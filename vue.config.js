@@ -1,3 +1,13 @@
+/* 
+    =============== 注意事项 ===============
+    1.本项目是多页应用，且路由使用的是historty模式，所以请不要修改publicPath的值
+    2.nginx配置类似于如下
+    location /home {
+        try_files $uri $uri/ /home.html;
+        root html;
+    }
+*/
+
 'use strict'
 const glob = require('glob')
 const path = require('path')

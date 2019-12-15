@@ -5,8 +5,8 @@ import Test from '../../global/modules/Test.vue'
 Vue.use(Router)
 
 const router = new Router({
-    // mode: 'history',
-    base: '/home/',
+    mode: 'history',
+    base: '/xxx/',
     routes: [
         {
             path: '/',
