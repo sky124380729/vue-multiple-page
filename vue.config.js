@@ -36,8 +36,9 @@ module.exports = {
             .set('pages', resolve('src/pages'))
     },
     devServer: {
-        index: 'home.html', //默认启动serve 打开index页面
-        open: process.platform === 'darwin',
+        // index: 'index.html',
+        open: true,
+        openPage: 'home',
         host: '',
         port: 9988,
         https: false,
@@ -45,3 +46,5 @@ module.exports = {
         proxy: null // 设置代理
     }
 }
+
+console.log(process.env.NODE_ENV)
