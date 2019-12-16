@@ -28,6 +28,7 @@ module.exports = {
     pages,
     chainWebpack: config => {
         config.resolve.alias
+            .set('@', resolve('src'))
             .set('modules', resolve('src/modules'))
             .set('config', resolve('src/config'))
             .set('components', resolve('src/components'))
