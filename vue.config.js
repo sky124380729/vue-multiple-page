@@ -1,4 +1,4 @@
-/* 
+/*
     =============== 注意事项 ===============
     1.本项目是多页应用，且路由使用的是historty模式，所以请不要修改publicPath的值
     2.nginx配置类似于如下
@@ -28,10 +28,10 @@ module.exports = {
     pages,
     chainWebpack: config => {
         config.resolve.alias
-            .set('modules', resolve('src/global/modules'))
-            .set('config', resolve('src/global/config'))
-            .set('components', resolve('src/global/components'))
-            .set('styles', resolve('src/global/styles'))
+            .set('modules', resolve('src/modules'))
+            .set('config', resolve('src/config'))
+            .set('components', resolve('src/components'))
+            .set('styles', resolve('src/styles'))
             .set('imgs', resolve('src/assets/imgs'))
             .set('pages', resolve('src/pages'))
     },
@@ -46,5 +46,3 @@ module.exports = {
         proxy: null // 设置代理
     }
 }
-
-console.log(process.env.NODE_ENV)
