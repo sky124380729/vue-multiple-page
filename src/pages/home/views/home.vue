@@ -3,7 +3,7 @@
         <el-row :gutter="20">
             <el-col :span="6" v-for="item in linkList" :key="item.path">
                 <el-card shadow="hover">
-                    <a :href="item.path">{{ item.des }}</a>
+                    <a @click="goPath(item)">{{ item.des }}</a>
                 </el-card>
             </el-col>
         </el-row>
@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie'
 export default {
     data() {
         return {
@@ -20,6 +21,12 @@ export default {
                 { path: '/c', des: '系统C' },
                 { path: '/d', des: '系统D' }
             ]
+        }
+    },
+    methods: {
+        goPath(item) {
+            Cookies.set('token', 'whosyourdaddy')
+            location.href = item.path
         }
     }
 }

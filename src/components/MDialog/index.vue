@@ -40,11 +40,19 @@ export default {
     },
     computed: {
         realLabelWidth() {
-            const map = new Map([[1, '110px'], [2, '110px'], [3, '110px']])
+            const map = new Map([
+                [1, '110px'],
+                [2, '110px'],
+                [3, '110px']
+            ])
             return this.labelWidth || map.get(this.number)
         },
         realWidth() {
-            const map = new Map([[1, '480px'], [2, '750px'], [3, '980px']])
+            const map = new Map([
+                [1, '480px'],
+                [2, '750px'],
+                [3, '980px']
+            ])
             return this.width || map.get(this.number)
         }
     },

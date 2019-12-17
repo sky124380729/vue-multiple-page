@@ -26,6 +26,14 @@ glob.sync('./src/pages/**/main.js').forEach(path => {
 })
 module.exports = {
     pages,
+    css: {
+        loaderOptions: {
+            // 向所有 Sass 样式传入共享的全局变量
+            sass: {
+                prependData: `@import "~styles/variables.scss";`
+            }
+        }
+    },
     chainWebpack: config => {
         config.resolve.alias
             .set('@', resolve('src'))
@@ -33,6 +41,7 @@ module.exports = {
             .set('config', resolve('src/config'))
             .set('components', resolve('src/components'))
             .set('styles', resolve('src/styles'))
+            .set('utils', resolve('src/utils'))
             .set('imgs', resolve('src/assets/imgs'))
             .set('pages', resolve('src/pages'))
     },
