@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Layout from 'modules/layout/Layout'
+import Layout from 'modules/layout'
 import NotFound from 'modules/NotFound'
 import common from './common' // 引入通用模块
 import modules from './modules'

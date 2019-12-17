@@ -28,3 +28,5 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" src="./layout.scss"></style>
