@@ -1,10 +1,10 @@
 @import '~styles/variables';
 // 全局的布局样式
 .wrapper-x {
-    overflow-y: hidden;
+    overflow-y: hidden !important;
 }
 .wrapper-y {
-    overflow-x: hidden;
+    overflow-x: hidden !important;
 }
 
 .layout {
