@@ -9,7 +9,7 @@ import 'utils/prototype' // 原型链扩展
 import 'element-ui/lib/theme-chalk/index.css'
 import 'styles/index.scss'
 import 'components' // 全局组件
-import './permission' // 权限管理
+import './router/permission' // 权限管理
 
 Vue.config.productionTip = false
 Vue.use(directives)

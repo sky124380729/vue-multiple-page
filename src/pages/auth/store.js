@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import Cookie from 'js-cookie'
 import { asyncRouter } from './router'
 // import { Decrypt } from '@/utils/secret'
-import { deepClone } from '@/utils/tools'
+import { deepClone } from 'utils/tools'
 
 Vue.use(Vuex)
 

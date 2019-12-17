@@ -1,33 +1,9 @@
-/* import Vue from 'vue'
-import Router from 'vue-router'
-import Layout from './views/layout/Layout'
-
-Vue.use(Router)
-
-const router = new Router({
-    mode: 'history',
-    base: '/auth/',
-    routes: [
-        {
-            path: '/',
-            component: Layout
-        }
-    ]
-})
-router.beforeEach((to, from, next) => {
-    next()
-})
-
-export default router */
-
 import Vue from 'vue'
 import Router from 'vue-router'
-import Layout from './views/layout/Layout'
-import Login from 'modules/Login'
+import Layout from 'modules/layout/Layout'
 import NotFound from 'modules/NotFound'
-import NoPermission from 'modules/NoPermission'
-// import modules from './modules'
-// import common from './common' // 引入通用模块
+import common from './common' // 引入通用模块
+import modules from './modules'
 
 Vue.use(Router)
 
@@ -42,20 +18,7 @@ const createRouter = () =>
         mode: 'history',
         base: '/auth/',
         scrollBehavior: () => ({ y: 0 }),
-        routes: [
-            {
-                path: '/',
-                redirect: '/platform'
-            },
-            {
-                path: '/noPermission',
-                component: NoPermission
-            },
-            {
-                path: '/login',
-                component: Login
-            }
-        ]
+        routes: common
     })
 
 const router = createRouter()
@@ -88,18 +51,18 @@ export const asyncRouter = [
             {
                 path: 'index',
                 name: 'platform-index',
-                component: () => import('./views/platform'),
+                component: () => import('../views/platform'),
                 meta: { title: '中央控制台', always: true }
             }
         ]
+    },
+    {
+        path: '/system',
+        component: Layout,
+        name: 'system',
+        meta: { title: '系统管理', icon: 'el-icon-menu', menu: true },
+        children: modules.system
     }
-    // {
-    //     path: '/system',
-    //     component: Layout,
-    //     name: 'system',
-    //     meta: { title: '系统管理', icon: 'el-icon-menu', menu: true },
-    //     children: modules.system
-    // },
     // {
     //     path: '/test',
     //     component: Layout,
