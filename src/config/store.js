@@ -110,21 +110,22 @@ const commonStore = () => ({
             // 生产可访问的路由表
             const createRouter = (routes, name = '') => {
                 return routes.reduce((prev, item) => {
-                    if (item.isButton === 'TRUE') return
-                    let obj = {
-                        path: item.uri,
-                        component: () => import(`@/${item.componentPath}`),
-                        name: (name + '-' + item.name).slice(1),
-                        meta: {
-                            title: item.code,
-                            icon: item.icon,
-                            hidden: item.hidden,
-                            screenfull: item.screenfull
-                        },
-                        children: item.children && item.children.length ? createRouter(item.children, name + '-' + item.name) : []
+                    if (item.isButton !== 'TRUE') {
+                        let obj = {
+                            path: item.uri,
+                            component: () => import(`@/${item.componentPath}`),
+                            name: (name + '-' + item.name).slice(1),
+                            meta: {
+                                title: item.code,
+                                icon: item.icon,
+                                hidden: item.hidden,
+                                screenfull: item.screenfull
+                            },
+                            children: item.children && item.children.length ? createRouter(item.children, name + '-' + item.name) : []
+                        }
+                        item.redirect && (obj.redirect = item.redirect)
+                        prev.push(obj)
                     }
-                    item.redirect && (obj.redirect = item.redirect)
-                    prev.push(obj)
                     return prev
                 }, [])
             }
