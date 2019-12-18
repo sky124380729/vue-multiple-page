@@ -1,6 +1,5 @@
 import waves from './wave/wave.js'
 import dialogDrag from './dialog-drag'
-import permission from './permission'
 export default Vue => {
     /* clear指令，用于该表单在销毁之后清空表单内部v-model的绑定值 */
     Vue.directive('clear', {
@@ -23,6 +22,4 @@ export default Vue => {
     Vue.directive('wave', waves)
     // 拖拽弹框
     Vue.directive('dialog-drag', dialogDrag)
-    // 权限控制
-    Vue.directive('permission', permission)
 }

@@ -14,13 +14,12 @@ export default [
             {
                 id: 'asdasdasd',
                 code: '中央控制台',
-                name: 'platform-index',
+                name: 'index',
                 icon: null,
                 uri: 'index',
                 componentPath: 'pages/auth/views/platform',
-                hidden: true,
+                hidden: 'TRUE',
                 sort: 0,
-                // children: [{}],
                 isButton: '',
                 hasDataScope: ''
             }
@@ -42,11 +41,10 @@ export default [
                 id: generateUUID(),
                 path: 'resource',
                 code: '资源管理',
-                name: 'system-resource',
+                name: 'resource',
                 icon: null,
                 uri: 'resource',
                 componentPath: 'pages/auth/views/system/resource',
-                hidden: false,
                 sort: 0,
                 children: [
                     {
@@ -83,7 +81,7 @@ export default [
                 id: generateUUID(),
                 path: 'permission',
                 code: '权限管理',
-                name: 'system-permission',
+                name: 'permission',
                 icon: null,
                 uri: 'permission',
                 componentPath: 'pages/auth/views/system/permission',

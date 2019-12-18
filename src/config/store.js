@@ -19,7 +19,7 @@ const commonStore = () => ({
                     if (item.children && item.children.length) {
                         item.children = filterMenus(item.children)
                     }
-                    return item.meta && !item.meta.hidden
+                    return item.meta && item.meta.hidden !== 'TRUE'
                 })
             }
             return filterMenus(state.accsessRoutes)
@@ -108,20 +108,20 @@ const commonStore = () => ({
     actions: {
         setAccessRoutes: ({ commit }) => {
             // 生产可访问的路由表
-            const createRouter = routes => {
+            const createRouter = (routes, name = '') => {
                 return routes.reduce((prev, item) => {
                     if (item.isButton === 'TRUE') return
                     let obj = {
                         path: item.uri,
                         component: () => import(`@/${item.componentPath}`),
-                        name: item.name,
+                        name: (name + '-' + item.name).slice(1),
                         meta: {
                             title: item.code,
                             icon: item.icon,
                             hidden: item.hidden,
                             screenfull: item.screenfull
                         },
-                        children: item.children && item.children.length ? createRouter(item.children) : []
+                        children: item.children && item.children.length ? createRouter(item.children, name + '-' + item.name) : []
                     }
                     item.redirect && (obj.redirect = item.redirect)
                     prev.push(obj)
@@ -129,25 +129,22 @@ const commonStore = () => ({
                 }, [])
             }
             // 生产权限按钮表
-            const createPermissionBtns = routes => {
+            const createPermissionBtns = (routes, name = '') => {
                 return routes.reduce((prev, curr) => {
                     if (curr.isButton === 'TRUE') {
-                        prev.push(curr.name)
+                        prev.push((name + '-' + curr.name).slice(1))
                     }
                     if (curr.children && curr.children.length) {
-                        return createPermissionBtns(curr.children)
+                        return createPermissionBtns(curr.children, name + '-' + curr.name)
                     }
                     return prev
                 }, [])
             }
 
             return new Promise(resolve => {
-                // TODO:假装我这个nameList是异步获取的,嘿嘿
                 import('@/mock/menu').then(({ default: router }) => {
                     const accessRoutes = createRouter(router)
-                    console.log(router)
                     const permissionBtns = createPermissionBtns(router)
-                    console.log(permissionBtns)
                     commit('SET_ACCSESS_ROUTES', accessRoutes)
                     commit('SET_PERMISSION_BTNS', permissionBtns)
                     resolve(accessRoutes)

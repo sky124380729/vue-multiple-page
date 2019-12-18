@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import ElementUI from 'element-ui'
-import directives from '../../directives' // 全局指令
+import directives from './directive' // 全局指令
 import plugins from 'utils/plugins' // 全局方法
 import 'utils/prototype' // 原型链扩展
 import 'element-ui/lib/theme-chalk/index.css'
