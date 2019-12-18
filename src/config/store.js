@@ -109,7 +109,8 @@ const commonStore = () => ({
         setAccessRoutes: ({ commit }) => {
             // 生产可访问的路由表
             const createRouter = routes => {
-                return routes.map(item => {
+                return routes.reduce((prev, item) => {
+                    if (item.isButton === 'TRUE') return
                     let obj = {
                         path: item.uri,
                         component: () => import(`@/${item.componentPath}`),
@@ -122,20 +123,33 @@ const commonStore = () => ({
                         },
                         children: item.children && item.children.length ? createRouter(item.children) : []
                     }
-                    item.redirect &&
-                        Object.assign(obj, {
-                            redirect: item.redirect
-                        })
-                    return obj
-                })
+                    item.redirect && (obj.redirect = item.redirect)
+                    prev.push(obj)
+                    return prev
+                }, [])
             }
+            // 生产权限按钮表
+            const createPermissionBtns = routes => {
+                return routes.reduce((prev, curr) => {
+                    if (curr.isButton === 'TRUE') {
+                        prev.push(curr.name)
+                    }
+                    if (curr.children && curr.children.length) {
+                        return createPermissionBtns(curr.children)
+                    }
+                    return prev
+                }, [])
+            }
+
             return new Promise(resolve => {
                 // TODO:假装我这个nameList是异步获取的,嘿嘿
                 import('@/mock/menu').then(({ default: router }) => {
                     const accessRoutes = createRouter(router)
-                    console.log(accessRoutes)
+                    console.log(router)
+                    const permissionBtns = createPermissionBtns(router)
+                    console.log(permissionBtns)
                     commit('SET_ACCSESS_ROUTES', accessRoutes)
-                    commit('SET_PERMISSION_BTNS', ['test-table-append'])
+                    commit('SET_PERMISSION_BTNS', permissionBtns)
                     resolve(accessRoutes)
                 })
             })

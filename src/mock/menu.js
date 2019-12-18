@@ -49,19 +49,32 @@ export default [
                 hidden: false,
                 sort: 0,
                 children: [
-                    // {
-                    //     id: 'c76936207d5541aaab40b9db0e74fbb3',
-                    //     code: '新增',
-                    //     name: 'append',
-                    //     icon: null,
-                    //     uri: null,
-                    //     componentPath: null,
-                    //     componentName: null,
-                    //     sort: 1,
-                    //     children: [],
-                    //     isButton: 'TRUE',
-                    //     hasDataScope: 'FALSE'
-                    // }
+                    {
+                        id: generateUUID(),
+                        code: '新增',
+                        name: 'append',
+                        icon: null,
+                        uri: null,
+                        componentPath: null,
+                        componentName: null,
+                        sort: 1,
+                        children: [],
+                        isButton: 'TRUE',
+                        hasDataScope: 'FALSE'
+                    },
+                    {
+                        id: generateUUID(),
+                        code: '编辑',
+                        name: 'edit',
+                        icon: null,
+                        uri: null,
+                        componentPath: null,
+                        componentName: null,
+                        sort: 1,
+                        children: [],
+                        isButton: 'TRUE',
+                        hasDataScope: 'FALSE'
+                    }
                 ],
                 isButton: '',
                 hasDataScope: ''
