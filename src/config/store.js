@@ -1,8 +1,6 @@
 // 这里用于放一些全局配置
 import Cookie from 'js-cookie'
-// import { Decrypt } from '@/utils/secret'
-import { deepClone } from 'utils/tools'
-const commonStore = asyncRouter => ({
+const commonStore = () => ({
     state: {
         collapse: false, // 菜单栏是否收缩
         authorized: false, // 是否拉取了授权菜单
@@ -14,17 +12,17 @@ const commonStore = asyncRouter => ({
     getters: {
         cachedViews: state => state.cachedViews,
         accsessRoutes: state => state.accsessRoutes,
-        // 左侧菜单
+        // 菜单栏(过滤掉hidden)
         menuList: state => {
             const filterMenus = menus => {
                 return menus.filter(item => {
                     if (item.children && item.children.length) {
                         item.children = filterMenus(item.children)
                     }
-                    return item.meta && item.meta.menu
+                    return item.meta && !item.meta.hidden
                 })
             }
-            return filterMenus(deepClone(state.accsessRoutes))
+            return filterMenus(state.accsessRoutes)
         },
         navTags: state => state.navTags
     },
@@ -109,35 +107,37 @@ const commonStore = asyncRouter => ({
     },
     actions: {
         setAccessRoutes: ({ commit }) => {
-            // 设置全部路由的方法
-            const hack = (menuList, arr = []) => {
-                menuList.forEach(menu => {
-                    if (menu.children && menu.children.length) {
-                        hack(menu.children, arr)
+            // 生产可访问的路由表
+            const createRouter = routes => {
+                return routes.map(item => {
+                    let obj = {
+                        path: item.uri,
+                        component: () => import(`@/${item.componentPath}`),
+                        name: item.name,
+                        meta: {
+                            title: item.code,
+                            icon: item.icon,
+                            hidden: item.hidden,
+                            screenfull: item.screenfull
+                        },
+                        children: item.children && item.children.length ? createRouter(item.children) : []
                     }
-                    menu.name && arr.push(menu.name)
+                    item.redirect &&
+                        Object.assign(obj, {
+                            redirect: item.redirect
+                        })
+                    return obj
                 })
-                return arr
             }
-
             return new Promise(resolve => {
                 // TODO:假装我这个nameList是异步获取的,嘿嘿
-                const nameList = hack(deepClone(asyncRouter))
-
-                // 要对后台拉取的数据进行解密Decrypt
-
-                const filterRouter = routes => {
-                    return routes.filter(route => {
-                        if (route.children && route.children.length) {
-                            route.children = filterRouter(route.children)
-                        }
-                        return (route.meta && route.meta.always) || nameList.indexOf(route.name) !== -1
-                    })
-                }
-                const accessRoutes = filterRouter(asyncRouter)
-                commit('SET_ACCSESS_ROUTES', accessRoutes)
-                commit('SET_PERMISSION_BTNS', ['test-table-append'])
-                resolve(accessRoutes)
+                import('@/mock/menu').then(({ default: router }) => {
+                    const accessRoutes = createRouter(router)
+                    console.log(accessRoutes)
+                    commit('SET_ACCSESS_ROUTES', accessRoutes)
+                    commit('SET_PERMISSION_BTNS', ['test-table-append'])
+                    resolve(accessRoutes)
+                })
             })
         },
         logout: ({ commit }) => {

@@ -53,6 +53,14 @@ module.exports = {
         port: 9988,
         https: false,
         hotOnly: false,
-        proxy: null // 设置代理
+        proxy: {
+            '/test': {
+                changeOrigin: true,
+                target: 'http://172.16.10.153:8762',
+                pathRewrite: {
+                    '^/test': ''
+                }
+            }
+        }
     }
 }
