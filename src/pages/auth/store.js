@@ -1,11 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import commonStore from 'config/store'
-import { asyncRouter } from './router'
 
 Vue.use(Vuex)
 
-const common = commonStore(asyncRouter)
+const common = commonStore()
 
 export default new Vuex.Store({
     state: {

@@ -1,5 +1,6 @@
 // 这里用于放一些全局配置
 import Cookie from 'js-cookie'
+import NotFound from 'modules/NotFound'
 const commonStore = () => ({
     state: {
         collapse: false, // 菜单栏是否收缩
@@ -144,7 +145,16 @@ const commonStore = () => ({
 
             return new Promise(resolve => {
                 import('@/mock/menu').then(({ default: router }) => {
-                    const accessRoutes = createRouter(router)
+                    const accessRoutes = createRouter(router).concat([
+                        {
+                            path: '*',
+                            redirect: '/404'
+                        },
+                        {
+                            path: '/404',
+                            component: NotFound
+                        }
+                    ])
                     const permissionBtns = createPermissionBtns(router)
                     commit('SET_ACCSESS_ROUTES', accessRoutes)
                     commit('SET_PERMISSION_BTNS', permissionBtns)
