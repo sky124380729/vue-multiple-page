@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { Encrypt, Decrypt } from '@/utils/secret'
 export default {
     name: 'system-permission',
@@ -83,16 +82,7 @@ export default {
             }, 1000)
         }
     },
-    mounted() {
-        axios
-            .get('/test/api/identity/principalOrganization/list/current')
-            .then(res => {
-                console.log(res)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }
+    mounted() {}
 }
 </script>
 

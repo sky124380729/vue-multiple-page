@@ -111,13 +111,13 @@ const commonStore = () => ({
             // 生产可访问的路由表
             const createRouter = (routes, name = '') => {
                 return routes.reduce((prev, item) => {
-                    if (item.isButton !== 'TRUE') {
+                    if (item.type === 'MENU') {
                         let obj = {
                             path: item.uri,
                             component: () => import(`@/${item.componentPath}`),
                             name: (name + '-' + item.name).slice(1),
                             meta: {
-                                title: item.code,
+                                title: item.title,
                                 icon: item.icon,
                                 hidden: item.hidden,
                                 screenfull: item.screenfull
@@ -133,7 +133,7 @@ const commonStore = () => ({
             // 生产权限按钮表
             const createPermissionBtns = (routes, name = '') => {
                 return routes.reduce((prev, curr) => {
-                    if (curr.isButton === 'TRUE') {
+                    if (curr.type === 'BUTTON') {
                         prev.push((name + '-' + curr.name).slice(1))
                     }
                     if (curr.children && curr.children.length) {
