@@ -1,5 +1,7 @@
 import axios from 'axios'
-// import Cookies from 'js-cookie'
+import store from '../store'
+import router from '../router'
+import Cookies from 'js-cookie'
 import { Message } from 'element-ui'
 
 // loading处理函数
@@ -18,10 +20,9 @@ const codeCb = (code, error) => {
             break
         case 401:
             Message.error('页面超时，请重新登录!')
-            // store.commit('LOGOUT')
-            setTimeout(() => {
-                // router.push('/login')
-            }, 2000)
+            store.dispatch('logout').then(() => {
+                router.push('/login')
+            })
             break
         case 404:
             Message.error('接口地址错误，请联系管理员!')
@@ -45,8 +46,7 @@ const myHttp = (options, config = {}) => {
     // 请求拦截器
     service.interceptors.request.use(
         request => {
-            // const token = Cookies.get('token')
-            const token = 'bearer 68034cff-33b8-4821-8531-934ab0c87143'
+            const token = Cookies.get('token')
             token && (request.headers['authorization'] = token)
             loadingFun(config.loading, config.vm, true)
             return request

@@ -1,4 +1,4 @@
-import request from 'utils/request'
+import request from './request'
 
 // 新增角色
 export const createRole = (data, config) => {

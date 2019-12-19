@@ -49,7 +49,7 @@ export default {
         }
     },
     mounted() {
-        fetchRoleList({}, { msg: 'ss', vm: this, loading: 'loading' })
+        fetchRoleList({}, { vm: this, loading: 'loading' })
     }
 }
 </script>
