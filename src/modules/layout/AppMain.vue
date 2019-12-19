@@ -15,6 +15,7 @@ export default {
     name: 'app-main',
     computed: {
         cachedViews() {
+            // 开发环境把标签缓存去掉
             return process.env.NODE_ENV !== 'production' ? [] : this.$store.getters.cachedViews
         }
     }

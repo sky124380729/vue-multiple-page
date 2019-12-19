@@ -96,6 +96,21 @@ export default [
                 children: [],
                 type: 'MENU',
                 fullScreen: 'TRUE'
+            },
+            {
+                id: generateUUID(),
+                path: 'role',
+                code: '',
+                title: '角色管理',
+                name: 'role',
+                icon: null,
+                uri: 'role',
+                componentPath: 'pages/auth/views/system/role/role-bus',
+                hidden: false,
+                sort: 0,
+                children: [],
+                type: 'MENU',
+                fullScreen: ''
             }
         ],
         type: 'MENU'
