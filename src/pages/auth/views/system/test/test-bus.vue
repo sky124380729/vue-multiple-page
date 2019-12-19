@@ -5,10 +5,10 @@
 </template>
 <script>
 import { compBus } from '@/mixins'
-import Index from './role-list'
-import Opt from './role-opt'
+import Index from './test-list'
+import Opt from './test-opt'
 export default {
-    name: 'system-role',
+    name: 'system-test',
     mixins: [compBus],
     components: {
         Index,
