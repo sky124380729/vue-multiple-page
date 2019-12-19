@@ -5,7 +5,7 @@ import NoPermission from 'modules/NoPermission'
 
 Vue.use(Router)
 
-// fixed NavigationDuplicated Problem
+// Fixed NavigationDuplicated Problem
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
     return originalPush.call(this, location).catch(err => err)

@@ -1,6 +1,6 @@
 <template>
     <section>
-        <m-table title="角色管理菜单" :queryArr="queryArr" ref="mTable">
+        <m-table title="角色管理菜单" :queryArr="queryArr" ref="mTable" v-loading="loading">
             <template #buttons>
                 <el-button type="success" size="mini" @click="handle()">新增</el-button>
             </template>
@@ -18,14 +18,17 @@
 
         <el-dialog title="角色管理" :visible.sync="roleVisible"> </el-dialog>
         <el-dialog title="角色授权" :visible.sync="authVisible"> </el-dialog>
+        <el-button :loading="loading">测试</el-button>
     </section>
 </template>
 
 <script>
+import { fetchRoleList } from '../../../apis/role'
 export default {
     name: 'system-role',
     data() {
         return {
+            loading: false,
             queryArr: [{ key: 'x', tag: 'el-input', ph: '请输入查询条件' }],
             roleVisible: false,
             authVisible: false,
@@ -44,6 +47,9 @@ export default {
         remove(id) {
             console.log(id)
         }
+    },
+    mounted() {
+        fetchRoleList({}, { msg: 'ss', vm: this, loading: 'loading' })
     }
 }
 </script>
