@@ -4,6 +4,7 @@ import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import { Message } from 'element-ui'
 import Cookies from 'js-cookie'
+import screenfull from 'screenfull'
 
 router.beforeEach(async (to, from, next) => {
     const token = Cookies.get('token')
@@ -25,6 +26,15 @@ router.beforeEach(async (to, from, next) => {
                 }
             } else {
                 next()
+                // 全屏参数判断改页面是否全屏
+                if (!screenfull.isEnabled) return
+                if (to.meta && to.meta.fullScreen === 'TRUE') {
+                    screenfull.request().catch(() => null)
+                } else {
+                    if (screenfull.isFullscreen) {
+                        screenfull.exit()
+                    }
+                }
             }
         }
     } else {

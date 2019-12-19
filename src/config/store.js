@@ -120,7 +120,7 @@ const commonStore = () => ({
                                 title: item.title,
                                 icon: item.icon,
                                 hidden: item.hidden,
-                                screenfull: item.screenfull
+                                fullScreen: item.fullScreen
                             },
                             children: item.children && item.children.length ? createRouter(item.children, name + '-' + item.name) : []
                         }

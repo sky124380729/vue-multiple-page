@@ -79,6 +79,7 @@ export default [
                         hasDataScope: 'FALSE'
                     }
                 ],
+                fullScreen: 'FALSE',
                 type: 'MENU'
             },
             {
@@ -93,7 +94,8 @@ export default [
                 hidden: false,
                 sort: 0,
                 children: [],
-                type: 'MENU'
+                type: 'MENU',
+                fullScreen: 'TRUE'
             }
         ],
         type: 'MENU'
