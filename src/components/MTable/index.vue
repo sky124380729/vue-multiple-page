@@ -104,21 +104,29 @@ export default {
         async getList(mode) {
             this.debugger && console.log(mode)
             if (this.fetchData) {
-                this.loading = true
-                const res = await this.fetchData({
-                    ...this.conditions,
-                    page: this.currentPage - 1,
-                    size: this.pageSize,
-                    sort: this.sortStr
-                })
-                this.loading = false
-                if (!res) return
-                const {
-                    content: { content, totalElements, totalPages }
-                } = res
-                this.tableList = content
-                this.total = totalElements
-                this.totalPages = totalPages
+                if (this.page) {
+                    this.loading = true
+                    const res = await this.fetchData({
+                        ...this.conditions,
+                        page: this.currentPage - 1,
+                        size: this.pageSize,
+                        sort: this.sortStr
+                    })
+                    this.loading = false
+                    if (!res) return
+                    const {
+                        content: { content, totalElements, totalPages }
+                    } = res
+                    this.tableList = content
+                    this.total = totalElements
+                    this.totalPages = totalPages
+                } else {
+                    this.loading = true
+                    const res = await this.fetchData(this.conditions)
+                    this.loading = false
+                    if (!res) return
+                    this.tableList = res.content
+                }
             } else {
                 // 否则给一些测试数据做填充
                 const testForm = {

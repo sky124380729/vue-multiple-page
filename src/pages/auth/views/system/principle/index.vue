@@ -13,7 +13,7 @@
             <el-table-column label="操作" class-name="operate">
                 <template slot-scope="{ row }">
                     <el-button type="text" @click="handle(row.id)">编辑</el-button>
-                    <el-button type="text" @click="auth(row)">授权</el-button>
+                    <el-button type="text" @click="setupOrganization(row)">选择组织</el-button>
                     <el-button type="text" class="danger" @click="remove(row.id)">删除</el-button>
                 </template>
             </el-table-column>
@@ -40,7 +40,7 @@
             </el-form-item>
         </m-dialog>
 
-        <el-dialog title="用户授权" :visible.sync="authVisible"> </el-dialog>
+        <el-dialog title="选择组织" :visible.sync="orgVisible"> </el-dialog>
     </section>
 </template>
 
@@ -52,7 +52,7 @@ export default {
         return {
             queryArr: [{ key: 'name', tag: 'el-input', ph: '请输入姓名' }],
             principleVisible: false,
-            authVisible: false,
+            orgVisible: false,
             submitLoading: false,
             model: {},
             rules: {}
@@ -70,8 +70,8 @@ export default {
             }
             this.principleVisible = true
         },
-        auth(row) {
-            this.authVisible = true
+        setupOrganization(row) {
+            this.orgVisible = true
             console.log(row)
         },
         remove(id) {
@@ -80,8 +80,7 @@ export default {
         async submit() {
             const config = {
                 vm: this,
-                loading: 'submitLoading',
-                msg: true
+                loading: 'submitLoading'
             }
             const id = this.model.id
             const res = await (id ? updatePrincipal(id, this.model, config) : createPrincipal(this.model, config))

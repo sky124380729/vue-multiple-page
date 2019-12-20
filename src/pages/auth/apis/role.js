@@ -1,7 +1,7 @@
 import request from './request'
 
 // 新增角色
-export const createRole = (data, config) => {
+export const createRole = (data, config) =>
     request(
         {
             method: 'post',
@@ -10,8 +10,33 @@ export const createRole = (data, config) => {
         },
         config
     )
-}
-// 查询角色列表
+
+// 删除角色
+export const removeRole = id =>
+    request({
+        method: 'delete',
+        url: `/api/identity/role/${id}`
+    })
+
+// 更新角色
+export const updateRole = (id, data, config) =>
+    request(
+        {
+            method: 'put',
+            url: `/api/identity/role/${id}`,
+            data
+        },
+        config
+    )
+
+// 角色单个查询
+export const getRole = id =>
+    request({
+        method: 'get',
+        url: `/api/identity/role/${id}`
+    })
+
+// 角色列表查询
 export const fetchRoleList = (params, config) =>
     request(
         {
@@ -21,3 +46,11 @@ export const fetchRoleList = (params, config) =>
         },
         config
     )
+
+// 角色分页查询
+export const fetchRolePage = params =>
+    request({
+        method: 'get',
+        url: '/api/identity/role/page',
+        params
+    })
