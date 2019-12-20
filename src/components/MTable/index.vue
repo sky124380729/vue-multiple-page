@@ -34,9 +34,8 @@ export default {
     name: 'mTable',
     inheritAttrs: false,
     props: {
-        // 接口地址
-        api: {
-            type: String
+        fetchData: {
+            type: Function
         },
         // 是否带有查询条件
         queryArr: {
@@ -58,15 +57,9 @@ export default {
             type: Boolean,
             default: true
         },
-        // 是否有刷新按钮
-        renovate: {
+        debugger: {
             type: Boolean,
-            default: true
-        },
-        // 默认的查询条件
-        queryObj: {
-            type: Object,
-            default: () => ({})
+            default: false
         },
         // 排序规则
         sortRules: {
@@ -88,11 +81,6 @@ export default {
         }
     },
     watch: {
-        api() {
-            // 接口地址变更，从第一页重新开始查
-            this.currentPage = 1
-            this.getList('api')
-        },
         totalPages(page) {
             // 修复最后一页只有一条的情况下删除该条导致不请求上一页数据的bug
             if (page !== 0 && this.currentPage === page + 1) {
@@ -113,22 +101,17 @@ export default {
         this.getted = false
     },
     methods: {
-        async getList() {
-            // 给定API的时候展示真实的数据
-            if (this.api) {
-                const res = await this.$http_post(this.api, {
-                    data: {
-                        ...this.conditions,
-                        ...this.queryObj
-                    },
-                    params: {
-                        page: this.currentPage - 1,
-                        size: this.pageSize,
-                        sort: this.sortStr
-                    },
-                    self: this,
-                    loading: 'loading'
+        async getList(mode) {
+            this.debugger && console.log(mode)
+            if (this.fetchData) {
+                this.loading = true
+                const res = await this.fetchData({
+                    ...this.conditions,
+                    page: this.currentPage - 1,
+                    size: this.pageSize,
+                    sort: this.sortStr
                 })
+                this.loading = false
                 if (!res) return
                 const {
                     content: { content, totalElements, totalPages }
@@ -156,7 +139,7 @@ export default {
                 })
                 this.loading = true
                 this.tableList = []
-                console.log('%c创建测试数据...', 'color:yellowgreen')
+                console.log('%c创建测试数据...', 'color:#01C0C8')
                 const NUM = Math.ceil(Math.random() * 10)
                 setTimeout(() => {
                     let i = -1
@@ -209,19 +192,6 @@ export default {
     }
     .el-table {
         margin-top: 15px;
-    }
-    .renovate {
-        position: absolute;
-        top: 75px;
-        right: 18px;
-        font-size: 20px;
-        font-weight: bold;
-        color: #b79ba8;
-        transition: color 0.6s;
-        cursor: pointer;
-        &:hover {
-            color: $-color--primary;
-        }
     }
 }
 </style>

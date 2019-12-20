@@ -63,7 +63,7 @@ export default {
                 content: { token }
             } = res */
             // 测试token
-            const token = 'whosyourdaddy'
+            const token = 'bearer 77c588f1-c3b0-4abf-9f97-73c590c0f1d8'
             Cookies.set('token', token, { expires: 7 })
             this.$router.push('/')
         },

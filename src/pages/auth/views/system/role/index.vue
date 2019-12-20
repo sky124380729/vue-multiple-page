@@ -1,11 +1,11 @@
 <template>
     <section>
-        <m-table title="角色管理菜单" :queryArr="queryArr" ref="mTable" v-loading="loading">
+        <m-table title="角色管理菜单" :fetch-data="fetchData" :queryArr="queryArr" ref="mTable">
             <template #buttons>
                 <el-button type="success" size="mini" @click="handle()">新增</el-button>
             </template>
-            <el-table-column label="角色编码"></el-table-column>
-            <el-table-column label="角色名称"></el-table-column>
+            <el-table-column label="角色编码" prop="code" sortable="custom"></el-table-column>
+            <el-table-column label="角色名称" prop="name"></el-table-column>
             <el-table-column label="角色描述"></el-table-column>
             <el-table-column label="操作" class-name="operate">
                 <template slot-scope="{ row }">
@@ -18,17 +18,15 @@
 
         <el-dialog title="角色管理" :visible.sync="roleVisible"> </el-dialog>
         <el-dialog title="角色授权" :visible.sync="authVisible"> </el-dialog>
-        <el-button :loading="loading">测试</el-button>
     </section>
 </template>
 
 <script>
-import { fetchRoleList } from '../../../apis/role'
+import { fetchPrincipalPage } from '@/pages/auth/apis/principal'
 export default {
     name: 'system-role',
     data() {
         return {
-            loading: false,
             queryArr: [{ key: 'x', tag: 'el-input', ph: '请输入查询条件' }],
             roleVisible: false,
             authVisible: false,
@@ -36,6 +34,9 @@ export default {
         }
     },
     methods: {
+        fetchData(options) {
+            return fetchPrincipalPage(options)
+        },
         handle(row = {}) {
             this.model = { ...row }
             this.roleVisible = true
@@ -47,9 +48,6 @@ export default {
         remove(id) {
             console.log(id)
         }
-    },
-    mounted() {
-        fetchRoleList({}, { vm: this, loading: 'loading' })
     }
 }
 </script>
