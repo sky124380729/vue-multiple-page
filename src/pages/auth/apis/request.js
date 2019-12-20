@@ -4,38 +4,132 @@ import router from '../router'
 import Cookies from 'js-cookie'
 import { Message } from 'element-ui'
 
+const SERVER_CODE = new Map([
+    [
+        200,
+        res => {
+            return Promise.resolve(res)
+        }
+    ],
+    [
+        201,
+        res => {
+            Message.success(res.message)
+            return Promise.resolve(res)
+        }
+    ],
+    [
+        207,
+        res => {
+            Message.error(res.message)
+            return Promise.reject(res)
+        }
+    ],
+    [
+        208,
+        res => {
+            Message.success(res.message)
+            return Promise.resolve(res)
+        }
+    ],
+    [
+        209,
+        res => {
+            Message.error(res.message)
+            return Promise.reject(res)
+        }
+    ],
+    [
+        210,
+        res => {
+            Message.success(res.message)
+            return Promise.resolve(res)
+        }
+    ],
+    [
+        211,
+        res => {
+            Message.error(res.message)
+            return Promise.reject(res)
+        }
+    ],
+    [
+        212,
+        res => {
+            Message.error(res.message)
+            return Promise.reject(res)
+        }
+    ],
+    [
+        204,
+        res => {
+            Message.error(res.message)
+            return Promise.reject(res)
+        }
+    ],
+    [
+        500,
+        res => {
+            Message.error(res.message)
+            return Promise.reject(res)
+        }
+    ],
+    [
+        506,
+        res => {
+            Message.error(res.message)
+            return Promise.reject(res)
+        }
+    ]
+])
+
+const HTTP_CODE = new Map([
+    [
+        400,
+        () => {
+            Message.error('400，参数错误!')
+        }
+    ],
+    [
+        401,
+        () => {
+            Message.error('授权失败，请重新登录!')
+            store.dispatch('logout').then(() => {
+                router.push('/login')
+            })
+        }
+    ],
+    [
+        403,
+        () => {
+            Message.error('拒绝访问!')
+        }
+    ],
+    [
+        404,
+        e => {
+            Message.error(`接口地址错误，不存在接口：'${e.data.path}'`)
+        }
+    ],
+    [
+        500,
+        () => {
+            Message.error('服务器发生错误，请联系管理员!')
+        }
+    ],
+    [
+        504,
+        () => {
+            Message.error('接口发布中，请稍后再试...')
+        }
+    ]
+])
 // loading处理函数
 const loadingFun = (loading, vm, flag) => {
     if (!loading || !vm) return
     loading.split(',').forEach(v => {
         vm[v] = flag
     })
-}
-// 状态码处理
-const codeCb = (code, error) => {
-    // 提示信息
-    switch (code) {
-        case 400:
-            Message.error(error)
-            break
-        case 401:
-            Message.error('页面超时，请重新登录!')
-            store.dispatch('logout').then(() => {
-                router.push('/login')
-            })
-            break
-        case 404:
-            Message.error('接口地址错误，请联系管理员!')
-            break
-        case 500:
-            Message.error('服务器发生错误,请联系管理员!')
-            break
-        case 504:
-            Message.error('接口发布中，请稍后再试...')
-            break
-        default:
-            break
-    }
 }
 
 const myHttp = (options, config = {}) => {
@@ -57,27 +151,15 @@ const myHttp = (options, config = {}) => {
     )
     // 返回拦截器
     service.interceptors.response.use(
-        response => {
-            const rs = response.data
-            const code = rs && rs.code
+        ({ data: res }) => {
+            const code = res && res.code
             loadingFun(config.loading, config.vm, false)
-            if (code === 200 || code === 201) {
-                if (config.msg !== undefined) {
-                    Message({
-                        type: code === 200 || code === 201 ? 'success' : 'error',
-                        message: typeof config.msg === 'string' ? config.msg : rs.message
-                    })
-                }
-                return Promise.resolve(rs)
-            } else {
-                Message.error(rs.message)
-                return Promise.reject(rs)
-            }
+            return SERVER_CODE.get(code)(res)
         },
         error => {
             const { response: res = {} } = error
             loadingFun(config.loading, config.vm, false)
-            codeCb(res.status, res.statusText)
+            HTTP_CODE.get(res.status)(res)
             return Promise.reject(error)
         }
     )

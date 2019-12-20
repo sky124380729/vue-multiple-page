@@ -21,7 +21,7 @@
 
         <m-dialog :visible.sync="principleVisible" title="用户信息" :rules="rules" :model.sync="model" @submit="submit" :submit-loading="submitLoading">
             <el-form-item label="登录名：" prop="code">
-                <m-input v-model="model.code"></m-input>
+                <m-input v-model="model.code" :disabled="!!model.id"></m-input>
             </el-form-item>
             <el-form-item label="姓名：" prop="name">
                 <m-input v-model="model.name"></m-input>
@@ -64,8 +64,9 @@ export default {
         },
         async handle(id) {
             if (id) {
-                const { content } = await getPrincipal(id)
-                this.model = content || {}
+                const res = await getPrincipal(id)
+                if (!res) return
+                this.model = res.content
             }
             this.principleVisible = true
         },
@@ -79,11 +80,13 @@ export default {
         async submit() {
             const config = {
                 vm: this,
-                loading: 'submitLoading'
+                loading: 'submitLoading',
+                msg: true
             }
             const id = this.model.id
             const res = await (id ? updatePrincipal(id, this.model, config) : createPrincipal(this.model, config))
             if (!res) return
+            this.$refs.mTable.refresh()
             this.principleVisible = false
         }
     }
