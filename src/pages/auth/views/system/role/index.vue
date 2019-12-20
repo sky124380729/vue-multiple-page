@@ -10,13 +10,13 @@
             <el-table-column label="操作" class-name="operate">
                 <template slot-scope="{ row }">
                     <el-button type="text" @click="handle(row.id)">编辑</el-button>
-                    <el-button type="text" @click="auth(row)">授权</el-button>
+                    <el-button type="text" @click="setupMenu(row)">设置菜单</el-button>
                     <el-button type="text" class="danger" @click="remove(row.id)">删除</el-button>
                 </template>
             </el-table-column>
         </m-table>
 
-        <m-dialog title="角色管理" :model.sync="model" :visible.sync="roleVisible" @submit="submit" :submit-loading="roleSubmitLoading" :number="1">
+        <m-dialog title="角色管理" :model.sync="model" :visible.sync="roleVisible" @submit="submitRole" :submit-loading="roleSubmitLoading" :number="1">
             <el-form-item label="角色编码：" prop="code">
                 <m-input v-model="model.code"></m-input>
             </el-form-item>
@@ -28,12 +28,33 @@
             </el-form-item>
         </m-dialog>
 
-        <el-dialog title="角色授权" :visible.sync="authVisible"> </el-dialog>
+        <el-dialog title="设置菜单" :visible.sync="authVisible" width="700px">
+            <el-tabs type="card">
+                <el-tab-pane label="系统统一认证">
+                    <el-tree show-checkbox check-strictly :data="menuList" :props="defaultProps">
+                        <!-- <div class="custom-tree-node" slot-scope="{ node, data }">
+                            <span>{{ node.label }}</span>
+                            <el-checkbox-group v-if="showBtnList(node, data)" v-model="permission[data.name]" @hook:destroyed="clearPermission(data.name)">
+                                <el-checkbox v-for="btn in getBtnList(data)" :label="btn.value" :key="btn.value">{{ btn.label }}</el-checkbox>
+                            </el-checkbox-group>
+                        </div> -->
+                    </el-tree>
+                </el-tab-pane>
+                <el-tab-pane label="系统A"></el-tab-pane>
+                <el-tab-pane label="系统B"></el-tab-pane>
+                <el-tab-pane label="系统C"></el-tab-pane>
+            </el-tabs>
+            <template #footer>
+                <el-button size="mini" @click="authVisible = false">返回</el-button>
+                <el-button size="mini" type="primary" :loading="setupMenuLoading" @click="setupMenuSubmit">提交</el-button>
+            </template>
+        </el-dialog>
     </section>
 </template>
 
 <script>
 import { fetchRoleList, createRole, updateRole, getRole, removeRole } from '@/pages/auth/apis/role'
+// import { getMenuTree } from '@/pages/auth/apis/menu'
 export default {
     name: 'system-role',
     data() {
@@ -42,7 +63,15 @@ export default {
             roleVisible: false,
             authVisible: false,
             roleSubmitLoading: false,
-            model: {}
+            setupMenuLoading: false,
+            defaultProps: {
+                children: 'children',
+                label(data) {
+                    return data.title
+                }
+            },
+            model: {},
+            menuList: []
         }
     },
     methods: {
@@ -57,10 +86,13 @@ export default {
             }
             this.roleVisible = true
         },
-        auth(row) {
+        async setupMenu(row) {
+            // const { content } = await getMenuTree()
+            const { default: res } = await import('@/mock/menu')
+            this.menuList = res
             this.authVisible = true
-            console.log(row)
         },
+        setupMenuSubmit() {},
         remove(id) {
             this.$confirm('确认要删除吗?', '提示', {
                 type: 'error'
@@ -72,7 +104,7 @@ export default {
                 })
                 .catch(() => {})
         },
-        async submit() {
+        async submitRole() {
             const config = {
                 vm: this,
                 loading: 'roleSubmitLoading'
