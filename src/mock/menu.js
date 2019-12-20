@@ -126,6 +126,21 @@ export default [
                 children: [],
                 type: 'MENU',
                 fullScreen: ''
+            },
+            {
+                id: generateUUID(),
+                path: 'principle',
+                code: '',
+                title: '用户管理',
+                name: 'principle',
+                icon: null,
+                uri: 'principle',
+                componentPath: 'pages/auth/views/system/principle',
+                hidden: false,
+                sort: 0,
+                children: [],
+                type: 'MENU',
+                fullScreen: ''
             }
         ],
         type: 'MENU'

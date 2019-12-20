@@ -61,10 +61,10 @@ const myHttp = (options, config = {}) => {
             const rs = response.data
             const code = rs && rs.code
             loadingFun(config.loading, config.vm, false)
-            if (code === 200) {
+            if (code === 200 || code === 201) {
                 if (config.msg !== undefined) {
                     Message({
-                        type: code === 200 ? 'success' : 'error',
+                        type: code === 200 || code === 201 ? 'success' : 'error',
                         message: typeof config.msg === 'string' ? config.msg : rs.message
                     })
                 }
@@ -77,7 +77,7 @@ const myHttp = (options, config = {}) => {
         error => {
             const { response: res = {} } = error
             loadingFun(config.loading, config.vm, false)
-            codeCb(res.status, res.data.error)
+            codeCb(res.status, res.statusText)
             return Promise.reject(error)
         }
     )

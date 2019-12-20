@@ -1,5 +1,12 @@
 <template>
-    <el-dialog custom-class="m-dialog" :title="title" :visible.sync="visible" :width="realWidth" :before-close="() => $emit('update:visible', false)" @close="close">
+    <el-dialog
+        custom-class="m-dialog"
+        :title="title"
+        :visible.sync="visible"
+        :width="realWidth"
+        :before-close="() => $emit('update:visible', false)"
+        @closed="() => $emit('update:model', {})"
+    >
         <el-form ref="form" status-icon :model="model" :rules="rules" class="dialogForm" label-position="right" :label-width="realLabelWidth">
             <m-row :number="number">
                 <slot></slot>
@@ -57,9 +64,6 @@ export default {
         }
     },
     methods: {
-        close() {
-            this.$refs.form.resetFields()
-        },
         submitForm() {
             this.$refs.form.validate(valid => {
                 if (!valid) return
