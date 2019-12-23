@@ -1,4 +1,14 @@
-import request from './request'
+import request, { baseURL } from './request'
+import axios from 'axios'
+
+// 登录
+export const login = data =>
+    axios({
+        baseURL: baseURL,
+        method: 'post',
+        url: `/api/identity/principal/login`,
+        data
+    })
 
 // 新增用户
 export const createPrincipal = (data, config) =>

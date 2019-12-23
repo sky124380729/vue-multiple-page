@@ -9,8 +9,8 @@
                 <div class="body">
                     <h1>Basic后台管理系统</h1>
                     <el-form class="login_form" :model="form" ref="form" :rules="rules">
-                        <el-form-item prop="code">
-                            <el-input size="medium" prefix-icon="el-icon-user-solid" v-model.trim="form.code"></el-input>
+                        <el-form-item prop="username">
+                            <el-input size="medium" prefix-icon="el-icon-user-solid" v-model.trim="form.username"></el-input>
                         </el-form-item>
                         <el-form-item prop="password">
                             <el-input size="medium" prefix-icon="el-icon-lock" v-model="form.password" @keyup.enter="login"></el-input>
@@ -35,35 +35,33 @@
 
 <script>
 import Cookies from 'js-cookie'
+import { login } from '@/pages/auth/apis/principal'
 export default {
     name: 'login',
     data() {
         return {
             loading: false,
             form: {
-                code: 'admin',
+                username: 'admin',
                 password: '123'
             },
             rules: {
-                code: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+                username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
                 password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
             }
         }
     },
     methods: {
         async login() {
-            // 真实接口
-            /* const res = await this.$http.post('/principal/login', {
-                data: this.form,
-                vm: this,
-                loading: 'loading'
-            })
+            let form = new FormData()
+            form.append('username', this.form.username)
+            form.append('password', this.form.password)
+            this.loading = true
+            const res = await login(form)
+            this.loading = false
             if (!res) return
-            const {
-                content: { token }
-            } = res */
-            // 测试token
-            const token = 'bearer 77c588f1-c3b0-4abf-9f97-73c590c0f1d8'
+            const { data } = res
+            const token = `${data.token_type} ${data.access_token}`
             Cookies.set('token', token, { expires: 7 })
             this.$router.push('/')
         },

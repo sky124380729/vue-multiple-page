@@ -4,6 +4,8 @@ import router from '../router'
 import Cookies from 'js-cookie'
 import { Message } from 'element-ui'
 
+export const baseURL = '/test'
+
 const SERVER_CODE = new Map([
     [
         200,
@@ -118,6 +120,12 @@ const HTTP_CODE = new Map([
         }
     ],
     [
+        503,
+        () => {
+            Message.error('Service Unavailable!')
+        }
+    ],
+    [
         504,
         () => {
             Message.error('接口发布中，请稍后再试...')
@@ -134,7 +142,7 @@ const loadingFun = (loading, vm, flag) => {
 
 const myHttp = (options, config = {}) => {
     const service = axios.create({
-        baseURL: '/test',
+        baseURL: baseURL,
         timeout: 5000
     })
     // 请求拦截器

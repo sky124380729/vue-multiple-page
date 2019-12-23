@@ -28,16 +28,16 @@
             </el-form-item>
         </m-dialog>
 
-        <el-dialog title="设置菜单" :visible.sync="authVisible" width="700px">
+        <el-dialog title="设置菜单" :visible.sync="authVisible" width="720px">
             <el-tabs type="card">
                 <el-tab-pane label="系统统一认证">
-                    <el-tree show-checkbox check-strictly :data="menuList" :props="defaultProps">
-                        <!-- <div class="custom-tree-node" slot-scope="{ node, data }">
+                    <el-tree show-checkbox :data="menuList" :props="defaultProps">
+                        <div class="custom-tree-node" slot-scope="{ node, data }">
                             <span>{{ node.label }}</span>
                             <el-checkbox-group v-if="showBtnList(node, data)" v-model="permission[data.name]" @hook:destroyed="clearPermission(data.name)">
-                                <el-checkbox v-for="btn in getBtnList(data)" :label="btn.value" :key="btn.value">{{ btn.label }}</el-checkbox>
+                                <el-checkbox v-for="btn of data.btnList" :label="btn.id" :key="btn.id">{{ btn.title }}</el-checkbox>
                             </el-checkbox-group>
-                        </div> -->
+                        </div>
                     </el-tree>
                 </el-tab-pane>
                 <el-tab-pane label="系统A"></el-tab-pane>
@@ -54,7 +54,6 @@
 
 <script>
 import { fetchRoleList, createRole, updateRole, getRole, removeRole } from '@/pages/auth/apis/role'
-// import { getMenuTree } from '@/pages/auth/apis/menu'
 export default {
     name: 'system-role',
     data() {
@@ -64,6 +63,7 @@ export default {
             authVisible: false,
             roleSubmitLoading: false,
             setupMenuLoading: false,
+            permission: {},
             defaultProps: {
                 children: 'children',
                 label(data) {
@@ -74,9 +74,18 @@ export default {
             menuList: []
         }
     },
+    created() {
+        this.getAllMenu()
+    },
     methods: {
         fetchData(options) {
             return fetchRoleList(options)
+        },
+        showBtnList(node, data) {
+            return node.checked && data.btnList
+        },
+        clearPermission(name) {
+            this.permission[name] = []
         },
         async handle(id) {
             if (id) {
@@ -86,11 +95,26 @@ export default {
             }
             this.roleVisible = true
         },
-        async setupMenu(row) {
-            // const { content } = await getMenuTree()
-            const { default: res } = await import('@/mock/menu')
-            this.menuList = res
+        async setupMenu() {
             this.authVisible = true
+        },
+        async getAllMenu() {
+            const { default: res } = await import('@/mock/menu')
+            const filterMenu = menuList => {
+                return menuList.filter(menu => {
+                    if (menu.children && menu.children.length) {
+                        if (menu.children.every(v => v.type === 'BUTTON')) {
+                            this.$set(this.permission, menu.name, [])
+                            menu.btnList = menu.children
+                            menu.children = []
+                        } else {
+                            menu.children = filterMenu(menu.children)
+                        }
+                    }
+                    return menu.hidden !== 'TRUE'
+                })
+            }
+            this.menuList = filterMenu(res)
         },
         setupMenuSubmit() {},
         remove(id) {
@@ -119,4 +143,21 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.el-tree {
+    margin-top: 10px;
+    ::v-deep {
+        .custom-tree-node {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 14px;
+            padding-right: 8px;
+            .el-checkbox {
+                margin-right: 15px;
+            }
+        }
+    }
+}
+</style>
