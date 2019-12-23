@@ -34,7 +34,7 @@
                     <el-tree show-checkbox :data="menuList" :props="defaultProps">
                         <div class="custom-tree-node" slot-scope="{ node, data }">
                             <span>{{ node.label }}</span>
-                            <el-checkbox-group v-if="showBtnList(node, data)" v-model="permission[data.name]" @hook:destroyed="clearPermission(data.name)">
+                            <el-checkbox-group v-if="showBtnList(node, data)" v-model="permission[data.id]" @hook:destroyed="clearPermission(data.id)">
                                 <el-checkbox v-for="btn of data.btnList" :label="btn.id" :key="btn.id">{{ btn.title }}</el-checkbox>
                             </el-checkbox-group>
                         </div>
@@ -84,8 +84,8 @@ export default {
         showBtnList(node, data) {
             return node.checked && data.btnList
         },
-        clearPermission(name) {
-            this.permission[name] = []
+        clearPermission(id) {
+            this.permission[id] = []
         },
         async handle(id) {
             if (id) {
@@ -104,7 +104,7 @@ export default {
                 return menuList.filter(menu => {
                     if (menu.children && menu.children.length) {
                         if (menu.children.every(v => v.type === 'BUTTON')) {
-                            this.$set(this.permission, menu.name, [])
+                            this.$set(this.permission, menu.id, [])
                             menu.btnList = menu.children
                             menu.children = []
                         } else {
