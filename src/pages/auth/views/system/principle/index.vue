@@ -10,7 +10,7 @@
             <el-table-column label="邮箱" prop="email"></el-table-column>
             <el-table-column label="职业类型" prop="workType"></el-table-column>
             <el-table-column label="描述" prop="note"></el-table-column>
-            <el-table-column label="操作" class-name="operate">
+            <el-table-column label="操作" class-name="operate" align="center" width="180px">
                 <template slot-scope="{ row }">
                     <el-button type="text" @click="handle(row.id)">编辑</el-button>
                     <el-button type="text" @click="setupOrganization(row)">选择组织</el-button>
@@ -40,12 +40,16 @@
             </el-form-item>
         </m-dialog>
 
-        <el-dialog title="选择组织" :visible.sync="orgVisible"> </el-dialog>
+        <el-dialog title="职位信息" :visible.sync="orgVisible" width="720px">
+            <el-tree :data="orgTree" :expand-on-click-node="false" show-checkbox="" default-expand-all :props="treeProps"></el-tree>
+        </el-dialog>
     </section>
 </template>
 
 <script>
 import { getPrincipal, createPrincipal, updatePrincipal, fetchPrincipalPage } from '@/pages/auth/apis/principal'
+import { getOrganizationTree } from '@/pages/auth/apis/organization'
+
 export default {
     name: 'system-principle',
     data() {
@@ -55,12 +59,28 @@ export default {
             orgVisible: false,
             submitLoading: false,
             model: {},
-            rules: {}
+            orgTree: [],
+            treeProps: {
+                label: 'name',
+                children: 'children'
+            },
+            rules: {
+                code: { required: true, message: '此项为必填项' },
+                name: { required: true, message: '此项为必填项' }
+            }
         }
+    },
+    created() {
+        this.getTreeData()
     },
     methods: {
         fetchData(options) {
             return fetchPrincipalPage(options)
+        },
+        async getTreeData() {
+            const res = await getOrganizationTree()
+            if (!res) return
+            this.orgTree = [res.content]
         },
         async handle(id) {
             if (id) {
