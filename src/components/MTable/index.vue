@@ -188,7 +188,7 @@ export default {
 @import '~styles/mixins';
 .m-table {
     position: relative;
-    overflow: hidden;
+    // overflow: hidden;
     &__bottom {
         display: flex;
         height: 60px;

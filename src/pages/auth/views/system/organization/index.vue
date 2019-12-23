@@ -2,23 +2,25 @@
     <section>
         <div class="org">
             <div class="org__left">
-                <div class="operate">
-                    <span class="title">组织信息</span>
-                    <div class="buttonList">
-                        <el-tooltip content="新增" placement="bottom">
-                            <el-button type="primary" circle icon="el-icon-plus" size="small" @click="handle('CREATE')"></el-button>
-                        </el-tooltip>
-                        <el-tooltip content="编辑" placement="bottom">
-                            <el-button type="warning" circle icon="el-icon-edit" size="small" @click="handle('EDIT')"></el-button>
-                        </el-tooltip>
-                        <el-tooltip content="授权" placement="bottom">
-                            <el-button type="success" circle icon="el-icon-key" size="small" @click="auth"></el-button>
-                        </el-tooltip>
-                        <el-tooltip content="删除" placement="bottom">
-                            <el-button type="danger" circle icon="el-icon-delete" size="small"></el-button>
-                        </el-tooltip>
+                <m-sticky :sticky-top="96" :z-index="2">
+                    <div class="operate">
+                        <span class="title">组织信息</span>
+                        <div class="buttonList">
+                            <el-tooltip content="新增" placement="bottom">
+                                <el-button type="primary" circle icon="el-icon-plus" size="mini" @click="handle('CREATE')"></el-button>
+                            </el-tooltip>
+                            <el-tooltip content="编辑" placement="bottom">
+                                <el-button type="warning" circle icon="el-icon-edit" size="mini" @click="handle('EDIT')"></el-button>
+                            </el-tooltip>
+                            <el-tooltip content="授权" placement="bottom">
+                                <el-button type="success" circle icon="el-icon-key" size="mini" @click="auth"></el-button>
+                            </el-tooltip>
+                            <el-tooltip content="删除" placement="bottom">
+                                <el-button type="danger" circle icon="el-icon-delete" size="mini"></el-button>
+                            </el-tooltip>
+                        </div>
                     </div>
-                </div>
+                </m-sticky>
                 <el-tree
                     :data="orgTree"
                     icon-class="el-icon-s-promotion"
@@ -211,25 +213,28 @@ export default {
 .org {
     display: flex;
     &__left {
-        flex: 1;
+        flex: 2;
+        min-width: 400px;
         margin-right: 20px;
         .operate {
             display: flex;
             justify-content: space-between;
+            background-color: #fff;
             align-items: center;
-            margin-bottom: 15px;
-            border: 2px solid #01c0c8;
-            border-radius: 4px;
-            padding: 2px 12px;
+            border-bottom: 2px solid #01c0c8;
+            padding: 4.5px 12px;
             box-shadow: 0 0 5px 1px rgba(0, 21, 41, 0.08);
             .title {
                 font-weight: 600;
                 color: #4a6076;
             }
         }
+        .el-tree {
+            margin-top: 15px;
+        }
     }
     &__right {
-        flex: 3;
+        flex: 5;
     }
 }
 </style>
