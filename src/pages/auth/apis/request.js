@@ -21,6 +21,12 @@ const SERVER_CODE = new Map([
         }
     ],
     [
+        204,
+        res => {
+            return Promise.resolve(res)
+        }
+    ],
+    [
         207,
         res => {
             Message.error(res.message)
@@ -57,13 +63,6 @@ const SERVER_CODE = new Map([
     ],
     [
         212,
-        res => {
-            Message.error(res.message)
-            return Promise.reject(res)
-        }
-    ],
-    [
-        204,
         res => {
             Message.error(res.message)
             return Promise.reject(res)

@@ -7,7 +7,7 @@
             <el-table-column label="角色编码" prop="code" sortable="custom"></el-table-column>
             <el-table-column label="角色名称" prop="name"></el-table-column>
             <el-table-column label="角色描述" prop="note"></el-table-column>
-            <el-table-column label="操作" class-name="operate">
+            <el-table-column label="操作" class-name="operate" align="center" width="180px">
                 <template slot-scope="{ row }">
                     <el-button type="text" @click="handle(row.id)">编辑</el-button>
                     <el-button type="text" @click="setupMenu(row)">设置菜单</el-button>
@@ -16,7 +16,7 @@
             </el-table-column>
         </m-table>
 
-        <m-dialog title="角色管理" :model.sync="model" :visible.sync="roleVisible" @submit="submitRole" :submit-loading="roleSubmitLoading" :number="1">
+        <m-dialog title="角色管理" :model.sync="model" :visible.sync="roleVisible" :rules="rules" @submit="submitRole" :submit-loading="roleSubmitLoading" :number="1">
             <el-form-item label="角色编码：" prop="code">
                 <m-input v-model="model.code"></m-input>
             </el-form-item>
@@ -64,6 +64,10 @@ export default {
             roleSubmitLoading: false,
             setupMenuLoading: false,
             permission: {},
+            rules: {
+                code: { required: true, message: '此项为必填项' },
+                name: { required: true, message: '此项为必填项' }
+            },
             defaultProps: {
                 children: 'children',
                 label(data) {

@@ -1,7 +1,7 @@
 import request from './request'
 
 // 新增或者修改角色菜单
-export const linkMenu = (roleId, data, config) =>
+export const handleMenu = (roleId, data, config) =>
     request(
         {
             method: 'post',

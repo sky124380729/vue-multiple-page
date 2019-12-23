@@ -171,6 +171,21 @@ export default [
             },
             {
                 id: generateUUID(),
+                path: 'organization',
+                code: '',
+                title: '系统组织管理',
+                name: 'organization',
+                icon: null,
+                uri: 'organization',
+                componentPath: 'pages/auth/views/system/organization',
+                hidden: false,
+                sort: 0,
+                children: [],
+                type: 'MENU',
+                fullScreen: ''
+            },
+            {
+                id: generateUUID(),
                 path: 'role',
                 code: '',
                 title: '角色管理',

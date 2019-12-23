@@ -92,3 +92,10 @@ p {
 .mt20 {
     margin-top: 20px;
 }
+
+.danger {
+    color: #F56C6C;
+    &:hover {
+        color: #f78989;
+    }
+}
