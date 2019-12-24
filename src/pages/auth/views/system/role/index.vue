@@ -30,7 +30,17 @@
 
         <el-dialog title="设置菜单" :visible.sync="authVisible" width="720px">
             <el-tabs type="card">
-                <el-tab-pane label="系统统一认证">
+                <el-tab-pane v-for="(system, index) in menuList" :label="system.title" :key="index">
+                    <el-tree show-checkbox :data="system.children" :props="defaultProps">
+                        <div class="custom-tree-node" slot-scope="{ node, data }">
+                            <span>{{ node.label }}</span>
+                            <el-checkbox-group v-if="showBtnList(node, data)" v-model="permission[data.id]" @hook:destroyed="clearPermission(data.id)">
+                                <el-checkbox v-for="btn of data.btnList" :label="btn.id" :key="btn.id">{{ btn.title }}</el-checkbox>
+                            </el-checkbox-group>
+                        </div>
+                    </el-tree>
+                </el-tab-pane>
+                <!-- <el-tab-pane label="系统统一认证">
                     <el-tree show-checkbox :data="menuList" :props="defaultProps">
                         <div class="custom-tree-node" slot-scope="{ node, data }">
                             <span>{{ node.label }}</span>
@@ -42,7 +52,7 @@
                 </el-tab-pane>
                 <el-tab-pane label="系统A"></el-tab-pane>
                 <el-tab-pane label="系统B"></el-tab-pane>
-                <el-tab-pane label="系统C"></el-tab-pane>
+                <el-tab-pane label="系统C"></el-tab-pane> -->
             </el-tabs>
             <template #footer>
                 <el-button size="mini" @click="authVisible = false">返回</el-button>
@@ -103,7 +113,7 @@ export default {
             this.authVisible = true
         },
         async getAllMenu() {
-            const { default: res } = await import('@/mock/menu')
+            const { default: res } = await import('@/mock/menuAll')
             const filterMenu = menuList => {
                 return menuList.filter(menu => {
                     if (menu.children && menu.children.length) {

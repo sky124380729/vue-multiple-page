@@ -57,13 +57,19 @@ export default {
             form.append('username', this.form.username)
             form.append('password', this.form.password)
             this.loading = true
-            const res = await login(form)
-            this.loading = false
-            if (!res) return
-            const { data } = res
-            const token = `${data.token_type} ${data.access_token}`
-            Cookies.set('token', token, { expires: 7 })
-            this.$router.push('/')
+            // 登录接口需要根据http状态码判断
+            login(form)
+                .then(res => {
+                    this.loading = false
+                    const { data } = res
+                    const token = `${data.token_type} ${data.access_token}`
+                    Cookies.set('token', token, { expires: 7 })
+                    this.$router.push('/')
+                })
+                .catch(() => {
+                    this.$message.error('账号或者密码错误')
+                    this.loading = false
+                })
         },
         forgetPwd() {
             this.$message.info('暂未开放，尽情期待~')
