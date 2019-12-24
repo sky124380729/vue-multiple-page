@@ -28,15 +28,31 @@
             </el-form-item>
         </m-dialog>
 
-        <el-dialog title="设置菜单" :visible.sync="authVisible" width="720px">
+        <el-dialog title="设置菜单" :visible.sync="authVisible" width="720px" @closed="authClosed">
             <el-tabs type="card">
                 <el-tab-pane v-for="(system, index) in menuList" :label="system.title" :key="index">
-                    <el-tree show-checkbox ref="menuTree" :data="system.children" :props="defaultProps">
+                    <el-tree
+                        v-loading="treeLoading"
+                        node-key="id"
+                        :default-expanded-keys="defaultKeys"
+                        :check-strictly="checkStrictly"
+                        show-checkbox
+                        :expand-on-click-node="false"
+                        ref="menuTree"
+                        :data="system.children"
+                        :props="defaultProps"
+                    >
                         <div class="custom-tree-node" slot-scope="{ node, data }">
-                            <span>{{ node.label }}</span>
-                            <el-checkbox-group v-if="showBtnList(node, data)" v-model="permission[data.id]" @hook:destroyed="clearPermission(data.id)">
-                                <el-checkbox v-for="btn of data.btnList" :label="btn.id" :key="btn.id">{{ btn.title }}</el-checkbox>
-                            </el-checkbox-group>
+                            <div class="main">
+                                <el-tag v-if="node.data.type === 'MENU'" size="mini" type="primary">菜单</el-tag>
+                                <el-tag v-else-if="node.data.type === 'BUTTON'" size="mini" type="success">按钮</el-tag>
+                                <span>{{ node.label }}</span>
+                            </div>
+                            <el-radio-group v-if="node.checked && data.hasDataScope === 'TRUE'" v-model="dataScope[data.id]" size="mini">
+                                <el-radio-button label="ALL">全部</el-radio-button>
+                                <el-radio-button label="BRANCH">分公司</el-radio-button>
+                                <el-radio-button label="SUBORDINATE">个人及其下属</el-radio-button>
+                            </el-radio-group>
                         </div>
                     </el-tree>
                 </el-tab-pane>
@@ -61,8 +77,11 @@ export default {
             authVisible: false,
             roleSubmitLoading: false,
             setupMenuLoading: false,
-            permission: {},
+            treeLoading: false,
+            checkStrictly: false,
             roleId: null,
+            dataScope: {},
+            defaultKeys: [],
             rules: {
                 code: { required: true, message: '此项为必填项' },
                 name: { required: true, message: '此项为必填项' }
@@ -84,12 +103,6 @@ export default {
         fetchData(options) {
             return fetchRoleList(options)
         },
-        showBtnList(node, data) {
-            return node.checked && data.btnList
-        },
-        clearPermission(id) {
-            this.permission[id] = []
-        },
         async handle(id) {
             if (id) {
                 const res = await getRole(id)
@@ -101,51 +114,49 @@ export default {
         async setupMenu(id) {
             this.roleId = id
             this.authVisible = true
+            const res = await getRoleMenu(id, { vm: this, loading: 'treeLoading' })
+            if (!res) return
+            const checkedKeys = res.content.reduce((prev, curr) => {
+                prev.push(curr.menuId)
+                this.$set(this.dataScope, curr.menuId, curr.dataScope)
+                return prev
+            }, [])
+            this.checkStrictly = true
+            this.$nextTick(() => {
+                this.$refs.menuTree.forEach(menu => {
+                    menu.setCheckedKeys(checkedKeys)
+                })
+                this.defaultKeys = checkedKeys
+                this.checkStrictly = false
+            })
         },
         async getAllMenu() {
             const { default: res } = await import('@/mock/menuAll')
-            const filterMenu = menuList => {
+            const filterMenus = menuList => {
                 return menuList.filter(menu => {
                     if (menu.children && menu.children.length) {
-                        if (menu.children.every(v => v.type === 'BUTTON')) {
-                            this.$set(this.permission, menu.id, [])
-                            menu.btnList = menu.children
-                            menu.children = []
-                        } else {
-                            menu.children = filterMenu(menu.children)
-                        }
+                        menu.children = filterMenus(menu.children)
                     }
                     return menu.hidden !== 'TRUE'
                 })
             }
-            this.menuList = filterMenu(res)
+            this.menuList = filterMenus(res)
         },
         async setupMenuSubmit() {
-            // 菜单
             const menuList = this.$refs.menuTree.reduce((prev, menu) => {
                 const list = menu
                     .getCheckedNodes()
                     .concat(menu.getHalfCheckedNodes())
                     .map(v => ({
                         menuId: v.id,
-                        dataScope: 'ALL'
+                        dataScope: this.dataScope[v.id] || 'ALL'
                     }))
                 prev = prev.concat(list)
                 return prev
             }, [])
-            // 按钮
-            let buttonList = []
-            for (let k in this.permission) {
-                buttonList = buttonList.concat(
-                    this.permission[k].map(v => ({
-                        menuId: v,
-                        dataScope: 'ALL'
-                    }))
-                )
-            }
-            const res = await handleRoleMenu(this.roleId, menuList.concat(buttonList), { vm: this, loading: 'setupMenuLoading' })
+            const res = await handleRoleMenu(this.roleId, menuList, { vm: this, loading: 'setupMenuLoading' })
             if (!res) return
-            console.log(res)
+            this.authVisible = false
         },
         remove(id) {
             this.$confirm('确认要删除吗?', '提示', {
@@ -168,6 +179,9 @@ export default {
             if (!res) return
             this.$refs.mTable.refresh()
             this.roleVisible = false
+        },
+        authClosed() {
+            this.dataScope = {}
         }
     }
 }
@@ -184,8 +198,8 @@ export default {
             justify-content: space-between;
             font-size: 14px;
             padding-right: 8px;
-            .el-checkbox {
-                margin-right: 15px;
+            .el-tag {
+                margin-right: 10px;
             }
         }
     }

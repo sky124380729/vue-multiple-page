@@ -1,14 +1,13 @@
-import { generateUUID } from 'utils/tools'
 export default [
     {
-        id: generateUUID(),
+        id: '7c4475637c38409ca865a799eb0dcfa0',
         type: 'MODULE',
         uri: '/auth',
         code: '',
         title: '系统统一身份认证',
         children: [
             {
-                id: generateUUID(),
+                id: '7c4475637c38409ca865a799eb0dcfa1',
                 code: '',
                 title: '首页',
                 name: 'platform',
@@ -36,7 +35,7 @@ export default [
                 type: 'MENU'
             },
             {
-                id: generateUUID(),
+                id: '7c4475637c38409ca865a799eb0dcfa2',
                 code: '',
                 title: '系统管理',
                 name: 'system',
@@ -47,18 +46,19 @@ export default [
                 sort: 0,
                 children: [
                     {
-                        id: generateUUID(),
+                        id: '7c4475637c38409ca865a799eb0dcfa3',
                         path: 'resource',
                         code: '',
                         title: '资源管理',
                         name: 'resource',
                         icon: null,
                         uri: 'resource',
+                        hasDataScope: 'TRUE',
                         componentPath: 'pages/auth/views/system/resource',
                         sort: 0,
                         children: [
                             {
-                                id: generateUUID(),
+                                id: '7c4475637c38409ca865a799eb0dcfa4',
                                 code: '',
                                 title: '新增',
                                 name: 'append',
@@ -72,7 +72,7 @@ export default [
                                 hasDataScope: 'FALSE'
                             },
                             {
-                                id: generateUUID(),
+                                id: '7c4475637c38409ca865a799eb0dcfa5',
                                 code: '',
                                 title: '编辑',
                                 name: 'edit',
@@ -90,7 +90,7 @@ export default [
                         type: 'MENU'
                     },
                     {
-                        id: generateUUID(),
+                        id: '7c4475637c38409ca865a799eb0dcfa6',
                         path: 'permission',
                         code: '',
                         title: '权限管理',
@@ -102,7 +102,7 @@ export default [
                         sort: 0,
                         children: [
                             {
-                                id: generateUUID(),
+                                id: '7c4475637c38409ca865a799eb0dcfa7',
                                 code: '',
                                 title: '新增',
                                 name: 'append',
@@ -116,7 +116,7 @@ export default [
                                 hasDataScope: 'FALSE'
                             },
                             {
-                                id: generateUUID(),
+                                id: '7c4475637c38409ca865a799eb0dcfa8',
                                 code: '',
                                 title: '编辑',
                                 name: 'edit',
@@ -130,7 +130,7 @@ export default [
                                 hasDataScope: 'FALSE'
                             },
                             {
-                                id: generateUUID(),
+                                id: '7c4475637c38409ca865a799eb0dcfa9',
                                 code: '',
                                 title: '删除',
                                 name: 'edit',
@@ -144,7 +144,7 @@ export default [
                                 hasDataScope: 'FALSE'
                             },
                             {
-                                id: generateUUID(),
+                                id: '7c4475637c38409ca865a799eb0dcfb0',
                                 code: '',
                                 title: '上传',
                                 name: 'edit',
@@ -162,7 +162,7 @@ export default [
                         fullScreen: 'TRUE'
                     },
                     {
-                        id: generateUUID(),
+                        id: '7c4475637c38409ca865a799eb0dcfb1',
                         path: 'test',
                         code: '',
                         title: '多页测试',
@@ -177,7 +177,7 @@ export default [
                         fullScreen: ''
                     },
                     {
-                        id: generateUUID(),
+                        id: '7c4475637c38409ca865a799eb0dcfb2',
                         path: 'organization',
                         code: '',
                         title: '系统组织管理',
@@ -192,7 +192,7 @@ export default [
                         fullScreen: ''
                     },
                     {
-                        id: generateUUID(),
+                        id: '7c4475637c38409ca865a799eb0dcfb3',
                         path: 'role',
                         code: '',
                         title: '系统角色管理',
@@ -207,7 +207,7 @@ export default [
                         fullScreen: ''
                     },
                     {
-                        id: generateUUID(),
+                        id: '7c4475637c38409ca865a799eb0dcfb4',
                         path: 'principal',
                         code: '',
                         title: '系统用户管理',
@@ -227,14 +227,14 @@ export default [
         ]
     },
     {
-        id: generateUUID(),
+        id: '7c4475637c38409ca865a799eb0dcfb5',
         type: 'MODULE',
         uri: '/a',
         code: '',
         title: '系统A',
         children: [
             {
-                id: generateUUID(),
+                id: '7c4475637c38409ca865a799eb0dcfb6',
                 code: '',
                 title: '首页A',
                 name: 'platform',
@@ -262,7 +262,7 @@ export default [
                 type: 'MENU'
             },
             {
-                id: generateUUID(),
+                id: '7c4475637c38409ca865a799eb0dcfb7',
                 code: '',
                 title: '系统管理A',
                 name: 'system',
@@ -273,7 +273,7 @@ export default [
                 sort: 0,
                 children: [
                     {
-                        id: generateUUID(),
+                        id: '7c4475637c38409ca865a799eb0dcfb8',
                         path: 'resource',
                         code: '',
                         title: '资源管理',
@@ -284,7 +284,7 @@ export default [
                         sort: 0,
                         children: [
                             {
-                                id: generateUUID(),
+                                id: '7c4475637c38409ca865a799eb0dcfb9',
                                 code: '',
                                 title: '新增',
                                 name: 'append',
@@ -298,7 +298,7 @@ export default [
                                 hasDataScope: 'FALSE'
                             },
                             {
-                                id: generateUUID(),
+                                id: '7c4475637c38409ca865a799eb0dcfc0',
                                 code: '',
                                 title: '编辑',
                                 name: 'edit',
@@ -316,7 +316,7 @@ export default [
                         type: 'MENU'
                     },
                     {
-                        id: generateUUID(),
+                        id: '7c4475637c38409ca865a799eb0dcfc1',
                         path: 'permission',
                         code: '',
                         title: '权限管理',
@@ -328,7 +328,7 @@ export default [
                         sort: 0,
                         children: [
                             {
-                                id: generateUUID(),
+                                id: '7c4475637c38409ca865a799eb0dcfc2',
                                 code: '',
                                 title: '新增',
                                 name: 'append',
@@ -342,7 +342,7 @@ export default [
                                 hasDataScope: 'FALSE'
                             },
                             {
-                                id: generateUUID(),
+                                id: '7c4475637c38409ca865a799eb0dcfc3',
                                 code: '',
                                 title: '编辑',
                                 name: 'edit',
@@ -356,7 +356,7 @@ export default [
                                 hasDataScope: 'FALSE'
                             },
                             {
-                                id: generateUUID(),
+                                id: '7c4475637c38409ca865a799eb0dcfc4',
                                 code: '',
                                 title: '删除',
                                 name: 'edit',
@@ -370,7 +370,7 @@ export default [
                                 hasDataScope: 'FALSE'
                             },
                             {
-                                id: generateUUID(),
+                                id: '7c4475637c38409ca865a799eb0dcfc5',
                                 code: '',
                                 title: '上传',
                                 name: 'edit',
@@ -388,7 +388,7 @@ export default [
                         fullScreen: 'TRUE'
                     },
                     {
-                        id: generateUUID(),
+                        id: '7c4475637c38409ca865a799eb0dcfc6',
                         path: 'test',
                         code: '',
                         title: '多页测试',
@@ -403,7 +403,7 @@ export default [
                         fullScreen: ''
                     },
                     {
-                        id: generateUUID(),
+                        id: '7c4475637c38409ca865a799eb0dcfc7',
                         path: 'organization',
                         code: '',
                         title: '系统组织管理',
@@ -418,7 +418,7 @@ export default [
                         fullScreen: ''
                     },
                     {
-                        id: generateUUID(),
+                        id: '7c4475637c38409ca865a799eb0dcfc8',
                         path: 'role',
                         code: '',
                         title: '系统角色管理',
@@ -433,7 +433,7 @@ export default [
                         fullScreen: ''
                     },
                     {
-                        id: generateUUID(),
+                        id: '7c4475637c38409ca865a799eb0dcfc9',
                         path: 'principal',
                         code: '',
                         title: '系统用户管理',
