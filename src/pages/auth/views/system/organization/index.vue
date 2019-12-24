@@ -216,6 +216,7 @@ export default {
         flex: 2;
         min-width: 400px;
         margin-right: 20px;
+        box-shadow: 0 0 5px 1px rgba(0, 21, 41, 0.08);
         .operate {
             display: flex;
             justify-content: space-between;
@@ -223,7 +224,6 @@ export default {
             align-items: center;
             border-bottom: 2px solid #01c0c8;
             padding: 4.5px 12px;
-            box-shadow: 0 0 5px 1px rgba(0, 21, 41, 0.08);
             .title {
                 font-weight: 600;
                 color: #4a6076;
@@ -231,6 +231,7 @@ export default {
         }
         .el-tree {
             margin-top: 15px;
+            padding: 0 10px 10px;
         }
     }
     &__right {
