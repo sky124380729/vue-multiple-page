@@ -30,6 +30,11 @@
                     highlight-current
                     :props="treeProps"
                 >
+                    <span class="custom-tree-node" slot-scope="{ node, data }">
+                        <el-tag v-if="data.type === 'department'" type="primary" size="mini">部门</el-tag>
+                        <el-tag v-else-if="data.type === 'position'" type="success" size="mini">职位</el-tag>
+                        <span>{{ node.label }}</span>
+                    </span>
                 </el-tree>
             </div>
             <div class="org__right">
@@ -232,6 +237,12 @@ export default {
         .el-tree {
             margin-top: 15px;
             padding: 0 10px 10px;
+            .custom-tree-node {
+                font-size: 14px;
+                .el-tag {
+                    margin-right: 10px;
+                }
+            }
         }
     }
     &__right {
