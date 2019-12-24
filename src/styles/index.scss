@@ -95,7 +95,7 @@ p {
 
 .danger {
     color: #F56C6C;
-    &:hover {
+    &:hover,&:focus {
         color: #f78989;
     }
 }
