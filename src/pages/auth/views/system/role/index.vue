@@ -48,7 +48,7 @@
                                 <el-tag v-else-if="node.data.type === 'BUTTON'" size="mini" type="success">按钮</el-tag>
                                 <span>{{ node.label }}</span>
                             </div>
-                            <el-radio-group v-if="node.checked && data.hasDataScope === 'TRUE'" v-model="dataScope[data.id]" size="mini">
+                            <el-radio-group v-if="(node.indeterminate || node.checked) && data.hasDataScope === 'TRUE'" v-model="dataScope[data.id]" size="mini">
                                 <el-radio-button label="ALL">全部</el-radio-button>
                                 <el-radio-button label="BRANCH">分公司</el-radio-button>
                                 <el-radio-button label="SUBORDINATE">个人及其下属</el-radio-button>
