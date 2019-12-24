@@ -10,7 +10,7 @@
             <el-table-column label="操作" class-name="operate" align="center" width="180px">
                 <template slot-scope="{ row }">
                     <el-button type="text" @click="handle(row.id)">编辑</el-button>
-                    <el-button type="text" @click="setupMenu(row)">设置菜单</el-button>
+                    <el-button type="text" @click="setupMenu(row.id)">设置菜单</el-button>
                     <el-button type="text" class="danger" @click="remove(row.id)">删除</el-button>
                 </template>
             </el-table-column>
@@ -31,7 +31,7 @@
         <el-dialog title="设置菜单" :visible.sync="authVisible" width="720px">
             <el-tabs type="card">
                 <el-tab-pane v-for="(system, index) in menuList" :label="system.title" :key="index">
-                    <el-tree show-checkbox :data="system.children" :props="defaultProps">
+                    <el-tree show-checkbox ref="menuTree" :data="system.children" :props="defaultProps">
                         <div class="custom-tree-node" slot-scope="{ node, data }">
                             <span>{{ node.label }}</span>
                             <el-checkbox-group v-if="showBtnList(node, data)" v-model="permission[data.id]" @hook:destroyed="clearPermission(data.id)">
@@ -40,19 +40,6 @@
                         </div>
                     </el-tree>
                 </el-tab-pane>
-                <!-- <el-tab-pane label="系统统一认证">
-                    <el-tree show-checkbox :data="menuList" :props="defaultProps">
-                        <div class="custom-tree-node" slot-scope="{ node, data }">
-                            <span>{{ node.label }}</span>
-                            <el-checkbox-group v-if="showBtnList(node, data)" v-model="permission[data.id]" @hook:destroyed="clearPermission(data.id)">
-                                <el-checkbox v-for="btn of data.btnList" :label="btn.id" :key="btn.id">{{ btn.title }}</el-checkbox>
-                            </el-checkbox-group>
-                        </div>
-                    </el-tree>
-                </el-tab-pane>
-                <el-tab-pane label="系统A"></el-tab-pane>
-                <el-tab-pane label="系统B"></el-tab-pane>
-                <el-tab-pane label="系统C"></el-tab-pane> -->
             </el-tabs>
             <template #footer>
                 <el-button size="mini" @click="authVisible = false">返回</el-button>
@@ -64,6 +51,7 @@
 
 <script>
 import { fetchRoleList, createRole, updateRole, getRole, removeRole } from '@/pages/auth/apis/role'
+import { handleRoleMenu, getRoleMenu } from '@/pages/auth/apis/roleMenu'
 export default {
     name: 'system-role',
     data() {
@@ -74,6 +62,7 @@ export default {
             roleSubmitLoading: false,
             setupMenuLoading: false,
             permission: {},
+            roleId: null,
             rules: {
                 code: { required: true, message: '此项为必填项' },
                 name: { required: true, message: '此项为必填项' }
@@ -109,7 +98,8 @@ export default {
             }
             this.roleVisible = true
         },
-        async setupMenu() {
+        async setupMenu(id) {
+            this.roleId = id
             this.authVisible = true
         },
         async getAllMenu() {
@@ -130,7 +120,33 @@ export default {
             }
             this.menuList = filterMenu(res)
         },
-        setupMenuSubmit() {},
+        async setupMenuSubmit() {
+            // 菜单
+            const menuList = this.$refs.menuTree.reduce((prev, menu) => {
+                const list = menu
+                    .getCheckedNodes()
+                    .concat(menu.getHalfCheckedNodes())
+                    .map(v => ({
+                        menuId: v.id,
+                        dataScope: 'ALL'
+                    }))
+                prev = prev.concat(list)
+                return prev
+            }, [])
+            // 按钮
+            let buttonList = []
+            for (let k in this.permission) {
+                buttonList = buttonList.concat(
+                    this.permission[k].map(v => ({
+                        menuId: v,
+                        dataScope: 'ALL'
+                    }))
+                )
+            }
+            const res = await handleRoleMenu(this.roleId, menuList.concat(buttonList), { vm: this, loading: 'setupMenuLoading' })
+            if (!res) return
+            console.log(res)
+        },
         remove(id) {
             this.$confirm('确认要删除吗?', '提示', {
                 type: 'error'
