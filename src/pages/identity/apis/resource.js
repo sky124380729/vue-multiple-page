@@ -4,5 +4,5 @@ import request from './request'
 export const getResourceTree = () =>
     request({
         type: 'get',
-        url: '/api/identity/resource/tree'
+        url: 'resource/tree'
     })

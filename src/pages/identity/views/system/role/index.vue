@@ -33,6 +33,7 @@
                 <el-tab-pane v-for="(system, index) in menuList" :label="system.title" :key="index">
                     <el-tree
                         v-loading="treeLoading"
+                        :data-parent-id="system.id"
                         node-key="id"
                         :default-expanded-keys="defaultKeys"
                         :check-strictly="checkStrictly"
@@ -68,6 +69,7 @@
 <script>
 import { fetchRoleList, createRole, updateRole, getRole, removeRole } from '@/pages/identity/apis/role'
 import { handleRoleResource, getRoleResource } from '@/pages/identity/apis/roleResource'
+import { getResourceTree } from '@/pages/identity/apis/resource'
 export default {
     name: 'system-role',
     data() {
@@ -131,7 +133,7 @@ export default {
             })
         },
         async getAllMenu() {
-            const { default: res } = await import('@/mock/menuAll')
+            const { content: res } = await getResourceTree()
             const filterMenus = menuList => {
                 return menuList.filter(menu => {
                     if (menu.children && menu.children.length) {
@@ -152,6 +154,13 @@ export default {
                         dataScope: this.dataScope[v.id] || 'ALL'
                     }))
                 prev = prev.concat(list)
+                // 如果选中了任何一条数据，则把该系统的id也提交
+                if (list.length) {
+                    prev.push({
+                        resourceId: menu.$el.dataset.parentId,
+                        dataScope: 'ALL'
+                    })
+                }
                 return prev
             }, [])
             const res = await handleRoleResource(this.roleId, menuList, { vm: this, loading: 'setupMenuLoading' })

@@ -4,7 +4,7 @@ import commonStore from 'config/store'
 
 Vue.use(Vuex)
 
-const common = commonStore()
+const common = commonStore('identity')
 
 export default new Vuex.Store({
     state: {

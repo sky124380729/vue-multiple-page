@@ -144,11 +144,9 @@ const commonStore = moduleCode => ({
             }
 
             return new Promise(resolve => {
-                getModuleResource(moduleCode).then(({ data: { content, code } }) => {
-                    console.log(content, code)
-                })
-                import('@/mock/menu').then(({ default: router }) => {
-                    const accessRoutes = createRouter(router).concat([
+                getModuleResource(moduleCode).then(({ data: { content: router } }) => {
+                    console.log(router[0].children, 'router')
+                    const accessRoutes = createRouter(router[0].children).concat([
                         {
                             path: '*',
                             redirect: '/404'
@@ -163,6 +161,22 @@ const commonStore = moduleCode => ({
                     commit('SET_PERMISSION_BTNS', permissionBtns)
                     resolve(accessRoutes)
                 })
+                // import('@/mock/menu').then(({ default: router }) => {
+                //     const accessRoutes = createRouter(router).concat([
+                //         {
+                //             path: '*',
+                //             redirect: '/404'
+                //         },
+                //         {
+                //             path: '/404',
+                //             component: NotFound
+                //         }
+                //     ])
+                //     const permissionBtns = createPermissionBtns(router)
+                //     commit('SET_ACCSESS_ROUTES', accessRoutes)
+                //     commit('SET_PERMISSION_BTNS', permissionBtns)
+                //     resolve(accessRoutes)
+                // })
             })
         },
         logout: ({ commit }) => {
