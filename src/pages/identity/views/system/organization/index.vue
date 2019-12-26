@@ -98,10 +98,10 @@
 </template>
 
 <script>
-import { getOrganizationTree, createOrganization, updateOrganization, getOrganization } from '@/pages/auth/apis/organization'
-import { fetchRoleList } from '@/pages/auth/apis/role'
-import { fetchPrincipalPage } from '@/pages/auth/apis/principal'
-import { getOrganizationRole, handleOrganizationRole } from '@/pages/auth/apis/organizationRole'
+import { getOrganizationTree, createOrganization, updateOrganization, getOrganization } from '@/pages/identity/apis/organization'
+import { fetchRoleList } from '@/pages/identity/apis/role'
+import { fetchPrincipalPage } from '@/pages/identity/apis/principal'
+import { getOrganizationRole, handleOrganizationRole } from '@/pages/identity/apis/organizationRole'
 export default {
     name: 'system-organization',
     data() {

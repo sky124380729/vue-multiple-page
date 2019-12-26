@@ -1,10 +1,9 @@
 import axios from 'axios'
-import store from '../store'
-import router from '../router'
 import Cookies from 'js-cookie'
 import { Message } from 'element-ui'
+import devUrl from 'config/baseUrl'
 
-export const baseURL = '/test'
+export const baseURL = `${devUrl}/api/identity/`
 
 const SERVER_CODE = new Map([
     [
@@ -93,11 +92,8 @@ const HTTP_CODE = new Map([
     ],
     [
         401,
-        () => {
-            Message.error('授权失败，请重新登录!')
-            store.dispatch('logout').then(() => {
-                router.push('/login')
-            })
+        e => {
+            Message.error(e.data.error_description)
         }
     ],
     [
@@ -141,7 +137,7 @@ const loadingFun = (loading, vm, flag) => {
 
 const myHttp = (options, config = {}) => {
     const service = axios.create({
-        baseURL: baseURL,
+        baseURL,
         timeout: 5000
     })
     // 请求拦截器

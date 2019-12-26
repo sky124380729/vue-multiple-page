@@ -5,7 +5,7 @@ export const handlePrincipalOrganization = (principalId, data, config) =>
     request(
         {
             method: 'post',
-            url: `/api/identity/principalOrganization/principal/${principalId}`,
+            url: `principalOrganization/principal/${principalId}`,
             data
         },
         config
@@ -16,7 +16,7 @@ export const getPrincipalOrganization = (principalId, config) =>
     request(
         {
             method: 'get',
-            url: `/api/identity/principalOrganization/principal/${principalId}`
+            url: `principalOrganization/principal/${principalId}`
         },
         config
     )

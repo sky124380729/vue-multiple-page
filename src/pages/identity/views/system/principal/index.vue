@@ -71,9 +71,9 @@
 </template>
 
 <script>
-import { getPrincipal, createPrincipal, updatePrincipal, fetchPrincipalPage } from '@/pages/auth/apis/principal'
-import { getOrganizationTree } from '@/pages/auth/apis/organization'
-import { handlePrincipalOrganization, getPrincipalOrganization } from '@/pages/auth/apis/principalOrganization'
+import { getPrincipal, createPrincipal, updatePrincipal, fetchPrincipalPage } from '@/pages/identity/apis/principal'
+import { getOrganizationTree } from '@/pages/identity/apis/organization'
+import { handlePrincipalOrganization, getPrincipalOrganization } from '@/pages/identity/apis/principalOrganization'
 
 export default {
     name: 'system-principle',

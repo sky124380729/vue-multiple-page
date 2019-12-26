@@ -14,7 +14,7 @@ Router.prototype.push = function push(location) {
 const createRouter = () =>
     new Router({
         mode: 'history',
-        base: '/auth/',
+        base: '/identity/',
         scrollBehavior: () => ({ y: 0 }),
         routes: [
             {

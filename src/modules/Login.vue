@@ -13,7 +13,7 @@
                             <el-input size="medium" prefix-icon="el-icon-user-solid" v-model.trim="form.username"></el-input>
                         </el-form-item>
                         <el-form-item prop="word">
-                            <el-input size="medium" type="password" prefix-icon="el-icon-lock" v-model="form.word" @keyup.enter="login"></el-input>
+                            <el-input size="medium" type="password" prefix-icon="el-icon-lock" v-model="form.word" @keyup.native.enter="login"></el-input>
                         </el-form-item>
                         <p class="clearfix">
                             <el-button class="fr" type="text" @click="forgetPwd">忘记密码？</el-button>
@@ -35,7 +35,7 @@
 
 <script>
 import Cookies from 'js-cookie'
-import { login } from '@/pages/auth/apis/principal'
+import { login } from '@/apis'
 export default {
     name: 'login',
     data() {

@@ -66,8 +66,8 @@
 </template>
 
 <script>
-import { fetchRoleList, createRole, updateRole, getRole, removeRole } from '@/pages/auth/apis/role'
-import { handleRoleMenu, getRoleMenu } from '@/pages/auth/apis/roleMenu'
+import { fetchRoleList, createRole, updateRole, getRole, removeRole } from '@/pages/identity/apis/role'
+import { handleRoleResource, getRoleMenuResource } from '@/pages/identity/apis/roleResource'
 export default {
     name: 'system-role',
     data() {
@@ -114,7 +114,7 @@ export default {
         async setupMenu(id) {
             this.roleId = id
             this.authVisible = true
-            const res = await getRoleMenu(id, { vm: this, loading: 'treeLoading' })
+            const res = await getRoleMenuResource(id, { vm: this, loading: 'treeLoading' })
             if (!res) return
             const checkedKeys = res.content.reduce((prev, curr) => {
                 prev.push(curr.menuId)
@@ -154,7 +154,7 @@ export default {
                 prev = prev.concat(list)
                 return prev
             }, [])
-            const res = await handleRoleMenu(this.roleId, menuList, { vm: this, loading: 'setupMenuLoading' })
+            const res = await handleRoleResource(this.roleId, menuList, { vm: this, loading: 'setupMenuLoading' })
             if (!res) return
             this.authVisible = false
         },

@@ -5,7 +5,7 @@ export const handleOrganizationRole = (organizationId, data, config) =>
     request(
         {
             method: 'post',
-            url: `/api/identity/organizationRole/organization/${organizationId}`,
+            url: `organizationRole/organization/${organizationId}`,
             data
         },
         config
@@ -15,5 +15,5 @@ export const handleOrganizationRole = (organizationId, data, config) =>
 export const getOrganizationRole = organizationId =>
     request({
         method: 'get',
-        url: `/api/identity/organizationRole/organization/${organizationId}`
+        url: `organizationRole/organization/${organizationId}`
     })

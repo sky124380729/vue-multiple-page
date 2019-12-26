@@ -5,7 +5,7 @@ export const createRole = (data, config) =>
     request(
         {
             method: 'post',
-            url: '/api/identity/role/',
+            url: 'role/',
             data
         },
         config
@@ -15,7 +15,7 @@ export const createRole = (data, config) =>
 export const removeRole = id =>
     request({
         method: 'delete',
-        url: `/api/identity/role/${id}`
+        url: `role/${id}`
     })
 
 // 更新角色
@@ -23,7 +23,7 @@ export const updateRole = (id, data, config) =>
     request(
         {
             method: 'put',
-            url: `/api/identity/role/${id}`,
+            url: `role/${id}`,
             data
         },
         config
@@ -33,7 +33,7 @@ export const updateRole = (id, data, config) =>
 export const getRole = id =>
     request({
         method: 'get',
-        url: `/api/identity/role/${id}`
+        url: `role/${id}`
     })
 
 // 角色列表查询
@@ -41,7 +41,7 @@ export const fetchRoleList = (params, config) =>
     request(
         {
             method: 'get',
-            url: '/api/identity/role/list',
+            url: 'role/list',
             params
         },
         config
@@ -51,6 +51,6 @@ export const fetchRoleList = (params, config) =>
 export const fetchRolePage = params =>
     request({
         method: 'get',
-        url: '/api/identity/role/page',
+        url: 'role/page',
         params
     })

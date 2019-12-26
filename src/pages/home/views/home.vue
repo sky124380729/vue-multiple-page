@@ -17,7 +17,7 @@ export default {
         return {
             linkList: [
                 { path: '/xxx', des: '系统X' },
-                { path: '/auth', des: '统一身份认证系统' },
+                { path: '/identity', des: '统一身份认证系统' },
                 { path: '/c', des: '系统C' },
                 { path: '/d', des: '系统D' }
             ]

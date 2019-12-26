@@ -1,22 +1,22 @@
 import request from './request'
 
 // 新增或者修改角色菜单
-export const handleRoleMenu = (roleId, data, config) =>
+export const handleroleResource = (roleId, data, config) =>
     request(
         {
             method: 'post',
-            url: `/api/identity/roleMenu/role/${roleId}`,
+            url: `roleResource/role/${roleId}`,
             data
         },
         config
     )
 
 // 角色菜单单个查询
-export const getRoleMenu = (roleId, config) =>
+export const getroleResource = (roleId, config) =>
     request(
         {
             method: 'get',
-            url: `/api/identity/roleMenu/role/${roleId}`
+            url: `roleResource/role/${roleId}`
         },
         config
     )

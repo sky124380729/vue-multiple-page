@@ -1,21 +1,11 @@
-import request, { baseURL } from './request'
-import axios from 'axios'
-
-// 登录
-export const login = data =>
-    axios({
-        baseURL: baseURL,
-        method: 'post',
-        url: `/api/identity/principal/login`,
-        data
-    })
+import request from './request'
 
 // 新增用户
 export const createPrincipal = (data, config) =>
     request(
         {
             method: 'post',
-            url: '/api/identity/principal/',
+            url: 'principal/',
             data
         },
         config
@@ -26,7 +16,7 @@ export const updatePrincipal = (id, data, config) =>
     request(
         {
             method: 'put',
-            url: `/api/identity/principal/${id}`,
+            url: `principal/${id}`,
             data
         },
         config
@@ -37,7 +27,7 @@ export const getPrincipal = (id, config) =>
     request(
         {
             method: 'get',
-            url: `/api/identity/principal/${id}`
+            url: `principal/${id}`
         },
         config
     )
@@ -46,6 +36,6 @@ export const getPrincipal = (id, config) =>
 export const fetchPrincipalPage = params =>
     request({
         method: 'get',
-        url: '/api/identity/principal/page',
+        url: 'principal/page',
         params
     })

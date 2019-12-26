@@ -123,7 +123,7 @@ const commonStore = () => ({
                             },
                             children: item.children && item.children.length ? createRouter(item.children, name + '-' + item.name) : []
                         }
-                        item.redirect && (obj.redirect = item.redirect)
+                        item.redirectUri && (obj.redirect = item.redirectUri)
                         prev.push(obj)
                     }
                     return prev

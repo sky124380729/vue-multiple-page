@@ -4,7 +4,7 @@ import request from './request'
 export const getOrganizationTree = () =>
     request({
         method: 'get',
-        url: '/api/identity/organization/tree'
+        url: 'organization/tree'
     })
 
 // 新增组织
@@ -12,7 +12,7 @@ export const createOrganization = (data, config) =>
     request(
         {
             method: 'post',
-            url: '/api/identity/organization/',
+            url: 'organization/',
             data
         },
         config
@@ -22,7 +22,7 @@ export const createOrganization = (data, config) =>
 export const removeOrganization = id =>
     request({
         method: 'delete',
-        url: `/api/identity/organization/${id}`
+        url: `organization/${id}`
     })
 
 // 更新组织
@@ -31,7 +31,7 @@ export const updateOrganization = (id, data, config) => {
     return request(
         {
             method: 'put',
-            url: `/api/identity/organization/${id}`,
+            url: `organization/${id}`,
             data
         },
         config
@@ -42,7 +42,7 @@ export const updateOrganization = (id, data, config) => {
 export const getOrganization = id =>
     request({
         method: 'get',
-        url: `/api/identity/organization/${id}`
+        url: `organization/${id}`
     })
 
 // 组织列表查询
@@ -50,7 +50,7 @@ export const fetchOrganizationList = (params, config) =>
     request(
         {
             method: 'get',
-            url: '/api/identity/organization/list',
+            url: 'organization/list',
             params
         },
         config
@@ -60,6 +60,6 @@ export const fetchOrganizationList = (params, config) =>
 export const fetchOrganizationPage = params =>
     request({
         method: 'get',
-        url: '/api/identity/organization/page',
+        url: 'organization/page',
         params
     })
