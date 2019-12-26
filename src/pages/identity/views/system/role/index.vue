@@ -47,6 +47,7 @@
                             <div class="main">
                                 <el-tag v-if="node.data.type === 'MENU'" size="mini" type="primary">菜单</el-tag>
                                 <el-tag v-else-if="node.data.type === 'BUTTON'" size="mini" type="success">按钮</el-tag>
+                                <el-tag v-if="node.data.hidden === 'TRUE'" size="mini" type="warning">隐藏项</el-tag>
                                 <span>{{ node.label }}</span>
                             </div>
                             <el-radio-group v-if="(node.indeterminate || node.checked) && data.hasDataScope === 'TRUE'" v-model="dataScope[data.id]" size="mini">
@@ -134,15 +135,7 @@ export default {
         },
         async getAllMenu() {
             const { content: res } = await getResourceTree()
-            const filterMenus = menuList => {
-                return menuList.filter(menu => {
-                    if (menu.children && menu.children.length) {
-                        menu.children = filterMenus(menu.children)
-                    }
-                    return menu.hidden !== 'TRUE'
-                })
-            }
-            this.menuList = filterMenus(res)
+            this.menuList = res
         },
         async setupMenuSubmit() {
             const menuList = this.$refs.menuTree.reduce((prev, menu) => {
@@ -209,6 +202,9 @@ export default {
             padding-right: 8px;
             .el-tag {
                 margin-right: 10px;
+            }
+            .hidden {
+                color: lightgray;
             }
         }
     }
