@@ -1,7 +1,8 @@
 // 这里用于放一些全局配置
 import Cookie from 'js-cookie'
 import NotFound from 'modules/NotFound'
-const commonStore = () => ({
+import { getModuleResource } from '@/apis'
+const commonStore = moduleCode => ({
     state: {
         collapse: false, // 菜单栏是否收缩
         authorized: false, // 是否拉取了授权菜单
@@ -143,6 +144,9 @@ const commonStore = () => ({
             }
 
             return new Promise(resolve => {
+                getModuleResource(moduleCode).then(({ data: { content, code } }) => {
+                    console.log(content, code)
+                })
                 import('@/mock/menu').then(({ default: router }) => {
                     const accessRoutes = createRouter(router).concat([
                         {

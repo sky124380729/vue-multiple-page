@@ -10,13 +10,13 @@
                                 <el-button type="primary" circle icon="el-icon-plus" size="mini" @click="handle('CREATE')"></el-button>
                             </el-tooltip>
                             <el-tooltip content="编辑" placement="bottom">
-                                <el-button type="warning" circle icon="el-icon-edit" size="mini" @click="handle('EDIT')"></el-button>
+                                <el-button type="warning" :disabled="!treeCurrentRow.id" circle icon="el-icon-edit" size="mini" @click="handle('EDIT')"></el-button>
                             </el-tooltip>
                             <el-tooltip content="授权" placement="bottom">
-                                <el-button type="success" circle icon="el-icon-key" size="mini" @click="auth"></el-button>
+                                <el-button type="success" :disabled="treeCurrentRow.type !== 'position'" circle icon="el-icon-key" size="mini" @click="auth"></el-button>
                             </el-tooltip>
                             <el-tooltip content="删除" placement="bottom">
-                                <el-button type="danger" circle icon="el-icon-delete" size="mini"></el-button>
+                                <el-button type="danger" disabled circle icon="el-icon-delete" size="mini"></el-button>
                             </el-tooltip>
                         </div>
                     </div>
@@ -110,6 +110,7 @@ export default {
             authVisible: false,
             orgSubmitLoading: false,
             authSubmitLoading: false,
+            treeCurrentRow: {},
             treeCurrentId: null,
             editType: null,
             model: {},
@@ -156,6 +157,7 @@ export default {
             this.$refs.roleTable.clearSelection()
         },
         currentChange(data) {
+            this.treeCurrentRow = data
             this.treeCurrentId = data.id
             this.$refs.principalTable.refresh()
         },

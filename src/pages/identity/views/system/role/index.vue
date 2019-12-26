@@ -67,7 +67,7 @@
 
 <script>
 import { fetchRoleList, createRole, updateRole, getRole, removeRole } from '@/pages/identity/apis/role'
-import { handleRoleResource, getRoleMenuResource } from '@/pages/identity/apis/roleResource'
+import { handleRoleResource, getRoleResource } from '@/pages/identity/apis/roleResource'
 export default {
     name: 'system-role',
     data() {
@@ -114,11 +114,11 @@ export default {
         async setupMenu(id) {
             this.roleId = id
             this.authVisible = true
-            const res = await getRoleMenuResource(id, { vm: this, loading: 'treeLoading' })
+            const res = await getRoleResource(id, { vm: this, loading: 'treeLoading' })
             if (!res) return
             const checkedKeys = res.content.reduce((prev, curr) => {
-                prev.push(curr.menuId)
-                this.$set(this.dataScope, curr.menuId, curr.dataScope)
+                prev.push(curr.resourceId)
+                this.$set(this.dataScope, curr.resourceId, curr.dataScope)
                 return prev
             }, [])
             this.checkStrictly = true
@@ -148,7 +148,7 @@ export default {
                     .getCheckedNodes()
                     .concat(menu.getHalfCheckedNodes())
                     .map(v => ({
-                        menuId: v.id,
+                        resourceId: v.id,
                         dataScope: this.dataScope[v.id] || 'ALL'
                     }))
                 prev = prev.concat(list)
