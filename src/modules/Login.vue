@@ -12,8 +12,8 @@
                         <el-form-item prop="username">
                             <el-input size="medium" prefix-icon="el-icon-user-solid" v-model.trim="form.username"></el-input>
                         </el-form-item>
-                        <el-form-item prop="password">
-                            <el-input size="medium" prefix-icon="el-icon-lock" v-model="form.password" @keyup.enter="login"></el-input>
+                        <el-form-item prop="word">
+                            <el-input size="medium" type="password" prefix-icon="el-icon-lock" v-model="form.word" @keyup.enter="login"></el-input>
                         </el-form-item>
                         <p class="clearfix">
                             <el-button class="fr" type="text" @click="forgetPwd">忘记密码？</el-button>
@@ -43,11 +43,11 @@ export default {
             loading: false,
             form: {
                 username: 'admin',
-                password: '123'
+                word: '123'
             },
             rules: {
                 username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-                password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+                word: [{ required: true, message: '请输入密码', trigger: 'blur' }]
             }
         }
     },
@@ -55,7 +55,7 @@ export default {
         async login() {
             let form = new FormData()
             form.append('username', this.form.username)
-            form.append('password', this.form.password)
+            form.append('word', this.form.word)
             this.loading = true
             // 登录接口需要根据http状态码判断
             login(form)
@@ -66,8 +66,12 @@ export default {
                     Cookies.set('token', token, { expires: 7 })
                     this.$router.push('/')
                 })
-                .catch(() => {
-                    this.$message.error('账号或者密码错误')
+                .catch(({ response }) => {
+                    if (response.status === 401) {
+                        this.$message.error(response.data.error_description)
+                    } else {
+                        this.$message.error('未知错误!')
+                    }
                     this.loading = false
                 })
         },

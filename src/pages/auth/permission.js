@@ -26,7 +26,7 @@ router.beforeEach(async (to, from, next) => {
                 }
             } else {
                 next()
-                // 全屏参数判断改页面是否全屏
+                // 全屏参数判断该页面是否全屏
                 if (!screenfull.isEnabled) return
                 if (to.meta && to.meta.fullScreen === 'TRUE') {
                     screenfull.request().catch(() => null)
