@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import Cookies from 'js-cookie'
 export default {
     data() {
         return {
@@ -25,7 +24,6 @@ export default {
     },
     methods: {
         goPath(item) {
-            Cookies.set('token', 'whosyourdaddy')
             location.href = item.path
         }
     }

@@ -1,42 +1,10 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Login from 'modules/Login'
-import NoPermission from 'modules/NoPermission'
+import createRouter from 'config/router'
 
-Vue.use(Router)
+const router = createRouter('identity')
 
-// Fixed NavigationDuplicated Problem
-const originalPush = Router.prototype.push
-Router.prototype.push = function push(location) {
-    return originalPush.call(this, location).catch(err => err)
-}
-
-const createRouter = () =>
-    new Router({
-        mode: 'history',
-        base: '/identity/',
-        scrollBehavior: () => ({ y: 0 }),
-        routes: [
-            {
-                path: '/',
-                redirect: '/platform'
-            },
-            {
-                path: '/noPermission',
-                component: NoPermission
-            },
-            {
-                path: '/login',
-                component: Login
-            }
-        ]
-    })
-
-const router = createRouter()
-
-// 重置路由方法
+//重置路由方法
 export const resetRouter = () => {
-    const newRouter = createRouter()
+    const newRouter = createRouter('identity')
     router.matcher = newRouter.matcher
 }
 

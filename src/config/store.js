@@ -145,7 +145,7 @@ const commonStore = moduleCode => ({
 
             return new Promise(resolve => {
                 getModuleResource(moduleCode).then(({ data: { content: router } }) => {
-                    const accessRoutes = createRouter(router[0].children).concat([
+                    const accessRoutes = createRouter(router.children).concat([
                         {
                             path: '*',
                             redirect: '/404'
@@ -155,10 +155,11 @@ const commonStore = moduleCode => ({
                             component: NotFound
                         }
                     ])
-                    const permissionBtns = createPermissionBtns(router)
+                    const permissionBtns = createPermissionBtns(router.children)
                     commit('SET_ACCSESS_ROUTES', accessRoutes)
                     commit('SET_PERMISSION_BTNS', permissionBtns)
                     resolve(accessRoutes)
+                    console.log(1)
                 })
             })
         },
