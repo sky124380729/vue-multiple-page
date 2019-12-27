@@ -12,14 +12,14 @@
             <el-table-column label="描述" prop="note"></el-table-column>
             <el-table-column label="操作" class-name="operate" align="center" width="180px">
                 <template slot-scope="{ row }">
-                    <el-button type="text" @click="handle(row.id)">编辑</el-button>
+                    <el-button type="text" v-permission="'edit'" @click="handle(row.id)">编辑</el-button>
                     <el-button type="text" @click="setupOrganization(row.id)">选择组织</el-button>
                     <el-button type="text" class="danger" @click="remove(row.id)">删除</el-button>
                 </template>
             </el-table-column>
         </m-table>
 
-        <m-dialog :visible.sync="principleVisible" title="用户信息" :rules="rules" :model.sync="model" @submit="submit" :submit-loading="submitLoading">
+        <m-dialog :visible.sync="principalVisible" title="用户信息" :rules="rules" :model.sync="model" @submit="submit" :submit-loading="submitLoading">
             <el-form-item label="登录名：" prop="code">
                 <m-input v-model="model.code" :disabled="!!model.id"></m-input>
             </el-form-item>
@@ -76,11 +76,11 @@ import { getOrganizationTree } from '@/pages/identity/apis/organization'
 import { handlePrincipalOrganization, getPrincipalOrganization } from '@/pages/identity/apis/principalOrganization'
 
 export default {
-    name: 'system-principle',
+    name: 'system-principal',
     data() {
         return {
             queryArr: [{ key: 'name', tag: 'el-input', ph: '请输入姓名' }],
-            principleVisible: false,
+            principalVisible: false,
             orgVisible: false,
             submitLoading: false,
             submitOrgLoading: false,
@@ -122,7 +122,7 @@ export default {
                 if (!res) return
                 this.model = res.content
             }
-            this.principleVisible = true
+            this.principalVisible = true
         },
         async setupOrganization(id) {
             this.orgVisible = true
@@ -158,7 +158,7 @@ export default {
             const res = await (id ? updatePrincipal(id, this.model, config) : createPrincipal(this.model, config))
             if (!res) return
             this.$refs.mTable.refresh()
-            this.principleVisible = false
+            this.principalVisible = false
         },
         async submitOrg() {
             const checkList = this.$refs.organizationTree.getCheckedNodes()

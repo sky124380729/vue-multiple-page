@@ -38,7 +38,7 @@
                 </el-tree>
             </div>
             <div class="org__right">
-                <m-table title="用户信息" :fetch-data="fetchPrincipleList" ref="principalTable">
+                <m-table title="用户信息" :fetch-data="fetchPrincipalList" ref="principalTable">
                     <el-table-column label="序号" type="index"></el-table-column>
                     <el-table-column label="姓名" prop="name"></el-table-column>
                     <el-table-column label="登录名" prop="code"></el-table-column>
@@ -164,7 +164,7 @@ export default {
         selectionChange(val) {
             this.checkList = val.map(v => v.id)
         },
-        fetchPrincipleList(options) {
+        fetchPrincipalList(options) {
             return fetchPrincipalPage({
                 ...options,
                 organizationId: this.treeCurrentId
