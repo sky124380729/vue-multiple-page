@@ -1,8 +1,8 @@
 // 这里用于放一些全局配置
 import Cookie from 'js-cookie'
-import NotFound from 'modules/NotFound'
+// import NotFound from 'modules/NotFound'
 import { getModuleResource } from '@/apis'
-const commonStore = moduleCode => ({
+const createStore = moduleCode => ({
     state: {
         collapse: false, // 菜单栏是否收缩
         authorized: false, // 是否拉取了授权菜单
@@ -122,7 +122,7 @@ const commonStore = moduleCode => ({
                                 hidden: item.hidden,
                                 fullScreen: item.fullScreen
                             },
-                            children: item.children && item.children.length ? createRouter(item.children, name + '-' + item.name) : []
+                            children: item.children && item.children.length ? createRouter([...item.children], name + '-' + item.name) : []
                         }
                         item.redirectUri && (obj.redirect = item.redirectUri)
                         prev.push(obj)
@@ -145,16 +145,20 @@ const commonStore = moduleCode => ({
 
             return new Promise(resolve => {
                 getModuleResource(moduleCode).then(({ content: router }) => {
-                    const accessRoutes = createRouter(router.children).concat([
-                        {
-                            path: '*',
-                            redirect: '/404'
-                        },
-                        {
-                            path: '/404',
-                            component: NotFound
-                        }
-                    ])
+                    // const accessRoutes = createRouter(router.children).concat([
+                    //     {
+                    //         path: '*',
+                    //         redirect: '/404'
+                    //     },
+                    //     {
+                    //         path: '/404',
+                    //         component: NotFound
+                    //     }
+                    // ])
+                    const accessRoutes = createRouter(router.children)
+                    console.log(router, 'router')
+                    console.log(accessRoutes, 'accessRoutes')
+
                     const permissionBtns = createPermissionBtns(router.children)
                     commit('SET_ACCSESS_ROUTES', accessRoutes)
                     commit('SET_PERMISSION_BTNS', permissionBtns)
@@ -171,4 +175,4 @@ const commonStore = moduleCode => ({
     }
 })
 
-export default commonStore
+export default createStore

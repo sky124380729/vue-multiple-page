@@ -59,7 +59,7 @@ export default {
             this.loading = true
             // 登录接口需要根据http状态码判断
             login(form)
-                .then(res => {
+                .then(({ data: res }) => {
                     this.loading = false
                     const { token_type, access_token } = res
                     const token = `${token_type} ${access_token}`
