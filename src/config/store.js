@@ -159,7 +159,6 @@ const commonStore = moduleCode => ({
                     commit('SET_ACCSESS_ROUTES', accessRoutes)
                     commit('SET_PERMISSION_BTNS', permissionBtns)
                     resolve(accessRoutes)
-                    console.log(1)
                 })
             })
         },
