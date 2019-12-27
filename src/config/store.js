@@ -2,6 +2,7 @@
 import Cookie from 'js-cookie'
 import NotFound from 'modules/NotFound'
 import { getModuleResource } from '@/apis'
+import { deepClone } from 'utils/tools'
 const createStore = moduleCode => ({
     state: {
         collapse: false, // 菜单栏是否收缩
@@ -24,7 +25,7 @@ const createStore = moduleCode => ({
                     return item.meta && item.meta.hidden !== 'TRUE'
                 })
             }
-            return filterMenus(state.accsessRoutes)
+            return filterMenus(deepClone(state.accsessRoutes))
         },
         navTags: state => state.navTags
     },
