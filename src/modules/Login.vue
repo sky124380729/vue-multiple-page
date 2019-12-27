@@ -61,8 +61,8 @@ export default {
             login(form)
                 .then(res => {
                     this.loading = false
-                    const { data } = res
-                    const token = `${data.token_type} ${data.access_token}`
+                    const { token_type, access_token } = res
+                    const token = `${token_type} ${access_token}`
                     Cookies.set('token', token, { expires: 7 })
                     this.$router.push('/')
                 })

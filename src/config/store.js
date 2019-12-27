@@ -144,7 +144,7 @@ const commonStore = moduleCode => ({
             }
 
             return new Promise(resolve => {
-                getModuleResource(moduleCode).then(({ data: { content: router } }) => {
+                getModuleResource(moduleCode).then(({ content: router }) => {
                     const accessRoutes = createRouter(router.children).concat([
                         {
                             path: '*',

@@ -1,11 +1,9 @@
-import axios from 'axios'
-import Cookies from 'js-cookie'
+// import store from './store'
+// import createRouter from './router'
+import Cookie from 'js-cookie'
 import { Message } from 'element-ui'
-import devUrl from 'config/baseUrl'
 
-export const baseURL = `${devUrl}/api/identity/`
-
-const SERVER_CODE = new Map([
+export const SERVER_CODE = new Map([
     [
         200,
         res => {
@@ -83,7 +81,7 @@ const SERVER_CODE = new Map([
     ]
 ])
 
-const HTTP_CODE = new Map([
+export const HTTP_CODE = new Map([
     [
         400,
         () => {
@@ -92,8 +90,13 @@ const HTTP_CODE = new Map([
     ],
     [
         401,
-        e => {
-            Message.error(e.data.error_description)
+        () => {
+            Message.error('授权失败，请重新登录!')
+            setTimeout(() => {
+                const module = location.pathname.slice(1).split('/')[0]
+                Cookie.remove('token')
+                location.href = `/${module}/login`
+            }, 1000)
         }
     ],
     [
@@ -127,46 +130,3 @@ const HTTP_CODE = new Map([
         }
     ]
 ])
-// loading处理函数
-const loadingFun = (loading, vm, flag) => {
-    if (!loading || !vm) return
-    loading.split(',').forEach(v => {
-        vm[v] = flag
-    })
-}
-
-const myHttp = (options, config = {}) => {
-    const service = axios.create({
-        baseURL,
-        timeout: 5000
-    })
-    // 请求拦截器
-    service.interceptors.request.use(
-        request => {
-            const token = Cookies.get('token')
-            token && (request.headers['authorization'] = token)
-            loadingFun(config.loading, config.vm, true)
-            return request
-        },
-        error => {
-            Message.error(error)
-        }
-    )
-    // 返回拦截器
-    service.interceptors.response.use(
-        ({ data: res }) => {
-            const code = res && res.code
-            loadingFun(config.loading, config.vm, false)
-            return SERVER_CODE.get(code)(res)
-        },
-        error => {
-            const { response: res = {} } = error
-            loadingFun(config.loading, config.vm, false)
-            HTTP_CODE.get(res.status)(res)
-            return Promise.reject(error)
-        }
-    )
-    return service(options, config).catch(() => null)
-}
-
-export default myHttp
