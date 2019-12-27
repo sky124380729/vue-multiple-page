@@ -1,6 +1,6 @@
 // 这里用于放一些全局配置
 import Cookie from 'js-cookie'
-// import NotFound from 'modules/NotFound'
+import NotFound from 'modules/NotFound'
 import { getModuleResource } from '@/apis'
 const createStore = moduleCode => ({
     state: {
@@ -122,7 +122,7 @@ const createStore = moduleCode => ({
                                 hidden: item.hidden,
                                 fullScreen: item.fullScreen
                             },
-                            children: item.children && item.children.length ? createRouter([...item.children], name + '-' + item.name) : []
+                            children: item.children && item.children.length ? createRouter(item.children, name + '-' + item.name) : []
                         }
                         item.redirectUri && (obj.redirect = item.redirectUri)
                         prev.push(obj)
@@ -145,20 +145,16 @@ const createStore = moduleCode => ({
 
             return new Promise(resolve => {
                 getModuleResource(moduleCode).then(({ content: router }) => {
-                    // const accessRoutes = createRouter(router.children).concat([
-                    //     {
-                    //         path: '*',
-                    //         redirect: '/404'
-                    //     },
-                    //     {
-                    //         path: '/404',
-                    //         component: NotFound
-                    //     }
-                    // ])
-                    const accessRoutes = createRouter(router.children)
-                    console.log(router, 'router')
-                    console.log(accessRoutes, 'accessRoutes')
-
+                    const accessRoutes = createRouter(router.children).concat([
+                        {
+                            path: '*',
+                            redirect: '/404'
+                        },
+                        {
+                            path: '/404',
+                            component: NotFound
+                        }
+                    ])
                     const permissionBtns = createPermissionBtns(router.children)
                     commit('SET_ACCSESS_ROUTES', accessRoutes)
                     commit('SET_PERMISSION_BTNS', permissionBtns)
