@@ -17,7 +17,7 @@ export default {
     },
     methods: {
         go() {
-            this.switchPage('Opt', '1212')
+            this.$switchPage('Opt', '1212')
         }
     }
 }

@@ -26,7 +26,7 @@ const compCommon = {
         }
     },
     methods: {
-        switchPage(comp, id = null, view = false) {
+        $switchPage(comp, id = null, view = false) {
             const { page } = this
             page.comp = comp
             page.id = id

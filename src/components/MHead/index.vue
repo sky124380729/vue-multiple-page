@@ -40,7 +40,7 @@ export default {
                             type='danger'
                             size='mini'
                             on-click={() => {
-                                typeof context.props.back === 'boolean' ? context.parent.switchPage('Index') : context.props.back.call(context)
+                                typeof context.props.back === 'boolean' ? context.parent.$switchPage('Index') : context.props.back.call(context)
                             }}
                         >
                             返回

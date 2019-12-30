@@ -18,7 +18,7 @@ export default {
     },
     methods: {
         back() {
-            this.switchPage('Index')
+            this.$switchPage('Index')
         },
         get() {
             console.log(this.$route.params)
