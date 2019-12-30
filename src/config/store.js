@@ -144,23 +144,27 @@ const createStore = moduleCode => ({
                 }, [])
             }
 
-            return new Promise(resolve => {
-                getModuleResource(moduleCode).then(({ content: router }) => {
-                    const accessRoutes = createRouter(router.children).concat([
-                        {
-                            path: '*',
-                            redirect: '/404'
-                        },
-                        {
-                            path: '/404',
-                            component: NotFound
-                        }
-                    ])
-                    const permissionBtns = createPermissionBtns(router.children)
-                    commit('SET_ACCSESS_ROUTES', accessRoutes)
-                    commit('SET_PERMISSION_BTNS', permissionBtns)
-                    resolve(accessRoutes)
-                })
+            return new Promise((resolve, reject) => {
+                getModuleResource(moduleCode)
+                    .then(({ content: router }) => {
+                        const accessRoutes = createRouter(router.children).concat([
+                            {
+                                path: '*',
+                                redirect: '/404'
+                            },
+                            {
+                                path: '/404',
+                                component: NotFound
+                            }
+                        ])
+                        const permissionBtns = createPermissionBtns(router.children)
+                        commit('SET_ACCSESS_ROUTES', accessRoutes)
+                        commit('SET_PERMISSION_BTNS', permissionBtns)
+                        resolve(accessRoutes)
+                    })
+                    .catch(error => {
+                        reject(error)
+                    })
             })
         },
         logout: ({ commit }) => {

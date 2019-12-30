@@ -30,11 +30,26 @@ export default {
         }
     },
     render(createElement) {
+        // 普通查询
+        const normalSearch = this.queryArr.filter(v => !v.senior)
+        // 高级查询
+        const seniorSearch = this.queryArr.filter(v => v.senior)
+        // 高级查询label宽度
+        const seniorLabelWidth =
+            seniorSearch.reduce((max, curr) => {
+                const { label } = curr
+                label.length > max && (max = label.length)
+                return max
+            }, 0) *
+                18 +
+            'px'
+        // 高级查询的图标
+        const seniorIcon = seniorSearch.some(v => !!this.conditions[v.key]) ? 'el-icon-s-help' : 'el-icon-help'
         // 定义查询的node节点
-        const searchArea = this.queryArr.length ? (
+        const searchArea = normalSearch.length ? (
             <div class='m-search__search'>
-                {this.queryArr.map(v => {
-                    return createElement(
+                {normalSearch.map(v =>
+                    createElement(
                         v.tag,
                         {
                             class: 'm-search__item',
@@ -42,7 +57,7 @@ export default {
                                 width: (v.width || 200) + 'px'
                             },
                             attrs: {
-                                placeholder: v.ph
+                                placeholder: (v.tag === 'el-input' ? '请输入' : '请选择') + v.label
                             },
                             props: {
                                 value: this.conditions[v.key],
@@ -61,12 +76,55 @@ export default {
                         },
                         this.setChildren(v, createElement)
                     )
-                })}
-                <el-button class='m-search__btn' size='mini' type='primary' on-click={this.sendQuery}>
+                )}
+
+                <el-button class='m-search__btn' type='text' icon='el-icon-search' on-click={this.sendQuery}>
                     查询
                 </el-button>
+
+                {seniorSearch.length ? (
+                    <el-popover class='m-search__senior' popper-class='senior-form'>
+                        <el-form label-width={seniorLabelWidth} label-position='right' size='mini'>
+                            {seniorSearch.map(s =>
+                                createElement(
+                                    'el-form-item',
+                                    {
+                                        props: {
+                                            label: s.label
+                                        }
+                                    },
+                                    [
+                                        createElement(s.tag, {
+                                            attrs: {
+                                                placeholder: (s.tag === 'el-input' ? '请输入' : '请选择') + s.label
+                                            },
+                                            props: {
+                                                value: this.conditions[s.key],
+                                                size: 'mini',
+                                                // 快捷选项
+                                                clearable: s.clearable !== false,
+                                                editable: s.editable || false,
+                                                // 组件自己的props选项
+                                                ...s.props
+                                            },
+                                            on: {
+                                                input: val => {
+                                                    this.conditions[s.key] = val
+                                                }
+                                            }
+                                        })
+                                    ]
+                                )
+                            )}
+                        </el-form>
+                        <el-button type='text' slot='reference' icon={seniorIcon}>
+                            高级查询
+                        </el-button>
+                    </el-popover>
+                ) : null}
+
                 {this.showClearBtn && (
-                    <el-button class='m-search__btn' size='mini' type='danger' on-click={this.sendClear}>
+                    <el-button class='m-search__btn danger' type='text' icon='el-icon-delete' on-click={this.sendClear}>
                         清空
                     </el-button>
                 )}
@@ -121,7 +179,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .m-search {
     display: flex;
     justify-content: space-between;
@@ -142,6 +200,9 @@ export default {
     }
     &__item {
         margin-right: 10px;
+    }
+    &__senior {
+        margin: 0 10px;
     }
     &__slots {
         margin-left: 10px;

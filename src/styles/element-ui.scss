@@ -55,3 +55,12 @@
 .el-select {
     width: 100%;
 }
+
+
+// 高级查询的表单样式
+.senior-form {
+    padding: 20px 12px;
+    .el-form-item:last-child{
+        margin-bottom: 0;
+    }
+}

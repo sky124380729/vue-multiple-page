@@ -75,7 +75,7 @@ export default {
     name: 'system-role',
     data() {
         return {
-            queryArr: [{ key: 'name', tag: 'el-input', ph: '请输入名称' }],
+            queryArr: [{ key: 'name', tag: 'el-input', label: '请输入名称' }],
             roleVisible: false,
             authVisible: false,
             roleSubmitLoading: false,
