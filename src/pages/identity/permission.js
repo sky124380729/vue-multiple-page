@@ -2,7 +2,6 @@ import router from './router'
 import store from './store'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
-import { Message } from 'element-ui'
 import Cookies from 'js-cookie'
 import screenfull from 'screenfull'
 
@@ -21,7 +20,8 @@ router.beforeEach(async (to, from, next) => {
                     router.addRoutes(await store.dispatch('setAccessRoutes'))
                     next({ ...to, replace: true })
                 } catch (e) {
-                    Message.error(e.message || '发生错误')
+                    Cookies.remove('token')
+                    next({ path: '/login' })
                     NProgress.done()
                 }
             } else {

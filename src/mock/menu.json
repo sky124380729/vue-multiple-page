@@ -1,6 +1,6 @@
 [
     {
-        "id": "7c4475637c38409ca865a799eb0dcfa0",
+        "id": "f5723efc2b6a11eab9f1f4b520008912",
         "type": "MODULE",
         "uri": "/identity",
         "code": "",
@@ -8,7 +8,7 @@
         "title": "系统统一身份认证",
         "children": [
             {
-                "id": "7c4475637c38409ca865a799eb0dcfa1",
+                "id": "0347c2c32b6b11eab9f1f4b520008912",
                 "code": "",
                 "title": "首页",
                 "name": "platform",
@@ -21,7 +21,7 @@
                 "sort": 0,
                 "children": [
                     {
-                        "id": "7c4476637c38409ca865a799eb0dcfa0",
+                        "id": "062acb662b6b11eab9f1f4b520008912",
                         "code": "",
                         "title": "中央控制台",
                         "name": "index",
@@ -36,7 +36,7 @@
                 "type": "MENU"
             },
             {
-                "id": "7c4475637c38409ca865a799eb0dcfa2",
+                "id": "08b64e602b6b11eab9f1f4b520008912",
                 "code": "",
                 "title": "系统管理",
                 "name": "system",
@@ -47,7 +47,7 @@
                 "sort": 0,
                 "children": [
                     {
-                        "id": "7c4475637c38409ca865a799eb0dcfa3",
+                        "id": "0b537e312b6b11eab9f1f4b520008912",
                         "code": "",
                         "title": "资源管理",
                         "name": "resource",
@@ -58,7 +58,7 @@
                         "sort": 0,
                         "children": [
                             {
-                                "id": "7c4475637c38409ca865a799eb0dcfa4",
+                                "id": "0f07d11e2b6b11eab9f1f4b520008912",
                                 "code": "",
                                 "title": "新增",
                                 "name": "create",
@@ -72,7 +72,7 @@
                                 "hasDataScope": false
                             },
                             {
-                                "id": "7c4475637c38409ca865a799eb0dcfa5",
+                                "id": "127580232b6b11eab9f1f4b520008912",
                                 "code": "",
                                 "title": "编辑",
                                 "name": "edit",
@@ -90,7 +90,7 @@
                         "type": "MENU"
                     },
                     {
-                        "id": "7c4475637c38409ca865a799eb0dcfa6",
+                        "id": "14ea14502b6b11eab9f1f4b520008912",
                         "code": "",
                         "title": "权限管理",
                         "name": "permission",
@@ -101,7 +101,7 @@
                         "sort": 0,
                         "children": [
                             {
-                                "id": "7c4475637c38409ca865a799eb0dcfa7",
+                                "id": "175e955b2b6b11eab9f1f4b520008912",
                                 "code": "",
                                 "title": "新增",
                                 "name": "create",
@@ -115,7 +115,7 @@
                                 "hasDataScope": false
                             },
                             {
-                                "id": "7c4475637c38409ca865a799eb0dcfa8",
+                                "id": "1a9961cb2b6b11eab9f1f4b520008912",
                                 "code": "",
                                 "title": "编辑",
                                 "name": "edit",
@@ -129,7 +129,7 @@
                                 "hasDataScope": false
                             },
                             {
-                                "id": "7c4475637c38409ca865a799eb0dcfa9",
+                                "id": "1c82ea122b6b11eab9f1f4b520008912",
                                 "code": "",
                                 "title": "删除",
                                 "name": "delete",
@@ -143,7 +143,7 @@
                                 "hasDataScope": false
                             },
                             {
-                                "id": "7c4475637c38409ca865a799eb0dcfb0",
+                                "id": "1eed42252b6b11eab9f1f4b520008912",
                                 "code": "",
                                 "title": "上传",
                                 "name": "upload",
@@ -161,7 +161,7 @@
                         "fullScreen": true
                     },
                     {
-                        "id": "7c4475637c38409ca865a799eb0dcfb1",
+                        "id": "21016f0e2b6b11eab9f1f4b520008912",
                         "code": "",
                         "title": "多页测试",
                         "name": "test",
@@ -175,7 +175,7 @@
                         "fullScreen": ""
                     },
                     {
-                        "id": "7c4475637c38409ca865a799eb0dcfb2",
+                        "id": "23a4817c2b6b11eab9f1f4b520008912",
                         "code": "",
                         "title": "系统组织管理",
                         "name": "organization",
@@ -189,7 +189,7 @@
                         "fullScreen": ""
                     },
                     {
-                        "id": "7c4475637c38409ca865a799eb0dcfb3",
+                        "id": "269150312b6b11eab9f1f4b520008912",
                         "code": "",
                         "title": "系统角色管理",
                         "name": "role",
@@ -203,228 +203,7 @@
                         "fullScreen": ""
                     },
                     {
-                        "id": "7c4475637c38409ca865a799eb0dcfb4",
-                        "code": "",
-                        "title": "系统用户管理",
-                        "name": "principal",
-                        "icon": null,
-                        "uri": "principal",
-                        "componentPath": "pages/identity/views/system/principal",
-                        "hidden": false,
-                        "sort": 0,
-                        "children": [],
-                        "type": "MENU",
-                        "fullScreen": ""
-                    }
-                ],
-                "type": "MENU"
-            }
-        ]
-    },
-    {
-        "id": "7c4475637c38409ca865a799eb0dcfb5",
-        "type": "MODULE",
-        "uri": "/a",
-        "code": "",
-        "name": "a",
-        "title": "系统A",
-        "children": [
-            {
-                "id": "7c4475637c38409ca865a799eb0dcfb6",
-                "code": "",
-                "title": "首页A",
-                "name": "platform",
-                "icon": null,
-                "uri": "/platform",
-                "redirectUri": "/platform/index",
-                "hidden": false,
-                "componentPath": "modules/layout",
-                "fullScreen": false,
-                "sort": 0,
-                "children": [
-                    {
-                        "id": "7c4475632228409ca865a799eb0dcfb6",
-                        "code": "",
-                        "title": "中央控制台",
-                        "name": "index",
-                        "icon": null,
-                        "uri": "index",
-                        "componentPath": "pages/identity/views/platform",
-                        "hidden": true,
-                        "sort": 0,
-                        "type": "MENU"
-                    }
-                ],
-                "type": "MENU"
-            },
-            {
-                "id": "7c4475637c38409ca865a799eb0dcfb7",
-                "code": "",
-                "title": "系统管理A",
-                "name": "system",
-                "icon": null,
-                "uri": "/system",
-                "hidden": false,
-                "componentPath": "modules/layout",
-                "sort": 0,
-                "children": [
-                    {
-                        "id": "7c4475637c38409ca865a799eb0dcfb8",
-                        "code": "",
-                        "title": "资源管理",
-                        "name": "resource",
-                        "icon": null,
-                        "uri": "resource",
-                        "componentPath": "pages/identity/views/system/resource",
-                        "sort": 0,
-                        "children": [
-                            {
-                                "id": "7c4475637c38409ca865a799eb0dcfb9",
-                                "code": "",
-                                "title": "新增",
-                                "name": "create",
-                                "icon": null,
-                                "uri": null,
-                                "componentPath": null,
-                                "componentName": null,
-                                "sort": 1,
-                                "children": [],
-                                "type": "BUTTON",
-                                "hasDataScope": false
-                            },
-                            {
-                                "id": "7c4475637c38409ca865a799eb0dcfc0",
-                                "code": "",
-                                "title": "编辑",
-                                "name": "edit",
-                                "icon": null,
-                                "uri": null,
-                                "componentPath": null,
-                                "componentName": null,
-                                "sort": 1,
-                                "children": [],
-                                "type": "BUTTON",
-                                "hasDataScope": false
-                            }
-                        ],
-                        "fullScreen": false,
-                        "type": "MENU"
-                    },
-                    {
-                        "id": "7c4475637c38409ca865a799eb0dcfc1",
-                        "code": "",
-                        "title": "权限管理",
-                        "name": "permission",
-                        "icon": null,
-                        "uri": "permission",
-                        "componentPath": "pages/identity/views/system/permission",
-                        "hidden": false,
-                        "sort": 0,
-                        "children": [
-                            {
-                                "id": "7c4475637c38409ca865a799eb0dcfc2",
-                                "code": "",
-                                "title": "新增",
-                                "name": "create",
-                                "icon": null,
-                                "uri": null,
-                                "componentPath": null,
-                                "componentName": null,
-                                "sort": 1,
-                                "children": [],
-                                "type": "BUTTON",
-                                "hasDataScope": false
-                            },
-                            {
-                                "id": "7c4475637c38409ca865a799eb0dcfc3",
-                                "code": "",
-                                "title": "编辑",
-                                "name": "edit",
-                                "icon": null,
-                                "uri": null,
-                                "componentPath": null,
-                                "componentName": null,
-                                "sort": 1,
-                                "children": [],
-                                "type": "BUTTON",
-                                "hasDataScope": false
-                            },
-                            {
-                                "id": "7c4475637c38409ca865a799eb0dcfc4",
-                                "code": "",
-                                "title": "删除",
-                                "name": "delete",
-                                "icon": null,
-                                "uri": null,
-                                "componentPath": null,
-                                "componentName": null,
-                                "sort": 1,
-                                "children": [],
-                                "type": "BUTTON",
-                                "hasDataScope": false
-                            },
-                            {
-                                "id": "7c4475637c38409ca865a799eb0dcfc5",
-                                "code": "",
-                                "title": "上传",
-                                "name": "upload",
-                                "icon": null,
-                                "uri": null,
-                                "componentPath": null,
-                                "componentName": null,
-                                "sort": 1,
-                                "children": [],
-                                "type": "BUTTON",
-                                "hasDataScope": false
-                            }
-                        ],
-                        "type": "MENU",
-                        "fullScreen": true
-                    },
-                    {
-                        "id": "7c4475637c38409ca865a799eb0dcfc6",
-                        "code": "",
-                        "title": "多页测试",
-                        "name": "test",
-                        "icon": null,
-                        "uri": "test",
-                        "componentPath": "pages/identity/views/system/test/test-bus",
-                        "hidden": false,
-                        "sort": 0,
-                        "children": [],
-                        "type": "MENU",
-                        "fullScreen": ""
-                    },
-                    {
-                        "id": "7c4475637c38409ca865a799eb0dcfc7",
-                        "code": "",
-                        "title": "系统组织管理",
-                        "name": "organization",
-                        "icon": null,
-                        "uri": "organization",
-                        "componentPath": "pages/identity/views/system/organization",
-                        "hidden": false,
-                        "sort": 0,
-                        "children": [],
-                        "type": "MENU",
-                        "fullScreen": ""
-                    },
-                    {
-                        "id": "7c4475637c38409ca865a799eb0dcfc8",
-                        "code": "",
-                        "title": "系统角色管理",
-                        "name": "role",
-                        "icon": null,
-                        "uri": "role",
-                        "componentPath": "pages/identity/views/system/role",
-                        "hidden": false,
-                        "sort": 0,
-                        "children": [],
-                        "type": "MENU",
-                        "fullScreen": ""
-                    },
-                    {
-                        "id": "7c4475637c38409ca865a799eb0dcfc9",
+                        "id": "28edb2952b6b11eab9f1f4b520008912",
                         "code": "",
                         "title": "系统用户管理",
                         "name": "principal",

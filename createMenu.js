@@ -1,9 +1,13 @@
-var fs = require('fs')
-var path = require('path')
+const fs = require('fs')
+const path = require('path')
+const chalk = require('chalk')
 
 function resolve(dir) {
     return path.join(__dirname, dir)
 }
+
+// 导出的文件目录位置
+const SQL_PATH = resolve('./menu.sql')
 
 function createSQL(data, name = '', arr = []) {
     data.forEach(function(v) {
@@ -38,8 +42,8 @@ function createSQL(data, name = '', arr = []) {
 }
 
 fs.readFile(resolve('src/mock/menu.json'), 'utf-8', (err, data) => {
-    var menuList = createSQL(JSON.parse(data))
-    var sql = menuList
+    const menuList = createSQL(JSON.parse(data))
+    const sql = menuList
         .map(sql => {
             let value = ''
             // eslint-disable-next-line no-unused-vars
@@ -54,7 +58,7 @@ fs.readFile(resolve('src/mock/menu.json'), 'utf-8', (err, data) => {
             return 'INSERT INTO `t_id_resource` VALUES (' + value.slice(1) + ')' + '\n'
         })
         .join(';')
-    var mySQL =
+    const mySQL =
         'DROP TABLE IF EXISTS `t_id_resource`;' +
         '\n' +
         'CREATE TABLE `t_id_resource` (' +
@@ -108,12 +112,8 @@ fs.readFile(resolve('src/mock/menu.json'), 'utf-8', (err, data) => {
         ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='资源';" +
         '\n' +
         sql
-    fs.writeFile('menu.sql', mySQL, err => {
+    fs.writeFile(SQL_PATH, mySQL, err => {
         if (err) console.log(err)
-        /* fs.open('menu.sql', 'r', 0o666, (err, fd) => {
-            // console.log(err)
-            if (err) console.log(err)
-            console.log(fd, 'fd')
-        }) */
+        console.log(chalk.cyanBright(`恭喜你，创建sql语句成功，位置：${SQL_PATH}`))
     })
 })
