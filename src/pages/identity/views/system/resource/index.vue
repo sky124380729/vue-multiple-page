@@ -1,61 +1,53 @@
 <template>
-    <section>
-        <el-alert type="success" title="资源管理" description="取的是定义的路由元信息中menu为true的信息"></el-alert>
-        <el-tree :data="menuList" :props="defaultProps" :render-content="renderContent"></el-tree>
-        <el-button v-permission="'edit'">试试权限按钮呢</el-button>
+    <section class="resource">
+        <el-card :header="menu.title" v-for="menu in menuList" :key="menu.id">
+            <el-tree :data="menu.children" :props="defaultProps">
+                <div class="custom-tree-node" slot-scope="{ node, data }">
+                    <div class="main">
+                        <el-tag v-if="node.data.type === 'MENU'" size="mini" type="primary">菜单</el-tag>
+                        <el-tag v-else-if="node.data.type === 'BUTTON'" size="mini" type="success">按钮</el-tag>
+                        <el-tag v-if="node.data.hidden === 'TRUE'" size="mini" type="warning">隐藏项</el-tag>
+                        <span><i :class="data.icon"></i> {{ node.label }}</span>
+                    </div>
+                </div>
+            </el-tree>
+        </el-card>
     </section>
 </template>
 
 <script>
+import { getResourceTree } from '@/pages/identity/apis/resource'
 export default {
     name: 'system-resource',
     data() {
         return {
+            menuList: [],
             defaultProps: {
                 children: 'children',
                 label(data) {
-                    return data.meta && data.meta.title
+                    return data.title
                 }
             }
         }
     },
-    computed: {
-        menuList() {
-            function filterMenu(menu) {
-                return menu.filter(item => {
-                    if (item.children && item.children.length) {
-                        return filterMenu(item.children)
-                    }
-                    if (item.meta && item.meta.btnList) {
-                        let arr = []
-                        for (const [k, v] of Object.entries(item.meta.btnList)) {
-                            arr.push({ name: k, meta: { title: v }, isBtn: true })
-                        }
-                        item.children = arr
-                    }
-                    return item
-                })
-            }
-            return filterMenu(this.$deepClone(this.$store.getters.menuList))
-        }
+    created() {
+        this.getAllMenu()
     },
     methods: {
-        renderContent(h, { node, data }) {
-            return (
-                <p class='custom-tree-node'>
-                    <span class={{ isBtn: data.isBtn }}>{node.label}</span>
-                    <span class='name'>{data.name}</span>
-                </p>
-            )
+        async getAllMenu() {
+            const { content: res } = await getResourceTree()
+            this.menuList = res
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '~styles/variables';
+.resource {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+}
 .el-tree {
-    width: 600px;
     margin-top: 10px;
     ::v-deep {
         .custom-tree-node {
@@ -65,11 +57,11 @@ export default {
             justify-content: space-between;
             font-size: 14px;
             padding-right: 8px;
-            .name {
-                color: $-color--theme;
+            .el-tag {
+                margin-right: 10px;
             }
-            .isBtn {
-                color: rgb(255, 208, 75);
+            .hidden {
+                color: lightgray;
             }
         }
     }
