@@ -7,12 +7,12 @@ export const compBus = {
     },
     data(vm) {
         const {
-            $route: { params }
+            $route: { query }
         } = vm
         return {
-            comp: (params && params.comp) || 'Index',
-            id: params && params.id,
-            view: params && params.view
+            comp: (query && query.comp) || 'Index',
+            id: query && query.id,
+            view: query && query.view
         }
     }
 }
@@ -43,10 +43,11 @@ export const compIndex = {
 
 // bus操作页混入
 export const compOpt = {
-    data() {
+    data(vm) {
+        const { page } = vm
         return {
-            id: this.page.id,
-            view: this.page.view
+            id: page.id,
+            view: page.view
         }
     },
     ...compCommon

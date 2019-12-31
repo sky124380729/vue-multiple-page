@@ -22,7 +22,7 @@
 <script>
 import { Encrypt, Decrypt } from '@/utils/secret'
 export default {
-    name: 'system-permission',
+    name: 'test-permission',
     data() {
         return {
             visible: false,
