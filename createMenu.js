@@ -6,29 +6,50 @@ function resolve(dir) {
     return path.join(__dirname, dir)
 }
 
+Date.prototype.format = function(fmt) {
+    let o = {
+        'M+': this.getMonth() + 1, // 月份
+        'd+': this.getDate(), // 日
+        'h+': this.getHours(), // 小时
+        'm+': this.getMinutes(), // 分
+        's+': this.getSeconds(), // 秒
+        'q+': Math.floor((this.getMonth() + 3) / 3), // 季度
+        S: this.getMilliseconds() // 毫秒
+    }
+    if (/(y+)/.test(fmt)) {
+        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length))
+    }
+    for (var k in o) {
+        if (new RegExp('(' + k + ')').test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length))
+        }
+    }
+    return fmt
+}
+
 // 导出的文件目录位置
 const SQL_PATH = resolve('./menu.sql')
 
-function createSQL(data, name = '', arr = []) {
+function createSQL(data, name = '', pid = '', arr = []) {
     data.forEach(function(v) {
         if (v.children && v.children.length) {
-            createSQL(v.children, name + '-' + v.name, arr)
+            createSQL(v.children, name + '-' + v.name, v.id, arr)
         }
         arr.push({
             id: v.id,
-            created_at: null,
-            modified_at: null,
-            created_by: null,
-            modified_by: null,
+            created_at: new Date().format('yyyy-MM-dd hh:mm:ss'),
+            modified_at: new Date().format('yyyy-MM-dd hh:mm:ss'),
+            created_by: 'Pink丶缤',
+            modified_by: 'Pink丶缤',
             version: 0,
             is_delete: 0,
             code: (name + '-' + v.name).slice(1),
             name: v.name,
             title: v.title,
             icon: v.icon,
-            uri: v.url,
+            uri: v.uri,
             sort: v.sort,
-            parent_id: v.parent_id,
+            parent_id: pid,
             type: v.type,
             has_data_scope: v.hasDataScope,
             component_path: v.componentPath,
