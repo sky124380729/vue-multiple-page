@@ -10,9 +10,9 @@ export const compBus = {
             $route: { query }
         } = vm
         return {
-            comp: (query && query.comp) || 'Index',
-            id: query && query.id,
-            view: query && query.view
+            comp: query.comp || 'Index',
+            id: query.id,
+            view: !!query.view
         }
     }
 }
