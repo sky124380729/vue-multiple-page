@@ -24,6 +24,20 @@ glob.sync('./src/pages/**/main.js').forEach(path => {
         chunks: ['chunk-vendors', 'chunk-common', chunk]
     }
 })
+
+// 代理函数
+const setProxy = table => {
+    let proxy = {}
+    for (const [k, v] of table) {
+        proxy[k] = {
+            changeOrigin: true,
+            target: v,
+            pathRewrite: { [`^${k}`]: '' }
+        }
+    }
+    return proxy
+}
+
 module.exports = {
     pages,
     css: {
@@ -53,14 +67,11 @@ module.exports = {
         port: 9988,
         https: false,
         hotOnly: false,
-        proxy: {
-            '/test': {
-                changeOrigin: true,
-                target: 'http://172.16.10.153:8762',
-                pathRewrite: {
-                    '^/test': ''
-                }
-            }
-        }
+        proxy: setProxy(
+            new Map([
+                ['/xin', 'http://172.16.10.153:8762'], // 小鑫
+                ['/dev', 'http://118.25.94.233:8762'] // serve
+            ])
+        )
     }
 }
