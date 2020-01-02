@@ -60,15 +60,12 @@
                         "children": [
                             {
                                 "id": "fdb2a3ed2d0711eab9f1f4b520008912",
-                                "code": "",
                                 "title": "列表",
                                 "name": "index",
                                 "icon": null,
                                 "uri": "index",
                                 "hidden": "TRUE",
                                 "componentPath": "pages/identity/views/system/resource/index",
-                                "componentName": null,
-                                "sort": 1,
                                 "children": [],
                                 "type": "MENU",
                                 "hasDataScope": "FALSE"
@@ -91,76 +88,45 @@
                         "children": [
                             {
                                 "id": "e163d52e2d2e11eab9f1f4b520008912",
-                                "code": "",
                                 "title": "列表",
                                 "name": "index",
                                 "icon": null,
                                 "uri": "index",
                                 "hidden": "TRUE",
                                 "componentPath": "pages/identity/views/system/principal",
-                                "componentName": null,
-                                "sort": 1,
                                 "children": [],
                                 "type": "MENU",
                                 "hasDataScope": "FALSE"
                             },
                             {
                                 "id": "ff4c93ff2d2e11eab9f1f4b520008912",
-                                "code": "",
                                 "title": "新增",
                                 "name": "create",
-                                "icon": null,
-                                "uri": "create",
                                 "hidden": "TRUE",
-                                "componentPath": null,
-                                "componentName": null,
-                                "sort": 1,
-                                "children": [],
                                 "type": "BUTTON",
                                 "hasDataScope": "FALSE"
                             },
                             {
                                 "id": "02f16ecb2d2f11eab9f1f4b520008912",
-                                "code": "",
                                 "title": "编辑",
-                                "name": null,
-                                "icon": null,
-                                "uri": null,
+                                "name": "edit",
                                 "hidden": "TRUE",
-                                "componentPath": null,
-                                "componentName": null,
-                                "sort": 1,
-                                "children": [],
                                 "type": "BUTTON",
                                 "hasDataScope": "FALSE"
                             },
                             {
                                 "id": "0d2b81b52d2f11eab9f1f4b520008912",
-                                "code": "",
                                 "title": "删除",
-                                "name": null,
-                                "icon": null,
-                                "uri": null,
+                                "name": "delete",
                                 "hidden": "TRUE",
-                                "componentPath": null,
-                                "componentName": null,
-                                "sort": 1,
-                                "children": [],
                                 "type": "BUTTON",
                                 "hasDataScope": "FALSE"
                             },
                             {
                                 "id": "15f9a2332d2f11eab9f1f4b520008912",
-                                "code": "",
                                 "title": "选择组织",
-                                "name": null,
-                                "icon": null,
-                                "uri": null,
+                                "name": "setOrg",
                                 "hidden": "TRUE",
-                                "componentPath": null,
-                                "componentName": null,
-                                "sort": 1,
-                                "children": [],
                                 "type": "BUTTON",
                                 "hasDataScope": "FALSE"
                             }
@@ -182,15 +148,12 @@
                         "children": [
                             {
                                 "id": "162935c82d3011eab9f1f4b520008912",
-                                "code": "",
                                 "title": "主页",
                                 "name": "index",
                                 "icon": null,
                                 "uri": "index",
                                 "hidden": "TRUE",
                                 "componentPath": "pages/identity/views/system/organization",
-                                "componentName": null,
-                                "sort": 1,
                                 "children": [],
                                 "type": "MENU",
                                 "hasDataScope": "FALSE"
@@ -213,76 +176,45 @@
                         "children": [
                             {
                                 "id": "4028acae2d3011eab9f1f4b520008912",
-                                "code": "",
                                 "title": "列表",
                                 "name": "index",
                                 "icon": null,
                                 "uri": "index",
                                 "hidden": "TRUE",
                                 "componentPath": "pages/identity/views/system/role",
-                                "componentName": null,
-                                "sort": 1,
                                 "children": [],
                                 "type": "MENU",
                                 "hasDataScope": "FALSE"
                             },
                             {
                                 "id": "440e54022d3011eab9f1f4b520008912",
-                                "code": "",
                                 "title": "新增",
                                 "name": "create",
-                                "icon": null,
-                                "uri": "create",
                                 "hidden": "TRUE",
-                                "componentPath": null,
-                                "componentName": null,
-                                "sort": 1,
-                                "children": [],
                                 "type": "BUTTON",
                                 "hasDataScope": "FALSE"
                             },
                             {
                                 "id": "476f8c522d3011eab9f1f4b520008912",
-                                "code": "",
                                 "title": "编辑",
-                                "name": null,
-                                "icon": null,
-                                "uri": null,
+                                "name": "edit",
                                 "hidden": "TRUE",
-                                "componentPath": null,
-                                "componentName": null,
-                                "sort": 1,
-                                "children": [],
                                 "type": "BUTTON",
                                 "hasDataScope": "FALSE"
                             },
                             {
                                 "id": "4a790b362d3011eab9f1f4b520008912",
-                                "code": "",
                                 "title": "删除",
-                                "name": null,
-                                "icon": null,
-                                "uri": null,
+                                "name": "delete",
                                 "hidden": "TRUE",
-                                "componentPath": null,
-                                "componentName": null,
-                                "sort": 1,
-                                "children": [],
                                 "type": "BUTTON",
                                 "hasDataScope": "FALSE"
                             },
                             {
                                 "id": "4d6a8fab2d3011eab9f1f4b520008912",
-                                "code": "",
                                 "title": "设置菜单",
-                                "name": null,
-                                "icon": null,
-                                "uri": null,
+                                "name": "setMenu",
                                 "hidden": "TRUE",
-                                "componentPath": null,
-                                "componentName": null,
-                                "sort": 1,
-                                "children": [],
                                 "type": "BUTTON",
                                 "hasDataScope": "FALSE"
                             }
@@ -292,49 +224,6 @@
                     }
                 ],
                 "type": "MENU"
-            },
-            {
-                "id": "bafd57a82b9911eab9f1f4b520008912",
-                "code": "",
-                "title": "测试专用",
-                "name": "test",
-                "icon": null,
-                "uri": "/test",
-                "componentPath": "modules/layout",
-                "hidden": "FALSE",
-                "sort": 3,
-                "children": [
-                    {
-                        "id": "269569302b9a11eab9f1f4b520008912",
-                        "code": "",
-                        "title": "多页测试",
-                        "name": "multiple",
-                        "icon": null,
-                        "uri": "multiple",
-                        "componentPath": "pages/test/multiple/test-bus",
-                        "hidden": "FALSE",
-                        "sort": 1,
-                        "children": [],
-                        "type": "MENU",
-                        "fullScreen": ""
-                    },
-                    {
-                        "id": "9e605c202b9a11eab9f1f4b520008912",
-                        "code": "",
-                        "title": "权限测试",
-                        "name": "permission",
-                        "icon": null,
-                        "uri": "permission",
-                        "componentPath": "pages/test/permission",
-                        "hidden": "FALSE",
-                        "sort": 1,
-                        "children": [],
-                        "type": "MENU",
-                        "fullScreen": ""
-                    }
-                ],
-                "type": "MENU",
-                "fullScreen": ""
             }
         ]
     }

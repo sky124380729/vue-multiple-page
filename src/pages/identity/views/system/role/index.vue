@@ -150,11 +150,8 @@ export default {
             })
         },
         async getAllMenu() {
-            // const { content: res } = await getResourceTree()
-            // this.menuList = res
-            import('@/mock/menu.json').then(res => {
-                this.menuList = res.default
-            })
+            const { content: res } = await getResourceTree()
+            this.menuList = res
         },
         async setupMenuSubmit() {
             const menuList = this.$refs.menuTree.reduce((prev, menu) => {

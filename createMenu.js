@@ -31,7 +31,7 @@ Date.prototype.format = function(fmt) {
 const SQL_PATH = resolve('./menu.sql')
 
 function createSQL(data, name = '', pid = '', arr = []) {
-    data.forEach(function(v) {
+    data.forEach(function(v, d) {
         if (v.children && v.children.length) {
             createSQL(v.children, name + '-' + v.name, v.id, arr)
         }
@@ -48,7 +48,7 @@ function createSQL(data, name = '', pid = '', arr = []) {
             title: v.title,
             icon: v.icon,
             uri: v.uri,
-            sort: v.sort,
+            sort: d,
             parent_id: pid,
             type: v.type,
             has_data_scope: v.hasDataScope,

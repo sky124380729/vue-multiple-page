@@ -148,7 +148,7 @@ const createStore = moduleCode => ({
             }
 
             return new Promise((resolve, reject) => {
-                /* getModuleResource(moduleCode)
+                getModuleResource(moduleCode)
                     .then(({ content: router }) => {
                         const accessRoutes = createRouter(router.children).concat([
                             {
@@ -168,21 +168,21 @@ const createStore = moduleCode => ({
                     })
                     .catch(error => {
                         reject(error)
-                    }) */
+                    })
                 // 当数据库挂了的时候使用以下方法
-                import('@/mock/menu.json')
-                    .then(res => {
-                        const router = res[0].children
-                        const accessRoutes = createRouter(router)
-                        console.log(accessRoutes)
-                        const permissionBtns = createPermissionBtns(router)
-                        commit('SET_ACCSESS_ROUTES', accessRoutes)
-                        commit('SET_PERMISSION_BTNS', permissionBtns)
-                        resolve(accessRoutes)
-                    })
-                    .catch(error => {
-                        reject(error)
-                    })
+                // import('@/mock/menu.json')
+                //     .then(res => {
+                //         const router = res[0].children
+                //         const accessRoutes = createRouter(router)
+                //         console.log(accessRoutes)
+                //         const permissionBtns = createPermissionBtns(router)
+                //         commit('SET_ACCSESS_ROUTES', accessRoutes)
+                //         commit('SET_PERMISSION_BTNS', permissionBtns)
+                //         resolve(accessRoutes)
+                //     })
+                //     .catch(error => {
+                //         reject(error)
+                //     })
             })
         },
         logout: ({ commit }) => {
