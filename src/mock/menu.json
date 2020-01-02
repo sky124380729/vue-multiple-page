@@ -23,7 +23,20 @@
                         "name": "index",
                         "icon": null,
                         "uri": "index",
-                        "componentPath": "pages/identity/views/platform",
+                        "redirectUri":"/platform/index/index",
+                        "componentPath": "modules/Menu",
+                        "children":[
+                            {
+                                "id": "abeadec32d3711eab9f1f4b520008912",
+                                "title": "中央控制台",
+                                "name": "index",
+                                "icon": null,
+                                "uri": "index",
+                                "componentPath": "pages/identity/views/platform",
+                                "hidden": "TRUE",
+                                "type": "MENU"
+                            }
+                        ],
                         "hidden": "TRUE",
                         "type": "MENU"
                     }

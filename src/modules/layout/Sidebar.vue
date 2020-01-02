@@ -16,10 +16,17 @@ export default {
     name: 'sidebar',
     computed: {
         ...mapGetters(['menuList', 'collapse']),
+        // eslint-disable-next-line vue/return-in-computed-property
         activePath() {
             // 只要有隐藏项就取上一级的name
-            const { meta, name } = this.$route
-            return meta.hidden === 'TRUE' ? name.slice(0, name.lastIndexOf('-')) : name
+            const { matched } = this.$route
+            for (let i = matched.length - 1; i >= 0; i--) {
+                const { name, meta } = matched[i]
+                if (meta.hidden === 'TRUE') {
+                    continue
+                }
+                return name
+            }
         }
     },
     components: {

@@ -74,7 +74,25 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['navTags'])
+        ...mapGetters(['navTags']),
+        activeTag() {
+            const { matched } = this.$route
+            let tagName, tagTitle
+            for (let i = matched.length - 1; i >= 0; i--) {
+                const { name, meta } = matched[i]
+                if (meta.hidden === 'TRUE') {
+                    continue
+                } else {
+                    tagName = name
+                    tagTitle = meta.title
+                    break
+                }
+            }
+            return {
+                tagName,
+                tagTitle
+            }
+        }
     },
     methods: {
         ...mapMutations(['ADD_NAVTAGS', 'DEL_NAVTAGS', 'DEL_OTHER_NAVTAGS', 'DEL_ALL_NAVTAGS']),
@@ -88,11 +106,7 @@ export default {
             })
         },
         move(flag) {
-            if (flag > 0) {
-                this.swiper.slideNext()
-            } else {
-                this.swiper.slidePrev()
-            }
+            flag > 0 ? this.swiper.slideNext() : this.swiper.slidePrev()
         },
         handleTag(command) {
             if (command === 'closeOthers') {
@@ -103,18 +117,15 @@ export default {
             }
         },
         isTagActive(tagName) {
-            // 只要有隐藏项就取上一级的name
-            const { meta, name } = this.$route
-            return tagName === (meta.hidden === 'TRUE' ? name.slice(0, name.lastIndexOf('-')) : name)
+            return tagName === this.activeTag.tagName
         },
         // 添加标签
         addTag(route) {
-            const { meta, matched, name } = route
-            if (!name) return
-            const tagName = meta.hidden === 'TRUE' ? name.slice(0, name.lastIndexOf('-')) : name
-            const tagTitle = meta.hidden === 'TRUE' ? matched[matched.length - 2].meta.title : meta.title
-            this.ADD_NAVTAGS({ name: tagName, title: tagTitle })
-            const newName = this.$nextTick(() => {
+            const { meta, matched, name: rName } = route
+            if (!rName) return
+            const { tagName: name, tagTitle: title } = this.activeTag
+            this.ADD_NAVTAGS({ name, title })
+            this.$nextTick(() => {
                 let index = [...document.querySelectorAll('.swiper-wrapper .el-tag')].findIndex(item => item.classList.contains('isActive'))
                 this.swiper.slideTo(index)
             })
