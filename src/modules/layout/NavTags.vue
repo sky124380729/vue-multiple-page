@@ -10,7 +10,7 @@
                         @contextmenu.prevent.native="openMenu(item, $event)"
                         @click="$router.push({ name: item.name })"
                         :class="{ isActive: isTagActive(item.name) }"
-                        closable
+                        :closable="item.name !== 'platform'"
                         @close="closeTag(item)"
                         size="medium"
                         class="swiper-slide"
@@ -88,10 +88,7 @@ export default {
                     break
                 }
             }
-            return {
-                tagName,
-                tagTitle
-            }
+            return { tagName, tagTitle }
         }
     },
     methods: {
@@ -133,9 +130,10 @@ export default {
         // 删除标签
         closeTag(tag) {
             // 控制路由重新跳转
+            const { tagName } = this.activeTag
             if (this.navTags.length === 1) {
                 this.$router.push({ name: 'platform' })
-            } else if (this.$route.name === tag.name) {
+            } else if (tagName === tag.name) {
                 for (const [k, v] of this.navTags.entries()) {
                     if (v.name === tag.name) {
                         if (k !== this.navTags.length - 1) {
