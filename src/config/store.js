@@ -113,6 +113,7 @@ const createStore = moduleCode => ({
             // 生产可访问的路由表
             const createRouter = (routes, name = '') => {
                 return routes.reduce((prev, item) => {
+                    // 只要这个菜单有uri，则注册进去，可能是MENU，也可能是BUTTON
                     if (item.uri) {
                         let obj = {
                             path: item.uri,

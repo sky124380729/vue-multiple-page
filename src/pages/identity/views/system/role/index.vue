@@ -45,9 +45,9 @@
                     >
                         <div class="custom-tree-node" slot-scope="{ node, data }">
                             <div class="main">
-                                <el-tag v-if="node.data.type === 'MENU'" size="mini" type="primary">菜单</el-tag>
-                                <el-tag v-else-if="node.data.type === 'BUTTON'" size="mini" type="success">按钮</el-tag>
-                                <el-tag v-if="node.data.name === 'index'" size="mini" type="warning">重定向</el-tag>
+                                <el-tag v-if="node.data.type === 'BUTTON'" size="mini" type="success">按钮项</el-tag>
+                                <el-tag v-else-if="node.data.name !== 'index'" size="mini" type="primary">菜单项</el-tag>
+                                <el-tag v-else size="mini" type="warning">重定向</el-tag>
                                 <span>{{ node.label }}</span>
                             </div>
                             <el-radio-group v-if="(node.indeterminate || node.checked) && data.hasDataScope === 'TRUE'" v-model="dataScope[data.id]" size="mini">
@@ -117,6 +117,18 @@ export default {
             }
             this.roleVisible = true
         },
+        // 获取所有name为index的节点
+        getDefaultCheckedKeys() {
+            let list = []
+            const getChecked = data => {
+                data.forEach(curr => {
+                    curr.children && curr.children.length && getChecked(curr.children)
+                    curr.name === 'index' && list.push(curr.id)
+                })
+            }
+            getChecked(this.menuList)
+            return list
+        },
         async setupMenu(id) {
             this.roleId = id
             this.authVisible = true
@@ -130,7 +142,7 @@ export default {
             this.checkStrictly = true
             this.$nextTick(() => {
                 this.$refs.menuTree.forEach(menu => {
-                    menu.setCheckedKeys(checkedKeys)
+                    menu.setCheckedKeys(checkedKeys.concat(this.getDefaultCheckedKeys()))
                 })
                 this.defaultKeys = checkedKeys
                 this.checkStrictly = false
