@@ -44,7 +44,7 @@ const createStore = moduleCode => ({
         // 添加tag导航，以及存储cache
         ADD_NAVTAGS: (state, route) => {
             // 如果导航列表里面已经有该标签，则不添加
-            if (state.navTags.find(item => item.path === route.path)) return
+            if (state.navTags.find(item => item.name === route.name)) return
             // 添加tag标签导航
             state.navTags.push(route)
             // 添加缓存列表(目前采用name的方式进行缓存)
@@ -54,7 +54,7 @@ const createStore = moduleCode => ({
         DEL_NAVTAGS: (state, route) => {
             // 删除tag标签
             for (const [index, item] of state.navTags.entries()) {
-                if (item.path === route.path) {
+                if (item.name === route.name) {
                     state.navTags.splice(index, 1)
                     break
                 }
@@ -82,7 +82,7 @@ const createStore = moduleCode => ({
         DEL_OTHER_NAVTAGS: (state, route) => {
             // 删除tag标签
             for (const [index, item] of state.navTags.entries()) {
-                if (item.path === route.path) {
+                if (item.name === route.name) {
                     state.navTags = state.navTags.slice(index, index + 1)
                     break
                 }

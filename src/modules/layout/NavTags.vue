@@ -9,7 +9,7 @@
                     <el-tag
                         @contextmenu.prevent.native="openMenu(item, $event)"
                         @click="$router.push({ name: item.name })"
-                        :class="{ isActive: $route.path === item.path }"
+                        :class="{ isActive: isTagActive(item.name) }"
                         closable
                         @close="closeTag(item)"
                         size="medium"
@@ -96,21 +96,25 @@ export default {
         },
         handleTag(command) {
             if (command === 'closeOthers') {
-                this.selectedTag = this.navTags.find(v => v.path === this.$route.path)
+                this.selectedTag = this.navTags.find(v => v.name === this.$route.name)
                 this.closeOthersTags()
             } else {
                 this.closeAllTags()
             }
         },
+        isTagActive(tagName) {
+            // 只要有隐藏项就取上一级的name
+            const { meta, name } = this.$route
+            return tagName === (meta.hidden === 'TRUE' ? name.slice(0, name.lastIndexOf('-')) : name)
+        },
         // 添加标签
         addTag(route) {
-            if (!route.name) return
-            this.ADD_NAVTAGS({
-                path: route.path,
-                title: route.meta.title,
-                name: route.name
-            })
-            this.$nextTick(() => {
+            const { meta, matched, name } = route
+            if (!name) return
+            const tagName = meta.hidden === 'TRUE' ? name.slice(0, name.lastIndexOf('-')) : name
+            const tagTitle = meta.hidden === 'TRUE' ? matched[matched.length - 2].meta.title : meta.title
+            this.ADD_NAVTAGS({ name: tagName, title: tagTitle })
+            const newName = this.$nextTick(() => {
                 let index = [...document.querySelectorAll('.swiper-wrapper .el-tag')].findIndex(item => item.classList.contains('isActive'))
                 this.swiper.slideTo(index)
             })
@@ -119,10 +123,10 @@ export default {
         closeTag(tag) {
             // 控制路由重新跳转
             if (this.navTags.length === 1) {
-                this.$router.push('/platform/index')
-            } else if (this.$route.path === tag.path) {
+                this.$router.push({ name: 'platform' })
+            } else if (this.$route.name === tag.name) {
                 for (const [k, v] of this.navTags.entries()) {
-                    if (v.path === tag.path) {
+                    if (v.name === tag.name) {
                         if (k !== this.navTags.length - 1) {
                             this.$router.push(this.navTags[k + 1])
                         } else if (k !== 0) {
@@ -141,7 +145,7 @@ export default {
         },
         closeOthersTags() {
             // 执行删除操作
-            this.$router.push(this.selectedTag)
+            this.$router.push({ name: this.selectedTag.name })
             this.DEL_OTHER_NAVTAGS(this.selectedTag)
         },
         closeAllTags() {
