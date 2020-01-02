@@ -8,7 +8,7 @@
         "children": [
             {
                 "id": "0347c2c32b6b11eab9f1f4b520008912",
-                "title": "首页",
+                "title": "中央控制台",
                 "name": "platform",
                 "icon": "el-icon-s-platform",
                 "uri": "/platform",
