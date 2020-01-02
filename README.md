@@ -10,6 +10,11 @@ yarn install
 yarn run dev
 ```
 
+### Create menu tree Sql
+```
+npm run menu
+```
+
 ### Compiles and minifies for production
 ```
 yarn run build
