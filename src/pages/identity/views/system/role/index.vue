@@ -48,7 +48,7 @@
                             <div class="main">
                                 <el-tag v-if="node.data.type === 'BUTTON'" size="mini" type="success">按钮项</el-tag>
                                 <el-tag v-else-if="node.data.name !== 'index'" size="mini" type="primary">菜单项</el-tag>
-                                <el-tag v-else size="mini" type="warning">重定向</el-tag>
+                                <el-tag v-else size="mini" type="danger">必选项</el-tag>
                                 <span>{{ node.label }}</span>
                             </div>
                             <el-radio-group v-if="(node.indeterminate || node.checked) && data.hasDataScope === 'TRUE'" v-model="dataScope[data.id]" size="mini">
@@ -93,7 +93,7 @@ export default {
             defaultProps: {
                 children: 'children',
                 disabled({ name }) {
-                    return name === 'index'
+                    // return name === 'index'
                 },
                 label({ title }) {
                     return title
@@ -143,7 +143,7 @@ export default {
             this.checkStrictly = true
             this.$nextTick(() => {
                 this.$refs.menuTree.forEach(menu => {
-                    menu.setCheckedKeys(checkedKeys.concat(this.getDefaultCheckedKeys()))
+                    menu.setCheckedKeys(checkedKeys)
                 })
                 // this.defaultKeys = checkedKeys 暂时先不展开吧
                 this.checkStrictly = false

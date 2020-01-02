@@ -2,9 +2,10 @@
     <el-scrollbar wrapClass="wrapper-y app-main">
         <section class="layout__content">
             <transition name="el-fade-in-linear" mode="out-in">
-                <keep-alive :include="cachedViews">
+                <!-- <keep-alive :include="cachedViews">
                     <router-view :key="$route.path"></router-view>
-                </keep-alive>
+                </keep-alive> -->
+                <router-view></router-view>
             </transition>
         </section>
     </el-scrollbar>
