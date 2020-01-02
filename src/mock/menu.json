@@ -3,13 +3,11 @@
         "id": "f5723efc2b6a11eab9f1f4b520008912",
         "type": "MODULE",
         "uri": "/identity",
-        "code": "",
         "name": "identity",
         "title": "系统统一身份认证",
         "children": [
             {
                 "id": "0347c2c32b6b11eab9f1f4b520008912",
-                "code": "",
                 "title": "首页",
                 "name": "platform",
                 "icon": "el-icon-s-platform",
@@ -18,18 +16,15 @@
                 "hidden": "FALSE",
                 "componentPath": "modules/layout",
                 "fullScreen": "FALSE",
-                "sort": 1,
                 "children": [
                     {
                         "id": "062acb662b6b11eab9f1f4b520008912",
-                        "code": "",
                         "title": "中央控制台",
                         "name": "index",
                         "icon": null,
                         "uri": "index",
                         "componentPath": "pages/identity/views/platform",
                         "hidden": "TRUE",
-                        "sort": 0,
                         "type": "MENU"
                     }
                 ],
@@ -37,18 +32,15 @@
             },
             {
                 "id": "08b64e602b6b11eab9f1f4b520008912",
-                "code": "",
                 "title": "系统管理",
                 "name": "system",
                 "icon": null,
                 "uri": "/system",
                 "hidden": "FALSE",
                 "componentPath": "modules/layout",
-                "sort": 2,
                 "children": [
                     {
                         "id": "0b537e312b6b11eab9f1f4b520008912",
-                        "code": "",
                         "title": "系统资源管理",
                         "name": "resource",
                         "icon": null,
@@ -56,7 +48,6 @@
                         "redirectUri":"/system/resource/index",
                         "hasDataScope": "TRUE",
                         "componentPath": "modules/Menu",
-                        "sort": 1,
                         "children": [
                             {
                                 "id": "fdb2a3ed2d0711eab9f1f4b520008912",
@@ -76,7 +67,6 @@
                     },
                     {
                         "id": "28edb2952b6b11eab9f1f4b520008912",
-                        "code": "",
                         "title": "系统用户管理",
                         "name": "principal",
                         "icon": null,
@@ -84,7 +74,6 @@
                         "redirectUri": "/system/principal/index",
                         "componentPath": "modules/Menu",
                         "hidden": "FALSE",
-                        "sort": 2,
                         "children": [
                             {
                                 "id": "e163d52e2d2e11eab9f1f4b520008912",
@@ -136,7 +125,6 @@
                     },
                     {
                         "id": "23a4817c2b6b11eab9f1f4b520008912",
-                        "code": "",
                         "title": "系统组织管理",
                         "name": "organization",
                         "icon": null,
@@ -144,7 +132,6 @@
                         "redirectUri":"/system/organization/index",
                         "componentPath": "modules/Menu",
                         "hidden": "FALSE",
-                        "sort": 3,
                         "children": [
                             {
                                 "id": "162935c82d3011eab9f1f4b520008912",
@@ -164,7 +151,6 @@
                     },
                     {
                         "id": "269150312b6b11eab9f1f4b520008912",
-                        "code": "",
                         "title": "系统角色管理",
                         "name": "role",
                         "icon": null,
@@ -172,7 +158,6 @@
                         "redirectUri":"/system/role/index",
                         "componentPath": "modules/Menu",
                         "hidden": "FALSE",
-                        "sort": 4,
                         "children": [
                             {
                                 "id": "4028acae2d3011eab9f1f4b520008912",
@@ -221,6 +206,53 @@
                         ],
                         "type": "MENU",
                         "fullScreen": ""
+                    }
+                ],
+                "type": "MENU"
+            },
+            {
+                "id": "d100580d2d3411eab9f1f4b520008912",
+                "title": "组件测试",
+                "name": "test",
+                "icon": null,
+                "uri": "/test",
+                "hidden": "FALSE",
+                "componentPath": "modules/layout",
+                "children":[
+                    {
+                        "id": "96e39da92d3411eab9f1f4b520008912",
+                        "title": "多页跳转测试",
+                        "name": "pages",
+                        "icon": null,
+                        "uri": "pages",
+                        "redirectUri": "/test/pages/index",
+                        "hasDataScope": "TRUE",
+                        "componentPath": "modules/Menu",
+                        "children": [
+                            {
+                                "id": "a53b863c2d3411eab9f1f4b520008912",
+                                "title": "主页",
+                                "name": "index",
+                                "icon": null,
+                                "uri": "index",
+                                "hidden": "TRUE",
+                                "componentPath": "pages/identity/views/test/pages/index",
+                                "type": "MENU",
+                                "hasDataScope": "FALSE"
+                            },
+                            {
+                                "id": "6d88d15a2d3611eab9f1f4b520008912",
+                                "title": "编辑",
+                                "name": "edit",
+                                "uri": "edit/:id",
+                                "hidden": "TRUE",
+                                "componentPath": "pages/identity/views/test/pages/form",
+                                "type": "BUTTON",
+                                "hasDataScope": "FALSE"
+                            }
+                        ],
+                        "fullScreen": "FALSE",
+                        "type": "MENU"
                     }
                 ],
                 "type": "MENU"

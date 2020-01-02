@@ -150,16 +150,7 @@ const createStore = moduleCode => ({
             return new Promise((resolve, reject) => {
                 getModuleResource(moduleCode)
                     .then(({ content: router }) => {
-                        const accessRoutes = createRouter(router.children).concat([
-                            {
-                                path: '*',
-                                redirect: '/404'
-                            },
-                            {
-                                path: '/404',
-                                component: NotFound
-                            }
-                        ])
+                        const accessRoutes = createRouter(router.children)
                         console.log(accessRoutes)
                         const permissionBtns = createPermissionBtns(router.children)
                         commit('SET_ACCSESS_ROUTES', accessRoutes)
