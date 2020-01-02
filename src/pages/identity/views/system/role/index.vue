@@ -38,6 +38,7 @@
                         :default-expanded-keys="defaultKeys"
                         :check-strictly="checkStrictly"
                         show-checkbox
+                        accordion
                         :expand-on-click-node="false"
                         ref="menuTree"
                         :data="system.children"
@@ -144,7 +145,7 @@ export default {
                 this.$refs.menuTree.forEach(menu => {
                     menu.setCheckedKeys(checkedKeys.concat(this.getDefaultCheckedKeys()))
                 })
-                this.defaultKeys = checkedKeys
+                // this.defaultKeys = checkedKeys 暂时先不展开吧
                 this.checkStrictly = false
             })
         },
