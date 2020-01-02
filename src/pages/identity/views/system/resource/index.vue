@@ -12,6 +12,12 @@
                 </div>
             </el-tree>
         </el-card>
+
+        <p>
+            <el-button type="primary" @click="go('create')">新增</el-button>
+            <el-button type="primary" @click="go('edit')">编辑</el-button>
+            <el-button type="primary" @click="go('view')">查看</el-button>
+        </p>
     </section>
 </template>
 
@@ -34,6 +40,13 @@ export default {
         this.getAllMenu()
     },
     methods: {
+        go(type) {
+            if (type === 'create') {
+                this.$router.push({ name: this.$options.name + '-' + type })
+            } else {
+                this.$router.push({ name: this.$options.name + '-' + type, params: { id: 1 } })
+            }
+        },
         async getAllMenu() {
             const { content: res } = await getResourceTree()
             this.menuList = res

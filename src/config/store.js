@@ -13,6 +13,7 @@ const createStore = moduleCode => ({
         cachedViews: [] // 缓存的页面
     },
     getters: {
+        collapse: state => state.collapse,
         cachedViews: state => state.cachedViews,
         accsessRoutes: state => state.accsessRoutes,
         // 菜单栏(过滤掉hidden)
@@ -112,7 +113,7 @@ const createStore = moduleCode => ({
             // 生产可访问的路由表
             const createRouter = (routes, name = '') => {
                 return routes.reduce((prev, item) => {
-                    if (item.type === 'MENU') {
+                    if (item.uri) {
                         let obj = {
                             path: item.uri,
                             component: () => import(`@/${item.componentPath}`),
@@ -121,6 +122,7 @@ const createStore = moduleCode => ({
                                 title: item.title,
                                 icon: item.icon,
                                 hidden: item.hidden,
+                                type: item.type,
                                 fullScreen: item.fullScreen
                             },
                             children: item.children && item.children.length ? createRouter(item.children, name + '-' + item.name) : []
@@ -145,7 +147,7 @@ const createStore = moduleCode => ({
             }
 
             return new Promise((resolve, reject) => {
-                getModuleResource(moduleCode)
+                /* getModuleResource(moduleCode)
                     .then(({ content: router }) => {
                         const accessRoutes = createRouter(router.children).concat([
                             {
@@ -157,6 +159,7 @@ const createStore = moduleCode => ({
                                 component: NotFound
                             }
                         ])
+                        console.log(accessRoutes)
                         const permissionBtns = createPermissionBtns(router.children)
                         commit('SET_ACCSESS_ROUTES', accessRoutes)
                         commit('SET_PERMISSION_BTNS', permissionBtns)
@@ -164,21 +167,13 @@ const createStore = moduleCode => ({
                     })
                     .catch(error => {
                         reject(error)
-                    })
+                    }) */
                 // 当数据库挂了的时候使用以下方法
-                /* import('@/mock/menu.json')
+                import('@/mock/menu.json')
                     .then(res => {
                         const router = res[0].children
-                        const accessRoutes = createRouter(router).concat([
-                            {
-                                path: '*',
-                                redirect: '/404'
-                            },
-                            {
-                                path: '/404',
-                                component: NotFound
-                            }
-                        ])
+                        const accessRoutes = createRouter(router)
+                        console.log(accessRoutes)
                         const permissionBtns = createPermissionBtns(router)
                         commit('SET_ACCSESS_ROUTES', accessRoutes)
                         commit('SET_PERMISSION_BTNS', permissionBtns)
@@ -186,7 +181,7 @@ const createStore = moduleCode => ({
                     })
                     .catch(error => {
                         reject(error)
-                    }) */
+                    })
             })
         },
         logout: ({ commit }) => {

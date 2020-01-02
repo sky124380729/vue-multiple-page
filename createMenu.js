@@ -70,8 +70,15 @@ fs.readFile(resolve('src/mock/menu.json'), 'utf-8', (err, data) => {
             // eslint-disable-next-line no-unused-vars
             for (const [k, v] of Object.entries(sql)) {
                 value += ','
-                if (typeof v === 'boolean') {
+                /* if (typeof v === 'boolean') {
                     value += v ? 1 : 0
+                } else {
+                    value += v ? `'${v}'` : null
+                } */
+                if (v === 'TRUE') {
+                    value += 1
+                } else if (v === 'FALSE') {
+                    value += 0
                 } else {
                     value += v ? `'${v}'` : null
                 }

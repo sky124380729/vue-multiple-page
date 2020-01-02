@@ -64,7 +64,8 @@ export default {
         },
         breadList() {
             // 如果有重定向，则是由于没有子菜单(因此过滤掉)
-            return this.$route.matched.filter(route => !route.redirect)
+            /* return this.$route.matched.filter(route => !route.redirect) */
+            return this.$route.matched
         },
         navIconClass() {
             return `el-icon-s-${this.collapse ? 'unfold' : 'fold'}`
