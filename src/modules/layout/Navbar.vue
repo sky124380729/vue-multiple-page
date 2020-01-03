@@ -7,7 +7,7 @@
             <el-breadcrumb separator-class="el-icon-arrow-right">
                 <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
                 <transition-group name="breadcrumb">
-                    <el-breadcrumb-item v-for="item in breadList" :key="item.path">{{ item.meta && item.meta.title }}</el-breadcrumb-item>
+                    <el-breadcrumb-item v-for="item in breadList" :key="item.name">{{ item.meta && item.meta.title }}</el-breadcrumb-item>
                 </transition-group>
             </el-breadcrumb>
 
@@ -65,7 +65,9 @@ export default {
         breadList() {
             // 如果有重定向，则是由于没有子菜单(因此过滤掉)
             /* return this.$route.matched.filter(route => !route.redirect) */
-            return this.$route.matched
+            return this.$route.matched.filter(route => {
+                return !route.name.includes('index')
+            })
         },
         navIconClass() {
             return `el-icon-s-${this.collapse ? 'unfold' : 'fold'}`
