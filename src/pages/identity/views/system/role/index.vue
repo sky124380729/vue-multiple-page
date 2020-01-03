@@ -93,7 +93,7 @@ export default {
             defaultProps: {
                 children: 'children',
                 disabled({ name }) {
-                    // return name === 'index'
+                    return name === 'index'
                 },
                 label({ title }) {
                     return title
@@ -137,11 +137,13 @@ export default {
             const res = await getRoleResource(id)
             this.treeLoading = false
             if (!res) return
-            const checkedKeys = res.content.reduce((prev, curr) => {
-                prev.push(curr.resourceId)
-                this.$set(this.dataScope, curr.resourceId, curr.dataScope)
-                return prev
-            }, [])
+            const checkedKeys = res.content
+                .reduce((prev, curr) => {
+                    prev.push(curr.resourceId)
+                    this.$set(this.dataScope, curr.resourceId, curr.dataScope)
+                    return prev
+                }, [])
+                .concat(this.getDefaultCheckedKeys())
             this.checkStrictly = true
             this.$nextTick(() => {
                 this.$refs.menuTree.forEach(menu => {
