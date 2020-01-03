@@ -1,41 +1,13 @@
 import request from './request'
 
 // 新增用户
-export const createPrincipal = (data, config) =>
-    request(
-        {
-            method: 'post',
-            url: 'principal/',
-            data
-        },
-        config
-    )
+export const createPrincipal = data => request.post('principal/', data)
 
 // 修改用户
-export const updatePrincipal = (id, data, config) =>
-    request(
-        {
-            method: 'put',
-            url: `principal/${id}`,
-            data
-        },
-        config
-    )
+export const updatePrincipal = (id, data) => request.put(`principal/${id}`, data)
 
 // 查询用户
-export const getPrincipal = (id, config) =>
-    request(
-        {
-            method: 'get',
-            url: `principal/${id}`
-        },
-        config
-    )
+export const getPrincipal = id => request.get(`principal/${id}`)
 
 // 用户分页查询
-export const fetchPrincipalPage = params =>
-    request({
-        method: 'get',
-        url: 'principal/page',
-        params
-    })
+export const fetchPrincipalPage = params => request.get('principal/page', { params })

@@ -127,7 +127,9 @@ export default {
         async setupOrganization(id) {
             this.orgVisible = true
             this.principalId = id
-            const res = await getPrincipalOrganization(id, { vm: this, loading: 'treeLoading' })
+            this.treeLoading = true
+            const res = await getPrincipalOrganization(id)
+            this.treeLoading = false
             if (!res) return
             const { content } = res
             const checkList = content.reduce((prev, curr) => {
@@ -150,12 +152,10 @@ export default {
             flag && this.mainPositionId === null && (this.mainPositionId = data.id)
         },
         async submit() {
-            const config = {
-                vm: this,
-                loading: 'submitLoading'
-            }
             const id = this.model.id
-            const res = await (id ? updatePrincipal(id, this.model, config) : createPrincipal(this.model, config))
+            this.submitLoading = true
+            const res = await (id ? updatePrincipal(id, this.model) : createPrincipal(this.model))
+            this.submitLoading = false
             if (!res) return
             this.$refs.mTable.refresh()
             this.principalVisible = false
@@ -167,10 +167,9 @@ export default {
                 organizationId: item.id,
                 isMain: item.id === this.mainPositionId ? 'TRUE' : 'FALSE'
             }))
-            const res = await handlePrincipalOrganization(this.principalId, principalOrganizationDTOList, {
-                vm: this,
-                loading: 'submitOrgLoading'
-            })
+            this.submitOrgLoading = true
+            const res = await handlePrincipalOrganization(this.principalId, principalOrganizationDTOList)
+            this.submitOrgLoading = false
             if (!res) return
             this.orgVisible = false
         },

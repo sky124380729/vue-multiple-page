@@ -171,21 +171,18 @@ export default {
             })
         },
         async orgSubmit() {
-            const config = {
-                vm: this,
-                loading: 'orgSubmitLoading'
-            }
             if (this.editType === 'CREATE') {
-                const res = await createOrganization(
-                    {
-                        ...this.model,
-                        parentId: this.treeCurrentId
-                    },
-                    config
-                )
+                this.orgSubmitLoading = true
+                const res = await createOrganization({
+                    ...this.model,
+                    parentId: this.treeCurrentId
+                })
+                this.orgSubmitLoading = false
                 if (!res) return
             } else {
-                const res = await updateOrganization(this.treeCurrentId, this.model, config)
+                this.orgSubmitLoading = true
+                const res = await updateOrganization(this.treeCurrentId, this.model)
+                this.orgSubmitLoading = false
                 if (!res) return
             }
             this.getTreeData()
@@ -205,10 +202,9 @@ export default {
             })
         },
         async authSubmit() {
-            const res = await handleOrganizationRole(this.treeCurrentId, this.checkList, {
-                vm: this,
-                loading: 'authSubmitLoading'
-            })
+            this.authSubmitLoading = true
+            const res = await handleOrganizationRole(this.treeCurrentId, this.checkList)
+            this.authSubmitLoading = false
             if (!res) return
             this.authVisible = false
         }

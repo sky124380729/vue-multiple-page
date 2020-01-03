@@ -133,7 +133,9 @@ export default {
         async setupMenu(id) {
             this.roleId = id
             this.authVisible = true
-            const res = await getRoleResource(id, { vm: this, loading: 'treeLoading' })
+            this.treeLoading = true
+            const res = await getRoleResource(id)
+            this.treeLoading = false
             if (!res) return
             const checkedKeys = res.content.reduce((prev, curr) => {
                 prev.push(curr.resourceId)
@@ -172,7 +174,9 @@ export default {
                 }
                 return prev
             }, [])
-            const res = await handleRoleResource(this.roleId, menuList, { vm: this, loading: 'setupMenuLoading' })
+            this.setupMenuLoading = true
+            const res = await handleRoleResource(this.roleId, menuList)
+            this.setupMenuLoading = false
             if (!res) return
             this.authVisible = false
         },
@@ -188,12 +192,10 @@ export default {
                 .catch(() => {})
         },
         async submitRole() {
-            const config = {
-                vm: this,
-                loading: 'roleSubmitLoading'
-            }
             const id = this.model.id
-            const res = await (id ? updateRole(id, this.model, config) : createRole(this.model, config))
+            this.roleSubmitLoading = true
+            const res = await (id ? updateRole(id, this.model) : createRole(this.model))
+            this.roleSubmitLoading = false
             if (!res) return
             this.$refs.mTable.refresh()
             this.roleVisible = false

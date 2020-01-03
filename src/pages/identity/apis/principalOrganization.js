@@ -1,22 +1,7 @@
 import request from './request'
 
 // 新增或者修改用户组织
-export const handlePrincipalOrganization = (principalId, data, config) =>
-    request(
-        {
-            method: 'post',
-            url: `principalOrganization/principal/${principalId}`,
-            data
-        },
-        config
-    )
+export const handlePrincipalOrganization = (principalId, data) => request.post(`principalOrganization/principal/${principalId}`, data)
 
 // 用户组织单个查询
-export const getPrincipalOrganization = (principalId, config) =>
-    request(
-        {
-            method: 'get',
-            url: `principalOrganization/principal/${principalId}`
-        },
-        config
-    )
+export const getPrincipalOrganization = principalId => request.get(`principalOrganization/principal/${principalId}`)

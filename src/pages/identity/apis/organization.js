@@ -1,65 +1,22 @@
 import request from './request'
 
 // 组织树查询
-export const getOrganizationTree = () =>
-    request({
-        method: 'get',
-        url: 'organization/tree'
-    })
+export const getOrganizationTree = () => request.get('organization/tree')
 
 // 新增组织
-export const createOrganization = (data, config) =>
-    request(
-        {
-            method: 'post',
-            url: 'organization/',
-            data
-        },
-        config
-    )
+export const createOrganization = data => request.post('organization/', data)
 
 // 删除组织
-export const removeOrganization = id =>
-    request({
-        method: 'delete',
-        url: `organization/${id}`
-    })
+export const removeOrganization = id => request.delete(`organization/${id}`)
 
 // 更新组织
-export const updateOrganization = (id, data, config) => {
-    console.log(config)
-    return request(
-        {
-            method: 'put',
-            url: `organization/${id}`,
-            data
-        },
-        config
-    )
-}
+export const updateOrganization = (id, data) => request.put(`organization/${id}`, data)
 
 // 组织单个查询
-export const getOrganization = id =>
-    request({
-        method: 'get',
-        url: `organization/${id}`
-    })
+export const getOrganization = id => request.get(`organization/${id}`)
 
 // 组织列表查询
-export const fetchOrganizationList = (params, config) =>
-    request(
-        {
-            method: 'get',
-            url: 'organization/list',
-            params
-        },
-        config
-    )
+export const fetchOrganizationList = params => request.get('organization/list', { params })
 
 // 组织分页查询
-export const fetchOrganizationPage = params =>
-    request({
-        method: 'get',
-        url: 'organization/page',
-        params
-    })
+export const fetchOrganizationPage = params => request.get('organization/page', { params })
