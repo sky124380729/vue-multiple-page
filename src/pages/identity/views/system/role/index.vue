@@ -152,8 +152,9 @@ export default {
             })
         },
         async getAllMenu() {
-            const { content: res } = await getResourceTree()
-            this.menuList = res
+            const res = await getResourceTree()
+            if (!res) return
+            this.menuList = res.content
         },
         async setupMenuSubmit() {
             const menuList = this.$refs.menuTree.reduce((prev, menu) => {

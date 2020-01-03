@@ -1,5 +1,4 @@
 // import store from './store'
-// import createRouter from './router'
 import Cookie from 'js-cookie'
 import { Message } from 'element-ui'
 
@@ -90,13 +89,11 @@ export const HTTP_CODE = new Map([
     ],
     [
         401,
-        () => {
+        (_, router) => {
             Message.error('授权失败，请重新登录!')
-            setTimeout(() => {
-                const module = location.pathname.slice(1).split('/')[0]
-                Cookie.remove('token')
-                location.href = `/${module}/login`
-            }, 1000)
+            if (!router) return
+            Cookie.remove('token')
+            router.push('/login')
         }
     ],
     [

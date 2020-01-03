@@ -4,10 +4,10 @@ import baseURL from 'config/baseUrl'
 import { Message } from 'element-ui'
 import { HTTP_CODE, SERVER_CODE } from 'config/codeMap'
 
-const createHttp = (option = {}) => {
+const createHttp = (option = {}, router) => {
     const service = axios.create({
         ...option,
-        baseURL: baseURL + option.baseURL
+        baseURL: baseURL + (option.baseURL || '')
     })
     // 请求拦截器
     service.interceptors.request.use(
@@ -24,21 +24,15 @@ const createHttp = (option = {}) => {
     service.interceptors.response.use(
         ({ data: res } = {}) => {
             const { code } = res
-            return code ? SERVER_CODE.get(code)(res) : Promise.reject(res)
+            return code ? SERVER_CODE.get(code)(res) : Promise.resolve(null)
         },
         error => {
             const { response: res = {} } = error
-            HTTP_CODE.get(res.status)(res)
-            return Promise.reject(error)
+            HTTP_CODE.get(res.status)(res, router)
+            return Promise.resolve(null)
         }
     )
     return service
 }
-
-// 系统管理API
-// export const httpIdentity = createHttp({
-//     baseURL: `${baseURL}/api/identity/`,
-//     timeout: 10000
-// })
 
 export default createHttp

@@ -148,25 +148,19 @@ const createStore = moduleCode => ({
             }
 
             return new Promise((resolve, reject) => {
-                // getModuleResource(moduleCode)
-                //     .then(({ content: router }) => {
-                //         const accessRoutes = createRouter(router.children)
-                //         console.log(accessRoutes)
-                //         const permissionBtns = createPermissionBtns(router.children)
-                //         commit('SET_ACCSESS_ROUTES', accessRoutes)
-                //         commit('SET_PERMISSION_BTNS', permissionBtns)
-                //         resolve(accessRoutes)
-                //     })
-                //     .catch(error => {
-                //         reject(error)
-                //     })
-                // 当数据库挂了的时候使用以下方法
-                import('@/mock/menu.json')
-                    .then(res => {
-                        const router = res[0].children
-                        const accessRoutes = createRouter(router)
-                        console.log(accessRoutes)
-                        const permissionBtns = createPermissionBtns(router)
+                getModuleResource(moduleCode)
+                    .then(({ content: router }) => {
+                        const accessRoutes = createRouter(router.children).concat([
+                            {
+                                path: '*',
+                                redirect: '/404'
+                            },
+                            {
+                                path: '/404',
+                                component: NotFound
+                            }
+                        ])
+                        const permissionBtns = createPermissionBtns(router.children)
                         commit('SET_ACCSESS_ROUTES', accessRoutes)
                         commit('SET_PERMISSION_BTNS', permissionBtns)
                         resolve(accessRoutes)
@@ -174,6 +168,19 @@ const createStore = moduleCode => ({
                     .catch(error => {
                         reject(error)
                     })
+                // 当数据库挂了的时候使用以下方法
+                /* import('@/mock/menu.json')
+                    .then(res => {
+                        const router = res[0].children
+                        const accessRoutes = createRouter(router)
+                        const permissionBtns = createPermissionBtns(router)
+                        commit('SET_ACCSESS_ROUTES', accessRoutes)
+                        commit('SET_PERMISSION_BTNS', permissionBtns)
+                        resolve(accessRoutes)
+                    })
+                    .catch(error => {
+                        reject(error)
+                    }) */
             })
         },
         logout: ({ commit }) => {
