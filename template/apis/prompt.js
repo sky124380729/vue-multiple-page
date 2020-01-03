@@ -1,5 +1,13 @@
 const { notEmpty } = require('../utils.js')
+
 const path = require('path')
+
+// 选项框
+const choices = ['create', 'update', 'get', 'delete', 'fetchList', 'fetchPage'].map(type => ({
+    name: type,
+    value: type,
+    checked: true
+}))
 
 module.exports = {
     description: 'generate api template',
@@ -20,50 +28,19 @@ module.exports = {
             type: 'checkbox',
             name: 'types',
             message: 'api types',
-            choices: [
-                {
-                    name: 'create',
-                    value: 'create',
-                    checked: true
-                },
-                {
-                    name: 'update',
-                    value: 'update',
-                    checked: true
-                },
-                {
-                    name: 'get',
-                    value: 'get',
-                    checked: true
-                },
-                {
-                    name: 'delete',
-                    value: 'delete',
-                    checked: true
-                },
-                {
-                    name: 'fetchList',
-                    value: 'fetchList',
-                    checked: true
-                },
-                {
-                    name: 'fetchPage',
-                    value: 'fetchPage',
-                    checked: true
-                }
-            ]
+            choices
         }
     ],
     actions: data => {
-        const types = data.types
-        const filePath = path.join('src/pages', data.from, data.name + '.js')
+        const { name, from, types } = data
+        const filePath = path.join('src/pages', from, name + '.js')
         const actions = [
             {
                 type: 'add',
                 path: filePath,
                 templateFile: 'template/apis/index.hbs',
                 data: {
-                    name: data.name,
+                    name: name,
                     create: types.includes('create'),
                     update: types.includes('update'),
                     get: types.includes('get'),
