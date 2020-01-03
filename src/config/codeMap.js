@@ -26,7 +26,7 @@ export const SERVER_CODE = new Map([
         207,
         res => {
             Message.error(res.message)
-            return Promise.reject(res)
+            return Promise.resolve(null)
         }
     ],
     [
@@ -40,7 +40,7 @@ export const SERVER_CODE = new Map([
         209,
         res => {
             Message.error(res.message)
-            return Promise.reject(res)
+            return Promise.resolve(null)
         }
     ],
     [
@@ -54,28 +54,28 @@ export const SERVER_CODE = new Map([
         211,
         res => {
             Message.error(res.message)
-            return Promise.reject(res)
+            return Promise.resolve(null)
         }
     ],
     [
         212,
         res => {
             Message.error(res.message)
-            return Promise.reject(res)
+            return Promise.resolve(null)
         }
     ],
     [
         500,
         res => {
             Message.error(res.message)
-            return Promise.reject(res)
+            return Promise.resolve(null)
         }
     ],
     [
         506,
         res => {
             Message.error(res.message)
-            return Promise.reject(res)
+            return Promise.resolve(null)
         }
     ]
 ])
