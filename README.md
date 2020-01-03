@@ -38,9 +38,11 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### 关于菜单配置
 
+> 本项目前端不定义路由，在后端定义好了之后拉取当前角色拥有的路由直接注册到前端
+
 ```javascript
 {
-	"id": "0347c2c32b6b11eab9f1f4b520008912", // 建议使用数据库生成id =必填=
+    "id": "0347c2c32b6b11eab9f1f4b520008912", // 建议使用数据库生成id =必填=
     "title": "中央控制台", //菜单的名称 =必填=
     "name": "platform",  // 菜单的name,前端路由用 =必填=
     "icon": "el-icon-s-platform", // 图标 =非必填=
@@ -48,8 +50,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
     "redirectUri": "/platform/index", // 路由重定向 =非必填=
     "hidden": "FALSE", // 该项在左侧菜单树是否显示 =非必填=
     "fullScreen": "FALSE"， // 该路由是否打开即全屏 =非必填=
-	"hasDataScope":"FALSE", // 数据权限范围，后台控制用 =非必填=
-	"componentPath": "modules/layout", // 路由对应的前端页面的路径 =菜单项和带跳转的按钮项必填=
+    "hasDataScope":"FALSE", // 数据权限范围，后台控制用 =非必填=
+    "componentPath": "modules/layout", // 路由对应的前端页面的路径 =菜单项和带跳转的按钮项必填=
     "type":"MENU", // 该项是的类型，分为[MODULE:'系统'，MENU:'菜单',BUTTON:'按钮']， =必填=
     "chidlren":[], // 子项，和以上结构相同
 }

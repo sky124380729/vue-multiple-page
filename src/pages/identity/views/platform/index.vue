@@ -5,7 +5,14 @@
 </template>
 
 <script>
-export default {}
+export default {
+    name: 'platform',
+    data() {
+        return {
+            x: null
+        }
+    }
+}
 </script>
 
 <style></style>

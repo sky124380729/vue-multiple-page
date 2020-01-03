@@ -35,8 +35,9 @@ export default {
     },
     methods: {
         async getAllMenu() {
-            const { content: res } = await getResourceTree()
-            this.menuList = res
+            const res = await getResourceTree()
+            if (!res) return
+            this.menuList = res.content
         }
     }
 }
