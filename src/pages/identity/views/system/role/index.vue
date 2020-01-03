@@ -69,9 +69,7 @@
 </template>
 
 <script>
-import { fetchRoleList, createRole, updateRole, getRole, removeRole } from '@/pages/identity/apis/role'
-import { handleRoleResource, getRoleResource } from '@/pages/identity/apis/roleResource'
-import { getResourceTree } from '@/pages/identity/apis/resource'
+import { fetchRoleList, createRole, updateRole, getRole, removeRole, handleRoleResource, getRoleResource, getResourceTree } from '@/pages/identity/apis'
 export default {
     name: 'system-role',
     data() {

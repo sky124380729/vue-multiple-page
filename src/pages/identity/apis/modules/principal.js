@@ -1,4 +1,4 @@
-import request from './request'
+import request from '../request'
 
 // 新增用户
 export const createPrincipal = data => request.post('principal/', data)

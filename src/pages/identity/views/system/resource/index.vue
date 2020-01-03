@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { getResourceTree } from '@/pages/identity/apis/resource'
+import { getResourceTree } from '@/pages/identity/apis'
 export default {
     name: 'system-resource',
     data() {

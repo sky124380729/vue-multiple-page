@@ -1,4 +1,4 @@
-import request from './request'
+import request from '../request'
 
 // 组织树查询
 export const getOrganizationTree = () => request.get('organization/tree')

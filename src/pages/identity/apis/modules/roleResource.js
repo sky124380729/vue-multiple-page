@@ -1,4 +1,4 @@
-import request from './request'
+import request from '../request'
 
 // 新增或者修改角色菜单
 export const handleRoleResource = (roleId, data) => request.post(`roleResource/role/${roleId}`, data)

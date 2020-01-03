@@ -1,4 +1,4 @@
-import request from './request'
+import request from '../request'
 
 // 新增或者修改组织角色
 export const handleOrganizationRole = (organizationId, data) => request.post(`organizationRole/organization/${organizationId}`, data)
