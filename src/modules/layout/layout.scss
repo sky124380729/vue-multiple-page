@@ -17,7 +17,7 @@
         width: 200px;
         height: 100%;
         transition: width $sidebar-duration;
-        background-color: $-color--theme;
+        background-color: $--color-theme;
         // 重置element的css
         .horizontal-collapse-transition {
             transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
@@ -56,7 +56,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 0 20px;
-        background-color: $-color--theme;
+        background-color: $--color-theme;
         color: #fff;
         &-left {
             display: flex;

@@ -125,7 +125,7 @@ export default {
         border-radius: 6px;
         .body {
             flex: 1;
-            color: $-color--theme;
+            color: $--color-theme;
             background-color: #fff;
             padding: 0 30px;
             h1 {

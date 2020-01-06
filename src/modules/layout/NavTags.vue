@@ -201,12 +201,12 @@ export default {
         text-align: center;
         cursor: pointer;
         font-size: 16px;
-        border: 1px solid $-color--theme;
-        color: $-color--theme;
+        border: 1px solid $--color-theme;
+        color: $--color-theme;
         transition: color 0.3s, border-radius 0.2s;
         border-radius: 2px;
         &:not(.navTags__btn--disabled):hover {
-            background-color: $-color--theme;
+            background-color: $--color-theme;
             color: #fff;
             border-radius: 50%;
         }
@@ -238,10 +238,10 @@ export default {
             border-radius: 50%;
         }
         &.isActive {
-            color: $-color--theme;
-            border-color: $-color--theme;
+            color: $--color-theme;
+            border-color: $--color-theme;
             .dotted {
-                background-color: $-color--theme;
+                background-color: $--color-theme;
             }
         }
     }
