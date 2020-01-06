@@ -40,14 +40,12 @@ export default {
                 const { label } = curr
                 label.length > max && (max = label.length)
                 return max
-            }, 0) *
-                18 +
-            'px'
+            }, 0) * 18
         // 高级查询的图标
         const seniorIcon = seniorSearch.some(v => !!this.conditions[v.key]) ? 'el-icon-s-help' : 'el-icon-help'
         // 定义查询的node节点
-        const searchArea = normalSearch.length ? (
-            <div class='m-search__search'>
+        const searchArea = (
+            <div class='m-search'>
                 {normalSearch.map(v =>
                     createElement(
                         v.tag,
@@ -78,13 +76,19 @@ export default {
                     )
                 )}
 
-                <el-button class='m-search__btn' type='text' icon='el-icon-search' on-click={this.sendQuery}>
+                <el-button class='m-search__btn' size='mini' icon='el-icon-search' on-click={this.sendQuery}>
                     查询
                 </el-button>
 
-                {seniorSearch.length ? (
+                {this.showClearBtn && (
+                    <el-button class='m-search__btn danger' size='mini' icon='el-icon-delete' on-click={this.sendClear}>
+                        重置
+                    </el-button>
+                )}
+
+                {seniorSearch.length !== 0 && (
                     <el-popover class='m-search__senior' popper-class='senior-form'>
-                        <el-form label-width={seniorLabelWidth} label-position='right' size='mini'>
+                        <el-form label-width={seniorLabelWidth + 'px'} label-position='right' size='mini'>
                             {seniorSearch.map(s =>
                                 createElement(
                                     'el-form-item',
@@ -117,33 +121,14 @@ export default {
                                 )
                             )}
                         </el-form>
-                        <el-button type='text' slot='reference' icon={seniorIcon}>
+                        <el-button size='mini' slot='reference' icon={seniorIcon}>
                             高级查询
                         </el-button>
                     </el-popover>
-                ) : null}
-
-                {this.showClearBtn && (
-                    <el-button class='m-search__btn danger' type='text' icon='el-icon-delete' on-click={this.sendClear}>
-                        清空
-                    </el-button>
                 )}
             </div>
-        ) : null
-        // 定义slot
-        const slotArea = this.$scopedSlots.default ? <div class='m-search__slots'>{this.$scopedSlots.default()}</div> : null
-        return (
-            <div class={{ 'm-search': true, noTitle: !this.title }}>
-                <div class='m-search__title'>
-                    <i class='icon' class={this.icon} />
-                    <span>{this.title}</span>
-                </div>
-                <div class='m-search__opt'>
-                    {searchArea}
-                    {slotArea}
-                </div>
-            </div>
         )
+        return searchArea
     },
     renderError(createElement, err) {
         return createElement('pre', { style: { color: 'pink' } }, err.stack)
@@ -163,17 +148,7 @@ export default {
         setChildren(v, createElement) {
             if (!v.tag.includes('el-select')) return v.tag
             if (!v.options) return []
-            return v.options.map(o =>
-                createElement('el-option', {
-                    props:
-                        typeof o === 'object'
-                            ? o
-                            : {
-                                  label: o,
-                                  value: o
-                              }
-                })
-            )
+            return v.options.map(o => createElement('el-option', { props: typeof o === 'object' ? o : { label: o, value: o } }))
         }
     }
 }
@@ -182,37 +157,15 @@ export default {
 <style lang="scss">
 .m-search {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    background: #fff;
-    padding: 8px;
+    padding: 8px 0;
     overflow: hidden;
-    border-bottom: 2px solid #01c0c8;
     box-shadow: 0 0 5px 1px rgba(0, 21, 41, 0.08);
-    &__title {
-        color: #4a6076;
-        font-weight: 600;
-    }
-    &__opt {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
     &__item {
         margin-right: 10px;
     }
     &__senior {
         margin: 0 10px;
-    }
-    &__slots {
-        margin-left: 10px;
-    }
-}
-.m-search.noTitle {
-    box-shadow: none;
-    border-bottom: none;
-    .m-search__title {
-        display: none;
     }
 }
 </style>
