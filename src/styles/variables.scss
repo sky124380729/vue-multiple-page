@@ -1,6 +1,9 @@
 $height-nav:56px; // 导航高度
 $height-tag:40px; // 标签高度
-$-color--bg: #162338; // 侧边栏
-$-color--theme: #01C0C8; // 导航栏
-$-color--primary: #409EFF;
+$-color--bg: #1E2233; // 侧边栏
+$-color--theme: #292C39; // 导航栏
 $sidebar-duration:.28s; // 菜单动画时间
+
+:export {
+    color_theme:$-color--theme;
+}
