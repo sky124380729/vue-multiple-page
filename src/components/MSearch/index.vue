@@ -78,9 +78,15 @@ export default {
                     )
                 )}
 
-                <el-button class='m-search__btn' type='text' icon='el-icon-search' on-click={this.sendQuery}>
+                <el-button class='m-search__btn' size='mini' icon='el-icon-search' on-click={this.sendQuery}>
                     查询
                 </el-button>
+
+                {this.showClearBtn && (
+                    <el-button class='m-search__btn danger' size='mini' icon='el-icon-delete' on-click={this.sendClear}>
+                        重置
+                    </el-button>
+                )}
 
                 {seniorSearch.length ? (
                     <el-popover class='m-search__senior' popper-class='senior-form'>
@@ -117,32 +123,27 @@ export default {
                                 )
                             )}
                         </el-form>
-                        <el-button type='text' slot='reference' icon={seniorIcon}>
+                        <el-button size='mini' slot='reference' icon={seniorIcon}>
                             高级查询
                         </el-button>
                     </el-popover>
                 ) : null}
-
-                {this.showClearBtn && (
-                    <el-button class='m-search__btn danger' type='text' icon='el-icon-delete' on-click={this.sendClear}>
-                        清空
-                    </el-button>
-                )}
             </div>
         ) : null
         // 定义slot
-        const slotArea = this.$scopedSlots.default ? <div class='m-search__slots'>{this.$scopedSlots.default()}</div> : null
+        // const slotArea = this.$scopedSlots.default ? <div class='m-search__slots'>{this.$scopedSlots.default()}</div> : null
         return (
-            <div class={{ 'm-search': true, noTitle: !this.title }}>
-                <div class='m-search__title'>
-                    <i class='icon' class={this.icon} />
-                    <span>{this.title}</span>
-                </div>
-                <div class='m-search__opt'>
-                    {searchArea}
-                    {slotArea}
-                </div>
-            </div>
+            // <div class={{ 'm-search': true, noTitle: !this.title }}>
+            //     <div class='m-search__title'>
+            //         <i class='icon' class={this.icon} />
+            //         <span>{this.title}</span>
+            //     </div>
+            //     <div class='m-search__opt'>
+            //         {searchArea}
+            //         {slotArea}
+            //     </div>
+            // </div>
+            <div class='m-search'>{searchArea}</div>
         )
     },
     renderError(createElement, err) {
@@ -163,17 +164,7 @@ export default {
         setChildren(v, createElement) {
             if (!v.tag.includes('el-select')) return v.tag
             if (!v.options) return []
-            return v.options.map(o =>
-                createElement('el-option', {
-                    props:
-                        typeof o === 'object'
-                            ? o
-                            : {
-                                  label: o,
-                                  value: o
-                              }
-                })
-            )
+            return v.options.map(o => createElement('el-option', { props: typeof o === 'object' ? o : { label: o, value: o } }))
         }
     }
 }
@@ -184,20 +175,9 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #fff;
-    padding: 8px;
+    padding: 8px 0;
     overflow: hidden;
-    border-bottom: 2px solid #01c0c8;
     box-shadow: 0 0 5px 1px rgba(0, 21, 41, 0.08);
-    &__title {
-        color: #4a6076;
-        font-weight: 600;
-    }
-    &__opt {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
     &__item {
         margin-right: 10px;
     }
@@ -206,6 +186,9 @@ export default {
     }
     &__slots {
         margin-left: 10px;
+    }
+    .el-input__inner {
+        border-radius: 0;
     }
 }
 .m-search.noTitle {

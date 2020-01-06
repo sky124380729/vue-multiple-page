@@ -85,7 +85,10 @@ export default {
     name: 'system-principal',
     data() {
         return {
-            queryArr: [{ key: 'name', tag: 'el-input', label: '请输入姓名' }],
+            queryArr: [
+                { key: 'name', tag: 'el-input', label: '请输入姓名' },
+                { key: 'code', tag: 'el-input', senior: true, label: '请输入编号' }
+            ],
             principalVisible: false,
             orgVisible: false,
             submitLoading: false,
