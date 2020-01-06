@@ -183,6 +183,7 @@ export default {
     display: flex;
     height: $height-tag;
     align-items: center;
+    background-color: $-color--theme;
     box-shadow: 0px 1px 10px 0px rgba(100, 100, 100, 0.2);
     flex-direction: start;
     font-size: 12px;
@@ -192,7 +193,7 @@ export default {
     &__btn {
         @include flex;
         position: relative;
-        background-color: #fff;
+        background-color: #2d354a;
         z-index: 99;
         box-sizing: border-box;
         width: 28px;
@@ -202,11 +203,11 @@ export default {
         cursor: pointer;
         font-size: 16px;
         border: 1px solid $-color--theme;
-        color: $-color--theme;
+        color: #7a8499;
         transition: color 0.3s, border-radius 0.2s;
         border-radius: 2px;
         &:not(.navTags__btn--disabled):hover {
-            background-color: $-color--theme;
+            background-color: $-color--primary;
             color: #fff;
             border-radius: 50%;
         }
@@ -224,8 +225,9 @@ export default {
         cursor: pointer;
         border-radius: 0;
         margin-right: 5px;
-        background-color: #fff;
-        color: #919499;
+        background-color: #2d354a;
+        color: #7a8499;
+        border-color: #2d354a;
         border-radius: 2px;
         .dotted {
             position: relative;
@@ -238,10 +240,10 @@ export default {
             border-radius: 50%;
         }
         &.isActive {
-            color: $-color--theme;
-            border-color: $-color--theme;
+            color: $-color--primary;
+            // border-color: $-color--theme;
             .dotted {
-                background-color: $-color--theme;
+                background-color: $-color--primary;
             }
         }
     }
