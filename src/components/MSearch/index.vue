@@ -11,7 +11,7 @@ export default {
     data() {
         return {
             conditions: {},
-            icon: 'fa fa-ravelry'
+            newTodoText: null
         }
     },
     computed: {
@@ -85,10 +85,16 @@ export default {
                         重置
                     </el-button>
                 )}
-
                 {seniorSearch.length !== 0 && (
                     <el-popover class='m-search__senior' popper-class='senior-form'>
-                        <el-form label-width={seniorLabelWidth + 'px'} label-position='right' size='mini' vOn:submit_native_prevent={() => {}}>
+                        <el-form
+                            label-width={seniorLabelWidth + 'px'}
+                            label-position='right'
+                            size='mini'
+                            nativeOn-submit={e => {
+                                e.preventDefault()
+                            }}
+                        >
                             {seniorSearch.map(s =>
                                 createElement(
                                     'el-form-item',
