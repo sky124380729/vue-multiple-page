@@ -186,13 +186,14 @@ export default {
     box-shadow: 0px 1px 10px 0px rgba(100, 100, 100, 0.2);
     flex-direction: start;
     font-size: 12px;
+    background-color: $--color-theme;
     &__box {
         overflow: hidden;
     }
     &__btn {
         @include flex;
         position: relative;
-        background-color: #fff;
+        background-color: mix($--color-theme, #fff, 95%);
         z-index: 99;
         box-sizing: border-box;
         width: 28px;
@@ -202,11 +203,11 @@ export default {
         cursor: pointer;
         font-size: 16px;
         border: 1px solid $--color-theme;
-        color: $--color-theme;
+        color: #fff;
         transition: color 0.3s, border-radius 0.2s;
         border-radius: 2px;
         &:not(.navTags__btn--disabled):hover {
-            background-color: $--color-theme;
+            background-color: $--color-primary;
             color: #fff;
             border-radius: 50%;
         }
@@ -224,8 +225,8 @@ export default {
         cursor: pointer;
         border-radius: 0;
         margin-right: 5px;
-        background-color: #fff;
-        color: #919499;
+        background-color: mix($--color-theme, #fff, 95%);
+        color: #fff;
         border-radius: 2px;
         .dotted {
             position: relative;
@@ -234,14 +235,14 @@ export default {
             margin-right: 6px;
             width: 10px;
             height: 10px;
-            background-color: #919499;
+            background-color: #fff;
             border-radius: 50%;
         }
         &.isActive {
-            color: $--color-theme;
-            border-color: $--color-theme;
+            color: $--color-primary;
+            background-color: mix($--color-theme, #000, 95%);
             .dotted {
-                background-color: $--color-theme;
+                background-color: $--color-primary;
             }
         }
     }

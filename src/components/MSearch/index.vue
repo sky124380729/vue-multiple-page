@@ -88,7 +88,7 @@ export default {
 
                 {seniorSearch.length !== 0 && (
                     <el-popover class='m-search__senior' popper-class='senior-form'>
-                        <el-form label-width={seniorLabelWidth + 'px'} label-position='right' size='mini'>
+                        <el-form label-width={seniorLabelWidth + 'px'} label-position='right' size='mini' vOn:submit_native_prevent={() => {}}>
                             {seniorSearch.map(s =>
                                 createElement(
                                     'el-form-item',

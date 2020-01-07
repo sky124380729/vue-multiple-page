@@ -43,7 +43,7 @@ export default {
             loading: false,
             form: {
                 username: 'aadmin',
-                word: '123456'
+                word: '123'
             },
             rules: {
                 username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],

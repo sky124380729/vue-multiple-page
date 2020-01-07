@@ -102,14 +102,19 @@
             }
         }
     }
-    // 主体内容区
-    &__content {
-        box-sizing: border-box;
+    .app-main {
+        background-color: $--color-bg;
         padding: 10px;
-        &.bgGrey {
-            background-color: #edf0f5;
+        .el-scrollbar__view {
+            height: 100%;
+            .layout__content {
+                min-height: 100%;
+                background-color: $--color-theme;
+                padding: 20px;
+            }
         }
     }
+
 }
 
 .layout.collapse {

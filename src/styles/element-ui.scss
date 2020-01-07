@@ -1,35 +1,35 @@
-.el-table {
-    border: 1px solid #ebeef5;
-    border-bottom: none;
-    .el-table__header th {
-        background-color: #FAFAFA;
-    }
-    .cell {
-        min-height: 28px;
-    }
-}
+// .el-table {
+//     border: 1px solid #ebeef5;
+//     border-bottom: none;
+//     .el-table__header th {
+//         background-color: #FAFAFA;
+//     }
+//     .cell {
+//         min-height: 28px;
+//     }
+// }
 
-// 列表的操作栏样式
-.el-table th.operate {
-    border-left: 1px solid #ebeef5;
-    // padding-left: 15px;
-}
-.el-table.el-table--border th.operate {
-    border-left: none;
-}
-.el-table td.operate {
-    border-left: 1px solid #ebeef5;
-}
-.el-table.el-table--border td.operate {
-    border-left: none;
-}
+// // 列表的操作栏样式
+// .el-table th.operate {
+//     border-left: 1px solid #ebeef5;
+//     // padding-left: 15px;
+// }
+// .el-table.el-table--border th.operate {
+//     border-left: none;
+// }
+// .el-table td.operate {
+//     border-left: 1px solid #ebeef5;
+// }
+// .el-table.el-table--border td.operate {
+//     border-left: none;
+// }
 
-.el-pagination {
-    float: right;
-    margin-top: 15px;
-}
+// .el-pagination {
+//     float: right;
+//     margin-top: 15px;
+// }
 
-// 自定义树的样式
+// // 自定义树的样式
 .el-tree-node__content {
     height: 34px;
 }
@@ -37,24 +37,24 @@
     margin-right: 8px !important;
 }
 
-// 弹框的样式
-.el-dialog__body {
-    padding: 20px;
-}
+// // 弹框的样式
+// .el-dialog__body {
+//     padding: 20px;
+// }
 
-.el-dialog__footer {
-    padding: 20px;
-    text-align: right;
-    border-top: 1px solid #dcdfe6;
-}
+// .el-dialog__footer {
+//     padding: 20px;
+//     text-align: right;
+//     border-top: 1px solid #dcdfe6;
+// }
 
-.el-date-editor.el-input {
-    width: 100%;
-}
+// .el-date-editor.el-input {
+//     width: 100%;
+// }
 
-.el-select {
-    width: 100%;
-}
+// .el-select {
+//     width: 100%;
+// }
 
 
 // 高级查询的表单样式
@@ -63,4 +63,8 @@
     .el-form-item:last-child{
         margin-bottom: 0;
     }
+}
+
+.el-loading-mask {
+    background-color: mix($--color-theme,#000,80%);
 }

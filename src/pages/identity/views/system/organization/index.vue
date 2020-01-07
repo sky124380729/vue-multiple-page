@@ -230,13 +230,14 @@ export default {
         .operate {
             display: flex;
             justify-content: space-between;
-            background-color: #fff;
+            background-color: $--color-theme;
             align-items: center;
-            border-bottom: 2px solid #01c0c8;
-            padding: 4.5px 12px;
+            height: 44px;
+            line-height: 44px;
+            padding: 0 8px;
             .title {
                 font-weight: 600;
-                color: #4a6076;
+                color: #fff;
             }
         }
         .el-tree {

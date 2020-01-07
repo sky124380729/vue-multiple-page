@@ -50,7 +50,7 @@ export default {
         // 是否有斑马线
         stripe: {
             type: Boolean,
-            default: true
+            default: false
         },
         // 是否有分页
         page: {
