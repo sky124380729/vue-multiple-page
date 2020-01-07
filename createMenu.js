@@ -141,7 +141,7 @@ fs.readFile(resolve('src/mock/menu.json'), 'utf-8', (err, data) => {
         '\n' +
         sql
     fs.writeFile(SQL_PATH, mySQL, err => {
-        if (err) console.log(err)
+        if (err) return console.log(err)
         console.log(chalk.cyanBright(`恭喜你，创建sql语句成功，位置：${SQL_PATH}`))
     })
 })
