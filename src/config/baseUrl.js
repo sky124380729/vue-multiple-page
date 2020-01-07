@@ -1,1 +1,1 @@
-export default '/xin'
+export default '/dev'
