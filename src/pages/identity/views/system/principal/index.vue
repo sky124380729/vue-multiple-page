@@ -2,7 +2,7 @@
     <section>
         <m-table title="用户管理" :fetch-data="fetchData" :queryArr="queryArr" ref="mTable">
             <template #buttons>
-                <el-button type="success" size="mini" @click="handle()">新增</el-button>
+                <el-button type="text" icon="el-icon-plus" size="mini" @click="handle()">新增</el-button>
             </template>
             <el-table-column label="登录名" prop="code" sortable="custom"></el-table-column>
             <el-table-column label="姓名" prop="name"></el-table-column>

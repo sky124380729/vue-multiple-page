@@ -226,17 +226,17 @@ export default {
         flex: 2;
         min-width: 400px;
         margin-right: 20px;
-        box-shadow: 0 0 5px 1px rgba(0, 21, 41, 0.08);
+        padding: 10px;
+        box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.08);
         .operate {
             display: flex;
             justify-content: space-between;
             background-color: $--color-theme;
             align-items: center;
-            height: 44px;
-            line-height: 44px;
-            padding: 0 8px;
+            height: 32px;
+            line-height: 32px;
+            padding: 0 15px;
             .title {
-                font-weight: 600;
                 color: #fff;
             }
         }
@@ -253,6 +253,8 @@ export default {
     }
     &__right {
         flex: 5;
+        box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.08);
+        padding: 10px 20px;
     }
 }
 </style>

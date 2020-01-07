@@ -1,9 +1,10 @@
 <template>
     <div class="m-table" :class="{ hasSearch: queryArr.length }">
-        <m-sticky :sticky-top="96" :z-index="2">
-            <m-search :queryArr="queryArr" :title="title" @getConditions="getConditions">
-                <slot name="buttons"></slot>
-            </m-search>
+        <m-title :title="title">
+            <slot name="buttons"></slot>
+        </m-title>
+        <m-sticky :sticky-top="96" :z-index="2" v-if="queryArr.length">
+            <m-search :queryArr="queryArr" :title="title" @getConditions="getConditions"></m-search>
         </m-sticky>
         <el-table v-bind="$attrs" v-on="$listeners" ref="elTable" :data="tableList" :stripe="stripe" @sort-change="sortChange" v-loading="loading">
             <slot></slot>
@@ -188,18 +189,11 @@ export default {
 @import '~styles/mixins';
 .m-table {
     position: relative;
-    // overflow: hidden;
     &__bottom {
         display: flex;
         height: 60px;
         justify-content: space-between;
         align-items: center;
-    }
-    .m-search {
-        margin-bottom: 15px;
-    }
-    .el-table {
-        margin-top: 15px;
     }
 }
 </style>
