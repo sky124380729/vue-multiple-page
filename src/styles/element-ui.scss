@@ -24,11 +24,6 @@
 //     border-left: none;
 // }
 
-// .el-pagination {
-//     float: right;
-//     margin-top: 15px;
-// }
-
 // // 自定义树的样式
 .el-tree-node__content {
     height: 34px;
@@ -37,24 +32,34 @@
     margin-right: 8px !important;
 }
 
+.el-table {
+    th {
+        background-color: #2b3141;
+    }
+    .cell {
+        min-height: 28px;
+        line-height: 28px;
+    }
+}
+
 // // 弹框的样式
-// .el-dialog__body {
-//     padding: 20px;
-// }
+.el-dialog__body {
+    padding: 20px;
+}
 
-// .el-dialog__footer {
-//     padding: 20px;
-//     text-align: right;
-//     border-top: 1px solid #dcdfe6;
-// }
+.el-dialog__footer {
+    padding: 20px;
+    text-align: right;
+    border-top: 1px solid $--color-primary;
+}
 
-// .el-date-editor.el-input {
-//     width: 100%;
-// }
+.el-date-editor.el-input {
+    width: 100%;
+}
 
-// .el-select {
-//     width: 100%;
-// }
+.el-select {
+    width: 100%;
+}
 
 
 // 高级查询的表单样式
