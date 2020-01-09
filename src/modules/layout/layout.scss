@@ -1,4 +1,6 @@
 @import '~styles/variables';
+@import '~styles/mixins';
+
 // 全局的布局样式
 .wrapper-x {
     overflow-y: hidden !important;
@@ -11,6 +13,7 @@
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+    background-color: $--color-theme;
     // 左侧
     &__side {
         float: left;
@@ -34,6 +37,18 @@
         .el-scrollbar {
             height: calc(100% - #{$height-nav});
         }
+        .icon {
+            width: 16px;
+            margin-right: 5px;
+            text-align: center;
+            font-size: 16px;
+        }
+        .subIcon {
+            position: relative;
+            top: -2px;
+            font-size: 20px;
+            margin-right: 6px;
+        }
     }
     // 右侧
     &__box {
@@ -41,7 +56,6 @@
         flex-direction: column;
         margin-left: 200px;
         transition: margin-left $sidebar-duration;
-        background-color: #fff;
         height: 100%;
         overflow: hidden;
         min-width: 1000px;
@@ -102,15 +116,100 @@
             }
         }
     }
-    .app-main {
-        background-color: $--color-bg;
-        padding: 10px;
-        .el-scrollbar__view {
-            height: 100%;
-            .layout__content {
-                min-height: 100%;
-                background-color: $--color-theme;
-                padding: 20px;
+    .layout__content {
+        min-height: calc(100vh - #{$height-nav} - #{$height-tag});
+        border:10px solid mix($--color-theme,$--color-black,85%);
+        padding: 20px;
+    }
+    .navTags {
+        display: flex;
+        height: $height-tag;
+        align-items: center;
+        box-shadow: 0px 1px 10px 0px rgba(100, 100, 100, 0.2);
+        flex-direction: start;
+        font-size: 12px;
+        background-color: $--color-theme;
+        &__box {
+            overflow: hidden;
+        }
+        &__btn {
+            @include flex;
+            position: relative;
+            background-color: mix($--color-theme, #fff, 95%);
+            z-index: 99;
+            box-sizing: border-box;
+            width: 28px;
+            height: 28px;
+            margin: 0 3px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 16px;
+            border: 1px solid $--color-theme;
+            color: #fff;
+            transition: color 0.3s, border-radius 0.2s;
+            border-radius: 2px;
+            &:not(.navTags__btn--disabled):hover {
+                background-color: $--color-primary;
+                color: #fff;
+                border-radius: 50%;
+            }
+            &--disabled {
+                border-color: #c2c5cc;
+                color: #c2c5cc;
+            }
+        }
+        &__box {
+            flex: 1;
+            padding: 0 5px;
+            white-space: nowrap;
+        }
+        .el-tag {
+            cursor: pointer;
+            border-radius: 0;
+            margin-right: 5px;
+            background-color: mix($--color-theme, $--color-white, 95%);
+            color: #fff;
+            border-radius: 2px;
+            .dotted {
+                position: relative;
+                display: inline-block;
+                top: 1px;
+                margin-right: 6px;
+                width: 10px;
+                height: 10px;
+                background-color: #fff;
+                border-radius: 50%;
+            }
+            &.isActive {
+                color: $--color-primary;
+                background-color: mix($--color-theme, $--color-black, 95%);
+                .dotted {
+                    background-color: $--color-primary;
+                }
+            }
+        }
+        .el-icon-circle-close {
+            font-size: 18px;
+        }
+    }
+    .contextmenu {
+        margin: 0;
+        background: #fff;
+        z-index: 100;
+        position: absolute;
+        list-style-type: none;
+        padding: 5px 0;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 400;
+        color: #333;
+        box-shadow: 3px 3px 13px 1px rgba(0, 0, 0, 0.2);
+        li {
+            margin: 0;
+            padding: 7px 16px;
+            cursor: pointer;
+            &:hover {
+                background: #eee;
             }
         }
     }

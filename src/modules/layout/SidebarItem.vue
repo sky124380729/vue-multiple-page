@@ -52,18 +52,3 @@ export default {
     }
 }
 </script>
-
-<style lang="scss">
-.icon {
-    width: 16px;
-    margin-right: 5px;
-    text-align: center;
-    font-size: 16px;
-}
-.subIcon {
-    position: relative;
-    top: -2px;
-    font-size: 20px;
-    margin-right: 6px;
-}
-</style>
