@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="layout__tags">
         <div class="navTags">
             <div class="navTags__btn navTags__btn--left" :class="{ 'navTags__btn--disabled': !moveAble }" @click="move(-1)">
                 <i class="el-icon-caret-left"></i>

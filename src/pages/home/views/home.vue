@@ -1,7 +1,7 @@
 <template>
     <section class="home">
         <el-row :gutter="20">
-            <el-col :span="6" v-for="item in linkList" :key="item.path">
+            <el-col :span="6" v-for="(item, index) in linkList" :key="index">
                 <el-card shadow="hover">
                     <a @click="goPath(item)">{{ item.des }}</a>
                 </el-card>
@@ -15,10 +15,10 @@ export default {
     data() {
         return {
             linkList: [
-                { path: '/xxx', des: '系统X' },
                 { path: '/identity', des: '统一身份认证系统' },
-                { path: '/c', des: '系统C' },
-                { path: '/d', des: '系统D' }
+                { path: '/consumer', des: '终端用户' },
+                { path: '/home', des: '暂未开放~' },
+                { path: '/home', des: '暂未开放~' }
             ]
         }
     },

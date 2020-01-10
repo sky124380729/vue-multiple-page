@@ -13,14 +13,14 @@
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    background-color: $--color-theme;
+    // background-color: $--color-theme;
     // 左侧
     &__side {
         float: left;
         width: 200px;
         height: 100%;
         transition: width $sidebar-duration;
-        background-color: $--color-theme;
+        // background-color: $--color-theme;
         // 重置element的css
         .horizontal-collapse-transition {
             transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
@@ -70,7 +70,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 0 20px;
-        background-color: $--color-theme;
+        // background-color: $--color-theme;
         color: #fff;
         &-left {
             display: flex;
@@ -116,9 +116,9 @@
             }
         }
     }
-    .layout__content {
+    &__content {
         min-height: calc(100vh - #{$height-nav} - #{$height-tag});
-        border:10px solid mix($--color-theme,$--color-black,85%);
+        // border:10px solid mix($--color-theme,$--color-black,85%);
         padding: 20px;
     }
     .navTags {
@@ -128,14 +128,14 @@
         box-shadow: 0px 1px 10px 0px rgba(100, 100, 100, 0.2);
         flex-direction: start;
         font-size: 12px;
-        background-color: $--color-theme;
+        // background-color: $--color-theme;
         &__box {
             overflow: hidden;
         }
         &__btn {
             @include flex;
             position: relative;
-            background-color: mix($--color-theme, #fff, 95%);
+            // background-color: mix($--color-theme, #fff, 95%);
             z-index: 99;
             box-sizing: border-box;
             width: 28px;
@@ -144,18 +144,13 @@
             text-align: center;
             cursor: pointer;
             font-size: 16px;
-            border: 1px solid $--color-theme;
             color: #fff;
             transition: color 0.3s, border-radius 0.2s;
             border-radius: 2px;
             &:not(.navTags__btn--disabled):hover {
-                background-color: $--color-primary;
+                // background-color: $--color-primary;
                 color: #fff;
                 border-radius: 50%;
-            }
-            &--disabled {
-                border-color: #c2c5cc;
-                color: #c2c5cc;
             }
         }
         &__box {
@@ -167,7 +162,7 @@
             cursor: pointer;
             border-radius: 0;
             margin-right: 5px;
-            background-color: mix($--color-theme, $--color-white, 95%);
+            // background-color: mix($--color-theme, $--color-white, 95%);
             color: #fff;
             border-radius: 2px;
             .dotted {
@@ -177,16 +172,16 @@
                 margin-right: 6px;
                 width: 10px;
                 height: 10px;
-                background-color: #fff;
+                // background-color: #fff;
                 border-radius: 50%;
             }
-            &.isActive {
-                color: $--color-primary;
-                background-color: mix($--color-theme, $--color-black, 95%);
-                .dotted {
-                    background-color: $--color-primary;
-                }
-            }
+            // &.isActive {
+            //     color: $--color-primary;
+            //     background-color: mix($--color-theme, $--color-black, 95%);
+            //     .dotted {
+            //         background-color: $--color-primary;
+            //     }
+            // }
         }
         .el-icon-circle-close {
             font-size: 18px;
