@@ -50,7 +50,7 @@ export default {
     margin-bottom: 10px;
     min-height: 32px;
     .title {
-        color: $--color-white;
+        color: $--color-text;
     }
 }
 </style>

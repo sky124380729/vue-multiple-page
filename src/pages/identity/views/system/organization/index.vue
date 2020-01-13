@@ -231,14 +231,11 @@ export default {
         .operate {
             display: flex;
             justify-content: space-between;
-            background-color: $--color-theme;
             align-items: center;
             height: 32px;
             line-height: 32px;
             padding: 0 15px;
-            .title {
-                color: #fff;
-            }
+            color: $--color-text;
         }
         .el-tree {
             margin-top: 15px;

@@ -1,8 +1,8 @@
 <template>
     <div class="layout__side">
-        <img class="logo" src="~imgs/logo.png" alt="" />
+        <img class="logo" src="~imgs/logo.png" @click="goHome" alt="" />
         <el-scrollbar wrapClass="wrapper-y">
-            <el-menu :collapse="collapse" :background-color="color_theme" text-color="#fff" unique-opened :default-active="activePath">
+            <el-menu :collapse="collapse" text-color="#fff" unique-opened :default-active="activePath">
                 <sidebar-item v-for="item in menuList" :key="item.name" :data="item"></sidebar-item>
             </el-menu>
         </el-scrollbar>
@@ -12,14 +12,8 @@
 <script>
 import SidebarItem from './SidebarItem'
 import { mapGetters, mapState } from 'vuex'
-import { color_theme } from '@/styles/variables.scss'
 export default {
     name: 'sidebar',
-    data() {
-        return {
-            color_theme
-        }
-    },
     computed: {
         ...mapGetters(['menuList', 'collapse']),
         // eslint-disable-next-line vue/return-in-computed-property
@@ -33,6 +27,11 @@ export default {
                 }
                 return name
             }
+        }
+    },
+    methods: {
+        goHome() {
+            location.href = '/home'
         }
     },
     components: {

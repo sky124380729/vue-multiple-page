@@ -1,12 +1,11 @@
 $height-nav:56px; // 导航高度
 $height-tag:40px; // 标签高度
-$sidebar-duration:.28s; // 菜单动画时间
 $--color-bg: #1E2233; // 侧边栏
+$--color-sidebar: #1E2233; // 侧边栏
+$--color-navbar: #1E2233; // 导航栏
+$--color-tags: #1E2233; // 标签栏
 $--color-theme: #292C39; // 导航栏
 $--color-primary: #409EFF; // 主要颜色
 $--color-white: #FFFFFF; // 主要颜色
 $--color-black: #000000; // 主要颜色
-
-:export {
-    color_theme:$--color-theme;
-}
+$--color-text: #666; // 主要颜色

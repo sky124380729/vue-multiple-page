@@ -20,18 +20,6 @@ export default {
     computed: {
         ...mapState(['collapse'])
     },
-    created() {
-        let { base = null } = this.$router.options
-        base = base.replace(/\//g, '')
-
-        import(`./theme-${base}.scss`)
-            .then(res => {
-                this.$message.success('layout主题应用成功')
-            })
-            .catch(() => {
-                this.$message.error('当前layout未设置主题')
-            })
-    },
     components: {
         Sidebar,
         Navbar,
@@ -40,5 +28,3 @@ export default {
     }
 }
 </script>
-
-<style lang="scss" src="./layout.scss"></style>
