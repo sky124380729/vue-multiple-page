@@ -60,7 +60,7 @@ export default {
     height: 46px;
     padding: 8px;
     justify-content: space-between;
-    // border-bottom: 2px solid $--color-primary;
+    border-bottom: 2px solid $--color-primary;
     margin-bottom: 10px;
     .title {
         font-weight: 600;
