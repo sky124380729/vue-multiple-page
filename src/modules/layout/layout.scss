@@ -116,9 +116,13 @@
             }
         }
     }
+    .el-scrollbar__view {
+        height: 100%;
+    }
     &__content {
-        min-height: calc(100vh - #{$height-nav} - #{$height-tag});
+        // min-height: calc(100vh - #{$height-nav} - #{$height-tag});
         // border:10px solid mix($--color-theme,$--color-black,85%);
+        min-height: 100%;
         padding: 20px;
     }
     .navTags {
