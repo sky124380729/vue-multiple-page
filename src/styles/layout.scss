@@ -129,7 +129,6 @@
         &__btn {
             @include flex;
             position: relative;
-            background-color: #fff;
             z-index: 99;
             box-sizing: border-box;
             width: 28px;
@@ -161,7 +160,7 @@
             cursor: pointer;
             border-radius: 0;
             margin-right: 5px;
-            background-color: #fff;
+            background-color: inherit;
             color: #919499;
             border-radius: 2px;
             .dotted {
@@ -214,6 +213,7 @@
     // 主体内容区
     &__content {
         border: 10px solid $--color-bg;
+        background-color: $--color-content;
         min-height: 100%;
         padding: 20px;
     }

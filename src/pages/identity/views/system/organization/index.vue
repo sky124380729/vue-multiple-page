@@ -235,7 +235,6 @@ export default {
             height: 32px;
             line-height: 32px;
             padding: 0 15px;
-            color: $--color-text;
         }
         .el-tree {
             margin-top: 15px;

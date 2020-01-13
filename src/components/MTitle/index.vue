@@ -49,8 +49,5 @@ export default {
     justify-content: space-between;
     margin-bottom: 10px;
     min-height: 32px;
-    .title {
-        color: $--color-text;
-    }
 }
 </style>

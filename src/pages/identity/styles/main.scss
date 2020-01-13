@@ -1,3 +1,6 @@
+/* ===== 主题色 ===== */
+// $--color-primary: #01C0C8;
+
 /* ===== 自定义变量 ===== */
 
 $--color-bg: #292C39; // 背景色
@@ -8,15 +11,25 @@ $--color-navbar: #1E2233; // 导航栏
 
 $--color-tags: #1E2233; // 标签栏
 
+$--color-content: #1E2233; // APPMAIN
+
+$--color-text:#FFFFFF;
 
 /* ====== 修改element变量 ====== */
-$--color-primary: #01C0C8;
 
-$--color-white: #FFFFFF;
+$--color-white: #292C39;
 
 $--color-black: #000000;
 
-$--table-header-background-color: $--color-bg; // 表头颜色
+$--color-text-primary: #FFFFFF;
+
+$--color-text-regular: #FFFFFF ;
+
+$--background-color-base: #2b3141;
+
+$--border-color-extra-light: #6d6969f2;
+
+$--table-header-background-color: #2b3141; // 表头颜色
 
 $--menu-background-color: $--color-sidebar; // 左侧菜单颜色
 
