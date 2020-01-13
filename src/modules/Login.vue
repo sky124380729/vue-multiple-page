@@ -46,8 +46,8 @@ export default {
                 word: '123456'
             },
             rules: {
-                username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-                word: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+                username: [{ required: true, message: '用户名', trigger: 'blur' }],
+                word: [{ required: true, message: '密码', trigger: 'blur' }]
             }
         }
     },

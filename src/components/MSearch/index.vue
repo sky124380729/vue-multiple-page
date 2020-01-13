@@ -35,12 +35,7 @@ export default {
         // 高级查询
         const seniorSearch = this.queryArr.filter(v => v.senior)
         // 高级查询label宽度
-        const seniorLabelWidth =
-            seniorSearch.reduce((max, curr) => {
-                const { label } = curr
-                label.length > max && (max = label.length)
-                return max
-            }, 0) * 18
+        const seniorLabelWidth = Math.max.apply(null, [...seniorSearch.map(v => v.label && v.label.length)]) * 20
         // 高级查询的图标
         const seniorIcon = seniorSearch.some(v => !!this.conditions[v.key]) ? 'el-icon-s-help' : 'el-icon-help'
         // 定义查询的node节点

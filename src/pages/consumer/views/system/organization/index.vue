@@ -4,7 +4,7 @@
             <div class="org__left">
                 <m-sticky :sticky-top="96" :z-index="2">
                     <div class="operate">
-                        <span class="title">组织信息</span>
+                        <span class="title">组织信息1</span>
                         <div class="buttonList">
                             <el-tooltip content="新增" placement="bottom">
                                 <el-button type="primary" circle icon="el-icon-plus" size="mini" @click="handle('CREATE')"></el-button>
