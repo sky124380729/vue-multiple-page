@@ -195,5 +195,8 @@ export default {
         justify-content: space-between;
         align-items: center;
     }
+    .m-sticky {
+        margin-bottom: 10px;
+    }
 }
 </style>

@@ -76,12 +76,12 @@ export default {
                     )
                 )}
 
-                <el-button class='m-search__btn' size='mini' icon='el-icon-search' on-click={this.sendQuery}>
+                <el-button class='m-search__btn' type='primary' size='mini' icon='el-icon-search' on-click={this.sendQuery}>
                     查询
                 </el-button>
 
                 {this.showClearBtn && (
-                    <el-button class='m-search__btn danger' size='mini' icon='el-icon-delete' on-click={this.sendClear}>
+                    <el-button class='m-search__btn danger' type='danger' size='mini' icon='el-icon-delete' on-click={this.sendClear}>
                         重置
                     </el-button>
                 )}
@@ -127,7 +127,7 @@ export default {
                                 )
                             )}
                         </el-form>
-                        <el-button size='mini' slot='reference' icon={seniorIcon}>
+                        <el-button size='mini' type='success' slot='reference' icon={seniorIcon}>
                             高级查询
                         </el-button>
                     </el-popover>
