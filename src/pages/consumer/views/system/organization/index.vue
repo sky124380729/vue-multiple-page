@@ -84,7 +84,7 @@
 
         <el-dialog title="组织授权" :visible.sync="authVisible" width="720px" @closed="authClosed">
             <el-table :data="roleList" row-key="id" ref="roleTable" @selection-change="selectionChange">
-                <el-table-column type="selection"></el-table-column>
+                <el-table-column type="selection" align="center"></el-table-column>
                 <el-table-column label="角色编码" prop="code"></el-table-column>
                 <el-table-column label="角色名称" prop="name"></el-table-column>
                 <el-table-column label="角色描述" prop="note"></el-table-column>
