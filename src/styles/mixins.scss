@@ -11,3 +11,22 @@
     clear: both;
   }
 }
+
+@function strip-unit($number) {
+    @if type-of($number) == 'number' and not unitless($number) {
+        @return $number / ($number * 0 + 1);
+    }
+    @return $number;
+}
+
+@function vw($width,$screen:1920px) {
+    @return strip-unit($width / $screen) * 100vw;
+}
+
+@function vh($height,$screen:1080px) {
+    @return strip-unit($height / $screen) * 100vh;
+}
+
+@mixin font-size($fontSize,$px:1920px) {
+    font-size: strip-unit($fontSize / $px) *100vw;
+}
