@@ -1,0 +1,151 @@
+@import '~styles/mixins.scss';
+
+.home {
+    width: 100vw;
+    height: 100vh;
+    background-color: #F0F2F5;
+    overflow: hidden;
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        background-color: #1890FF;
+        height: 48px;
+        color: #fff;
+        font-size: 16px;
+        padding: 0 12px;
+        .logo {
+            @include flex;
+            img {
+                width: 32px;
+                height: 32px;
+            }
+        }
+        .navs {
+            @include flex;
+            .nav {
+                margin: 0 20px;
+                font-size: 14px;
+                font-weight: bolder;
+            }
+        }
+        .opt {
+            @include flex;
+            img {
+                width: 36px;
+                height: 36px;
+                margin-right:10px;
+                border-radius: 50%;
+            }
+            .el-dropdown {
+                cursor: pointer;
+                color: #fff;
+            }
+        }
+    }
+    &__body {
+        display: flex;
+        justify-content: space-between;
+        height: calc(100% - 48px);
+        padding: 20px;
+        @include font-size(16);
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            overflow: hidden;
+            .title {
+                height: vh(48);
+                line-height: vh(48);
+                text-align: center;
+                color: #666;
+                border-bottom: 1px solid #ccc;
+            }
+            .nav {
+                margin-top: vh(20);
+                height: vh(20);
+                line-height: vh(20);
+                border-left: 4px solid #58AFFF;
+                color: #999;
+                @include font-size(14);
+                padding-left: 34px;
+            }
+        }
+        &--child {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }    
+        &__left {
+            width: vw(378);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            .left__top {
+                height: vh(264);
+                .info {
+                    @include flex(space-between);
+                    margin-top: vh(10);
+                    .subtitle {
+                        color: #999;
+                        @include font-size(14);
+                    }
+                    .number {
+                        @include font-size(24);
+                        font-weight: bold;
+                        color: #333;
+                    }
+                }
+                .progress {
+                    @include flex(space-between);
+                    text-align: center;
+                    color: #999;
+                    @include font-size(12);
+                    .el-progress-circle {
+                        margin: vh(20) vw(20) vh(20);
+                        width: vw(70) !important;
+                        height: vw(70) !important;
+                    }
+                    p {
+                        @include flex;
+                    }
+                    .dotted {
+                        display: inline-block;
+                        width: vw(8);
+                        height: vw(8);
+                        border-radius: 50%;
+                        margin-right: vw(10);
+                        &--blue {
+                            background-color: #1890FF;
+                        }
+                        &--yellow {
+                            background-color: #FABF42;
+                        }
+                        &--red {
+                            background-color: #E4523C;
+                        }
+                    }
+                }
+            }
+            .left__middle {
+                height: vh(278);
+                .subtitle {
+                    color: #999;
+                    @include font-size(14);
+                }
+                .number {
+                    @include font-size(24);
+                    font-weight: bold;
+                    color: #333;
+                }
+            }
+            .left__bottom {
+                height: vh(410);
+            }
+        }    
+        &__middle {
+            width: vw(1084);
+        }
+        &__right {
+            width: vw(378);
+        }
+    }
+}
