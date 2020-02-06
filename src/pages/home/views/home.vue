@@ -75,6 +75,7 @@
                 </div>
                 <div class="left__bottom container">
                     <p class="title">故障维修统计</p>
+                    <v-chart autoresize :options="maintenanceOption"></v-chart>
                 </div>
             </div>
 
@@ -102,11 +103,28 @@
                         </div>
                         <div class="top__right">
                             <p class="nav">告警处理状态</p>
+                            <v-chart autoresize :options="alarmOption"></v-chart>
                         </div>
                     </div>
                 </div>
                 <div class="right__bottom container">
                     <p class="title">能耗总览</p>
+                    <el-row class="pie">
+                        <el-col :span="11">
+                            <p class="nav">电量统计</p>
+                            <v-chart autoresize :options="electricityOption"></v-chart>
+                        </el-col>
+                        <el-col :span="11" :offset="1">
+                            <p class="nav">水量统计</p>
+                            <v-chart autoresize :options="waterOption"></v-chart>
+                        </el-col>
+                    </el-row>
+                    <el-row class="line">
+                        <v-chart autoresize :options="lineOption"></v-chart>
+                    </el-row>
+                    <el-row class="bar">
+                        <v-chart autoresize :options="barOption"></v-chart>
+                    </el-row>
                 </div>
             </div>
         </div>
@@ -122,7 +140,284 @@ export default {
                 { path: '/consumer', des: '终端用户' },
                 { path: '/home?a=1', des: '暂未开放~' },
                 { path: '/home?b=1', des: '暂未开放~' }
-            ]
+            ],
+            maintenanceOption: {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{b}: {c} min ({d}%)'
+                },
+                legend: {
+                    x: 'center',
+                    bottom: '15%',
+                    data: ['维修中', '已恢复', '故障'],
+                    itemWidth: 8,
+                    itemHeight: 8,
+                    itemGap: 20,
+                    icon: 'circle',
+                    textStyle: {
+                        fontSize: 12,
+                        color: '#999'
+                    }
+                },
+                series: [
+                    {
+                        type: 'pie',
+                        radius: ['30%', '45%'],
+                        center: ['50%', '40%'],
+                        avoidLabelOverlap: false,
+                        selectedMode: 'single',
+                        color: ['#FABF42', '#1890FF', '#E4523C'],
+                        label: {
+                            normal: {
+                                show: true
+                            }
+                        },
+                        data: [
+                            { value: 335, name: '维修中' },
+                            { value: 310, name: '已恢复' },
+                            { value: 234, name: '故障' }
+                        ]
+                    }
+                ]
+            },
+            alarmOption: {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{b}: {c} min ({d}%)'
+                },
+                legend: {
+                    x: 'center',
+                    bottom: '15%',
+                    data: ['门禁', '消防', '周界', '视频监控', '其它'],
+                    itemWidth: 8,
+                    itemHeight: 8,
+                    icon: 'circle',
+                    textStyle: {
+                        fontSize: 10,
+                        color: '#999'
+                    }
+                },
+                series: [
+                    {
+                        type: 'pie',
+                        radius: ['20%', '30%'],
+                        center: ['50%', '30%'],
+                        avoidLabelOverlap: false,
+                        selectedMode: 'single',
+                        color: ['#47D3D2', '#FAAD14', '#1890FF', '#FA541C', '#9C2BDD'],
+                        label: {
+                            normal: {
+                                show: true
+                            }
+                        },
+                        data: [
+                            { value: 335, name: '门禁' },
+                            { value: 310, name: '消防' },
+                            { value: 234, name: '周界' },
+                            { value: 234, name: '视频监控' },
+                            { value: 234, name: '其它' }
+                        ]
+                    }
+                ]
+            },
+            electricityOption: {
+                // tooltip: {
+                //     trigger: 'item',
+                //     formatter: '{b}: {c} min ({d}%)'
+                // },
+                legend: {
+                    x: 'center',
+                    bottom: '10%',
+                    data: ['2016', '2017', '2018', '2019'],
+                    itemWidth: 8,
+                    itemHeight: 8,
+                    icon: 'circle',
+                    textStyle: {
+                        fontSize: 10,
+                        color: '#999'
+                    }
+                },
+                series: [
+                    {
+                        type: 'pie',
+                        radius: ['55%', '70%'],
+                        center: ['50%', '35%'],
+                        avoidLabelOverlap: false,
+                        color: ['#47D3D2', '#FAAD14', '#1890FF', '#FA541C', '#9C2BDD'],
+                        label: {
+                            normal: {
+                                show: false,
+                                position: 'center'
+                            },
+                            emphasis: {
+                                show: true,
+                                formatter: ['{num|{d}%}', '{bt|{b}}'].join('\n'),
+                                rich: {
+                                    num: {
+                                        fontSize: 20,
+                                        lineHeight: 40,
+                                        color: '#333'
+                                    },
+                                    bt: {
+                                        fontSize: 12,
+                                        color: '#999'
+                                    }
+                                }
+                            }
+                        },
+                        labelLine: {
+                            normal: {
+                                show: false
+                            }
+                        },
+                        data: [
+                            { value: 335, name: '2016' },
+                            { value: 310, name: '2017' },
+                            { value: 234, name: '2018' },
+                            { value: 234, name: '2019' }
+                        ]
+                    }
+                ]
+            },
+            waterOption: {
+                // tooltip: {
+                //     trigger: 'item',
+                //     formatter: '{b}: {c} min ({d}%)'
+                // },
+                legend: {
+                    x: 'center',
+                    bottom: '10%',
+                    data: ['2016', '2017', '2018', '2019'],
+                    itemWidth: 8,
+                    itemHeight: 8,
+                    icon: 'circle',
+                    textStyle: {
+                        fontSize: 10,
+                        color: '#999'
+                    }
+                },
+                series: [
+                    {
+                        type: 'pie',
+                        radius: ['55%', '70%'],
+                        center: ['50%', '35%'],
+                        avoidLabelOverlap: false,
+                        color: ['#47D3D2', '#FAAD14', '#1890FF', '#FA541C', '#9C2BDD'],
+                        label: {
+                            normal: {
+                                show: false,
+                                position: 'center'
+                            },
+                            emphasis: {
+                                show: true,
+                                formatter: ['{num|{d}%}', '{bt|{b}}'].join('\n'),
+                                rich: {
+                                    num: {
+                                        fontSize: 20,
+                                        lineHeight: 40,
+                                        color: '#333'
+                                    },
+                                    bt: {
+                                        fontSize: 12,
+                                        color: '#999'
+                                    }
+                                }
+                            }
+                        },
+                        labelLine: {
+                            normal: {
+                                show: false
+                            }
+                        },
+                        data: [
+                            { value: 335, name: '2016' },
+                            { value: 310, name: '2017' },
+                            { value: 234, name: '2018' },
+                            { value: 234, name: '2019' }
+                        ]
+                    }
+                ]
+            },
+            lineOption: {
+                grid: {
+                    top: '15%',
+                    bottom: '15%',
+                    left: '10%'
+                },
+                legend: {
+                    x: 'center',
+                    y: 'top',
+                    textStyle: {
+                        fontSize: 10,
+                        color: '#999'
+                    },
+                    data: ['当月电量(千万时)', '当月水量(吨)']
+                },
+                xAxis: {
+                    type: 'category',
+                    data: ['12/03', '12/04', '12/05', '12/06', '12/07', '12/08', '12/09']
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name: '当月电量(千万时)',
+                        type: 'line',
+                        lineStyle: {
+                            color: '#1890FF'
+                        },
+                        data: [820, 932, 901, 934, 1290, 1330, 1320]
+                    },
+                    {
+                        name: '当月水量(吨)',
+                        type: 'line',
+                        lineStyle: {
+                            color: '#FAAD14'
+                        },
+                        data: [120, 232, 301, 334, 90, 430, 220]
+                    }
+                ]
+            },
+            barOption: {
+                grid: {
+                    top: '15%',
+                    bottom: '15%',
+                    left: '10%'
+                },
+                tooltip: {},
+                legend: {
+                    x: 'center',
+                    y: 'top',
+                    textStyle: {
+                        fontSize: 10,
+                        color: '#999'
+                    },
+                    data: ['当月电量(千万时)', '当月水量(吨)']
+                },
+                xAxis: {
+                    type: 'category',
+                    data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                color: ['#1890FF', '#FAAD14'],
+                series: [
+                    {
+                        name: '电量(千万时)',
+                        type: 'bar',
+                        stack: '总量',
+                        data: [820, 932, 901, 934, 1290, 1330, 1320, 901, 934, 1290, 1330, 1320]
+                    },
+                    {
+                        name: '水量(吨)',
+                        type: 'bar',
+                        stack: '总量',
+                        data: [120, 232, 301, 334, 90, 430, 220, 120, 232, 301, 334, 90]
+                    }
+                ]
+            }
         }
     },
     methods: {

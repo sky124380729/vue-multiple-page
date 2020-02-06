@@ -49,6 +49,10 @@
         height: calc(100% - 48px);
         padding: vh(20) vw(20);
         @include font-size(16);
+        .echarts {
+            width: 100%;
+            height: 100%;
+        }
         .container {
             background-color: #fff;
             padding: 0 vw(20) vh(20);
@@ -104,8 +108,8 @@
                     @include font-size(12);
                     .el-progress-circle {
                         margin: vh(10) vw(20);
-                        width: vw(70) !important;
-                        height: vw(70) !important;
+                        width: vw(60) !important;
+                        height: vw(60) !important;
                     }
                     p {
                         @include flex;
@@ -131,6 +135,17 @@
             .left__middle {
                 height: vh(278);
                 padding-top: vh(20);
+                &>div {
+                    display: inline-block;
+                    width: 50%;
+                }
+                .middle__left {
+                    padding-right: vw(10);
+                }
+                .middle__right {
+                    padding-left: vw(10);
+                    border-left: 1px solid #F7F7F7;
+                }
             }
             .left__bottom {
                 height: vh(410);
@@ -138,9 +153,9 @@
         }    
         &__middle {
             width: vw(1084);
-            height: vh(992);
+            height: 100%;
             background: url('~imgs/bg.png') no-repeat;
-            background-size: cover;
+            background-size: 100% 100%;
         }
         &__right {
             width: vw(378);
@@ -172,6 +187,21 @@
             }
             .right__bottom {
                 height: vh(730);
+                .pie {
+                    margin-top: vh(20);
+                    height: vh(200);
+                    overflow: hidden;
+                    .el-col {
+                        height: 100%;
+                    }
+                }
+                .line {
+                    height: vh(169);
+                    margin: vh(40) 0;
+                }
+                .bar {
+                    height: vh(167);
+                }
             }
         }
     }

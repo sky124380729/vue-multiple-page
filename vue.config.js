@@ -48,6 +48,7 @@ module.exports = {
             }
         }
     },
+    transpileDependencies: ['vue-echarts', 'resize-detector'],
     chainWebpack: config => {
         config.resolve.alias
             .set('@', resolve('src'))
