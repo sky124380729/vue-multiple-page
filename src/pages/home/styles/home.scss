@@ -5,6 +5,7 @@
     height: 100vh;
     background-color: #F0F2F5;
     overflow: hidden;
+    font-family:Microsoft YaHei;
     &__header {
         display: flex;
         justify-content: space-between;
@@ -46,11 +47,11 @@
         display: flex;
         justify-content: space-between;
         height: calc(100% - 48px);
-        padding: 20px;
+        padding: vh(20) vw(20);
         @include font-size(16);
         .container {
             background-color: #fff;
-            padding: 20px;
+            padding: 0 vw(20) vh(20);
             overflow: hidden;
             .title {
                 height: vh(48);
@@ -60,13 +61,21 @@
                 border-bottom: 1px solid #ccc;
             }
             .nav {
-                margin-top: vh(20);
                 height: vh(20);
                 line-height: vh(20);
                 border-left: 4px solid #58AFFF;
                 color: #999;
                 @include font-size(14);
-                padding-left: 34px;
+                padding-left: vw(10);
+            }
+            .subtitle {
+                color: #999;
+                @include font-size(14);
+            }
+            .number {
+                @include font-size(24);
+                font-weight: bold;
+                color: #333;
             }
         }
         &--child {
@@ -84,15 +93,9 @@
                 .info {
                     @include flex(space-between);
                     margin-top: vh(10);
-                    .subtitle {
-                        color: #999;
-                        @include font-size(14);
-                    }
-                    .number {
-                        @include font-size(24);
-                        font-weight: bold;
-                        color: #333;
-                    }
+                }
+                .nav {
+                    margin-top: vh(15);
                 }
                 .progress {
                     @include flex(space-between);
@@ -100,7 +103,7 @@
                     color: #999;
                     @include font-size(12);
                     .el-progress-circle {
-                        margin: vh(20) vw(20) vh(20);
+                        margin: vh(10) vw(20);
                         width: vw(70) !important;
                         height: vw(70) !important;
                     }
@@ -127,15 +130,7 @@
             }
             .left__middle {
                 height: vh(278);
-                .subtitle {
-                    color: #999;
-                    @include font-size(14);
-                }
-                .number {
-                    @include font-size(24);
-                    font-weight: bold;
-                    color: #333;
-                }
+                padding-top: vh(20);
             }
             .left__bottom {
                 height: vh(410);
@@ -143,9 +138,41 @@
         }    
         &__middle {
             width: vw(1084);
+            height: vh(992);
+            background: url('~imgs/bg.png') no-repeat;
+            background-size: cover;
         }
         &__right {
             width: vw(378);
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            .right__top {
+                height: vh(242);
+                .top__content {
+                    display: flex;
+                    margin-top: vh(20);
+                    &>div {
+                        width: 50%;
+                    }
+                }
+                .top__right {
+                    border-left: 1px solid #E6E6E6;
+                    padding-left: vw(20);
+                }
+                .info {
+                    display: flex;
+                    flex-wrap: wrap;
+                    margin-top: vh(20);
+                    li {
+                        margin-right: vw(30);
+                        margin-bottom: vh(10);
+                    }
+                }
+            }
+            .right__bottom {
+                height: vh(730);
+            }
         }
     }
 }

@@ -79,7 +79,36 @@
             </div>
 
             <div class="home__body__middle body__body--child"></div>
-            <div class="home__body__right body__body--child"></div>
+            <div class="home__body__right body__body--child">
+                <div class="right__top container">
+                    <p class="title">报警</p>
+                    <div class="top__content">
+                        <div class="top__left">
+                            <p class="nav">概览</p>
+                            <ul class="info">
+                                <li>
+                                    <p class="subtitle">报警总数</p>
+                                    <p class="number">35</p>
+                                </li>
+                                <li>
+                                    <p class="subtitle">已处理</p>
+                                    <p class="number">17</p>
+                                </li>
+                                <li>
+                                    <p class="subtitle">未处理</p>
+                                    <p class="number">8</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="top__right">
+                            <p class="nav">告警处理状态</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="right__bottom container">
+                    <p class="title">能耗总览</p>
+                </div>
+            </div>
         </div>
     </div>
 </template>
