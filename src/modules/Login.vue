@@ -114,11 +114,11 @@ export default {
     }
     &__body {
         align-self: flex-end;
+        width: vw(540);
         margin-right: vw(326);
         color: #fff;
         .el-form {
             text-align: center;
-            width: vw(540);
             padding: 0 vw(110);
             height: vh(440);
             overflow: hidden;
