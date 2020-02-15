@@ -437,4 +437,4 @@ export default {
 }
 </script>
 
-<style lang="scss" src="../styles/home.scss"></style>
+<style lang="scss" src="./home.scss"></style>
