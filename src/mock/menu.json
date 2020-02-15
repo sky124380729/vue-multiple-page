@@ -271,5 +271,97 @@
                 "type": "MENU"
             }
         ]
+    },
+    {
+        "id": "42b37c684fa511ea8b42525400e825a8",
+        "type": "MODULE",
+        "uri": "/guard",
+        "name": "guard",
+        "title": "门禁",
+        "children": [
+            {
+                "id": "5e02bf9a4fa511ea8b42525400e825a8",
+                "title": "中央控制台",
+                "name": "platform",
+                "icon": "el-icon-s-platform",
+                "uri": "/platform",
+                "redirectUri": "/platform/index",
+                "hidden": "FALSE",
+                "componentPath": "modules/layout",
+                "fullScreen": "FALSE",
+                "children": [
+                    {
+                        "id": "dc48d1874fa511ea8b42525400e825a8",
+                        "title": "中央控制台",
+                        "name": "index",
+                        "icon": null,
+                        "uri": "index",
+                        "redirectUri":"/platform/index/index",
+                        "componentPath": "modules/Menu",
+                        "children":[
+                            {
+                                "id": "e0100ce44fa511ea8b42525400e825a8",
+                                "title": "中央控制台",
+                                "name": "index",
+                                "icon": null,
+                                "uri": "index",
+                                "componentPath": "pages/guard/views/platform",
+                                "hidden": "TRUE",
+                                "type": "MENU"
+                            }
+                        ],
+                        "hidden": "TRUE",
+                        "type": "MENU"
+                    }
+                ],
+                "type": "MENU"
+            }
+        ]
+    },
+    {
+        "id": "2b82bc314fa611ea8b42525400e825a8",
+        "type": "MODULE",
+        "uri": "/video",
+        "name": "video",
+        "title": "视频",
+        "children": [
+            {
+                "id": "33cb63b14fa611ea8b42525400e825a8",
+                "title": "中央控制台",
+                "name": "platform",
+                "icon": "el-icon-s-platform",
+                "uri": "/platform",
+                "redirectUri": "/platform/index",
+                "hidden": "FALSE",
+                "componentPath": "modules/layout",
+                "fullScreen": "FALSE",
+                "children": [
+                    {
+                        "id": "369c5f424fa611ea8b42525400e825a8",
+                        "title": "中央控制台",
+                        "name": "index",
+                        "icon": null,
+                        "uri": "index",
+                        "redirectUri":"/platform/index/index",
+                        "componentPath": "modules/Menu",
+                        "children":[
+                            {
+                                "id": "39f6cf5d4fa611ea8b42525400e825a8",
+                                "title": "中央控制台",
+                                "name": "index",
+                                "icon": null,
+                                "uri": "index",
+                                "componentPath": "pages/video/views/platform",
+                                "hidden": "TRUE",
+                                "type": "MENU"
+                            }
+                        ],
+                        "hidden": "TRUE",
+                        "type": "MENU"
+                    }
+                ],
+                "type": "MENU"
+            }
+        ]
     }
 ]

@@ -1,0 +1,36 @@
+/* ====== 主要颜色 ====== */
+$--color-primary: #01C0C8;
+
+/* ===== 自定义变量 ===== */
+
+$--color-bg: #F0F2F5; // 背景色
+
+$--color-sidebar: #162338; // 侧边栏
+
+$--color-navbar: $--color-primary; // 导航栏
+
+$--color-tags: #FFFFFF; // 标签栏
+
+/* ====== 修改element变量 ====== */
+
+$--color-white: #FFFFFF;
+
+$--color-black: #000000;
+
+$--table-header-background-color: $--color-bg; // 表头颜色
+
+$--menu-background-color: $--color-sidebar; // 左侧菜单颜色
+
+$--menu-item-hover-fill: mix($--color-sidebar,$--color-black,60%); // 左侧菜单hover颜色
+
+
+/* 改变 icon 字体路径变量，必需 */
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+
+@import "~element-ui/packages/theme-chalk/src/index";
+
+/* layout布局 */
+@import '~styles/layout.scss';
+
+/* element全局样式 */
+@import './global.scss'

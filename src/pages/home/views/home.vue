@@ -138,8 +138,8 @@ export default {
             linkList: [
                 { path: '/identity', des: '统一身份认证系统' },
                 { path: '/consumer', des: '终端用户' },
-                { path: '/home?a=1', des: '暂未开放~' },
-                { path: '/home?b=1', des: '暂未开放~' }
+                { path: '/guard', des: '门禁' },
+                { path: '/video', des: '视频' }
             ],
             maintenanceOption: {
                 tooltip: {
