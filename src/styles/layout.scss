@@ -212,10 +212,13 @@
     }
     // 主体内容区
     &__content {
-        border: 10px solid $--color-bg;
-        background-color: $--color-content;
-        min-height: 100%;
-        padding: 20px;
+        height: 100%;
+        &>:not(.fullscreen) {
+            height: 100%;
+            border: 10px solid $--color-bg;
+            background-color: $--color-content;
+            padding: 20px;
+        }
     }
 }
 

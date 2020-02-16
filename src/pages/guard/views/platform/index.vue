@@ -1,6 +1,6 @@
 <template>
-    <section>
-        platform
+    <section class="fullscreen">
+        platform1
     </section>
 </template>
 
