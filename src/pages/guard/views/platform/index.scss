@@ -1,1 +1,114 @@
 @import '~styles/mixins.scss';
+
+.platform {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    background-color: #F0F2F5;
+    padding: vh(20) vw(20);
+    @include font-size(16);
+    .box {
+        background-color: #fff;
+        padding: 0 vw(20) vh(20);
+        .title {
+            height: vh(48);
+            line-height: vh(48);
+            text-align: center;
+            color: #666;
+            border-bottom: 1px solid #ccc;
+        }
+    }
+    .nav {
+        height: vh(20);
+        line-height: vh(20);
+        border-left: 4px solid #58AFFF;
+        color: #999;
+        padding-left: vw(10);
+    }
+    &__left {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: vw(378);
+        height: 100%;
+        &__top {
+            height: vh(524);
+            .search {
+                margin: vh(12) 0;
+            }
+            .info {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                img {
+                    width: vw(88);
+                    height: vh(88);
+                    margin-right: vw(20);
+                }
+                .row {
+                    flex: 1;
+                    @include font-size(13);
+                    line-height: vh(24);
+                }
+            }
+            .el-table {
+                height: vh(280);
+                margin-top: vh(20);
+            }
+        }
+        &__bottom {
+            height: vh(394);
+            .route {
+                margin: vh(20) auto vh(40);
+            }
+            .el-table {
+                height: vh(140);
+            }
+        }
+    }
+    &__middle {
+        width: vw(904);
+        height: 100%;
+        background: url('~imgs/bg.png') no-repeat center;
+        background-size: 100% 100%;
+    }
+    &__right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: vw(378);
+        height: 100%;
+        &__top {
+            height: vh(86);
+            padding-top: vh(20) !important;
+            .subtitle {
+                @include font-size(14);
+                color: #999;
+            }
+            .number {
+                @include font-size(24);
+                color: #333;
+                font-weight: bold;
+                line-height: vh(40);
+            }
+        }
+        &__middle {
+            height: vh(500);
+            .chart-box {
+                height: vh(226);
+                padding-top: vh(10);
+                .echarts {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+        &__bottom {
+            height: vh(317);
+            .echarts {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}
