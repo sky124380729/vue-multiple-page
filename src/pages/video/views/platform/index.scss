@@ -1,0 +1,111 @@
+@import '~styles/mixins.scss';
+/*滚动条的宽度*/
+
+::-webkit-scrollbar {
+    width:4px;
+    height:4px;
+}
+
+/*外层轨道。可以用display:none让其不显示，也可以添加背景图片，颜色改变显示效果*/
+
+::-webkit-scrollbar-track {
+    width: 6px;
+    background-color:transparent;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius:2em;
+}
+
+/*滚动条的设置*/
+
+::-webkit-scrollbar-thumb {
+    background-color:#606d71;
+    background-clip:padding-box;
+    min-height:28px;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius:2em;
+}
+/*滚动条移上去的背景*/
+
+::-webkit-scrollbar-thumb:hover {
+     background-color:#0d1b20;
+}
+
+.platform {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    background-color: #F0F2F5;
+    padding: vh(20) vw(20);
+    @include font-size(16);
+    .echarts {
+        width: 100%;
+        height: 100%;
+    }
+    .box {
+        background-color: #fff;
+        padding: 0 vw(20) vh(20);
+        .title {
+            height: vh(48);
+            line-height: vh(48);
+            text-align: center;
+            color: #666;
+            border-bottom: 1px solid #ccc;
+        }
+    }
+    .nav {
+        height: vh(20);
+        line-height: vh(20);
+        border-left: 4px solid #58AFFF;
+        color: #999;
+        padding-left: vw(10);
+    }
+    &__left,&__right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: vw(378);
+        height: 100%;
+        &__top {
+            height: vh(464);
+        }
+        &__bottom {
+            height: vh(460);
+            .chart-box {
+                height: vh(190);
+                padding-top: vh(10);
+                .content {
+                    text-align: center;
+                }
+                .el-progress {
+                    margin-top: vh(50);
+                }
+                .el-progress-circle {
+                    width: vw(72) !important;
+                    height: vw(72) !important;
+                }
+                .echarts {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+    }
+    &__middle {
+        width: vw(904);
+        height: 100%;
+        .content {
+            height: calc(100% - #{vh(42)});
+            overflow-y: scroll;
+            padding: vh(20) 0;
+            display: grid;
+            gap:vh(20) vw(20);
+            grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}
